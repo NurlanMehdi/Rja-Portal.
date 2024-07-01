@@ -438,5 +438,14 @@ document.addEventListener('livewire:load', function () {
   });
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+  var deleteModal = document.getElementById('confirmDeleteModal');
+  deleteModal.addEventListener('show.bs.modal', function (event) {
+      var button = event.relatedTarget;
+      var companyId = button.getAttribute('data-company-id');
+      var form = deleteModal.querySelector('#deleteForm');
+      form.action = '/company/' + companyId;
+  });
+});
 
 })();
