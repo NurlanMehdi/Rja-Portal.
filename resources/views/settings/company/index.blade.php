@@ -16,7 +16,7 @@
                     @endif
 
                     <div class="table-responsive">
-                        <table class="table table-bordered datatable">
+                        <table  id="companyTable" class="table table-bordered datatable">
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>

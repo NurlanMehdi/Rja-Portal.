@@ -10,7 +10,7 @@ class Rja extends Model
     use HasFactory;
 
     protected $fillable = [
-        'company_profile',
+        'company_id',
         'maintenance_email',
         'b2b_reference',
         'diagnosis',
@@ -48,6 +48,6 @@ class Rja extends Model
 
     public function companies()
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(Company::class,'company_id', 'id');
     }
 }

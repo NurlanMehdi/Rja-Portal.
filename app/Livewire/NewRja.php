@@ -8,7 +8,7 @@ use App\Models\Items;
 
 class NewRja extends Component
 {
-    public $company_profile;
+    public $company_id;
     public $maintenance_email;
     public $b2b_reference;
     public $diagnosis;
@@ -18,7 +18,7 @@ class NewRja extends Component
   
 
     protected $rules = [
-        'company_profile' => 'required',
+        'company_id' => 'required',
         'maintenance_email' => 'required|email',
         'b2b_reference' => 'required',
         'diagnosis' => 'required',
@@ -61,7 +61,7 @@ class NewRja extends Component
         $this->validate();
 
         $rja = Rja::create([
-            'company_id' => $this->company_profile,
+            'company_id' => $this->company_id,
             'maintenance_email' => $this->maintenance_email,
             'b2b_reference' => $this->b2b_reference,
             'diagnosis' => $this->diagnosis,

@@ -21,7 +21,7 @@ class RjaController extends Controller
     {
         $rja = Rja::with(['items' => function($query) {
             $query->orderBy('type');
-        }])->findOrFail($id);
+        },'companies'])->findOrFail($id);
         
         return view('rja.detail-rja', compact('rja'));
     }

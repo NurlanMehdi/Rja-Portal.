@@ -14,7 +14,7 @@
                                 <tbody>
                                     <tr>
                                         <th>Company Profile</th>
-                                        <td>{{ $rja->company_profile }}</td>
+                                        <td>{{ $rja->companies->company_name ?? ''  }}</td>
                                     </tr>
                                     <tr>
                                         <th>Maintenance Email</th>

@@ -28,7 +28,7 @@
                                                 <input type="checkbox" name="select" class="" id="{{ $rja->id }}">
                                             </th>
                                             <td><a href="{{ route('rja-detail', $rja->id) }}" class="text-primary">#{{ $rja->id }}</a></td>
-                                            <td>{{ $rja->company_profile }}</td>
+                                            <td>{{ $rja->companies->company_name ?? '' }}</td>
                                             <td>{{ $rja->maintenance_email }}</td>
                                             <td>{{ $rja->b2b_reference }}</td>
                                             <td>{{ $rja->diagnosis }}</td>

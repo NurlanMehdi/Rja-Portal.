@@ -23,12 +23,12 @@
                                         <span class="fs_14 fw_6 me-2">
                                             Select Company Profile:
                                         </span>
-                                        <select wire:model="company_profile" class="form-select" aria-label="Default select example">
+                                        <select wire:model="company_id" class="form-select" aria-label="Default select example">
                                             @foreach($companies as $company)
                                                 <option value="{{ $company->id }}">{{ $company->company_name }}</option>
                                             @endforeach
                                         </select>
-                                        @error('company_profile') <span class="text-danger">{{ $message }}</span> @enderror
+                                        @error('company_id') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="col-12 mt-4">

@@ -10,7 +10,7 @@ class DeniedRja extends Component
 {
     public function render()
     {
-        $rjas = Rja::where('status', Rja::STATUS_REJECTED)->paginate(10);
+        $rjas = Rja::with('companies')->where('status',Rja::STATUS_REJECTED)->paginate(10);
         
         return view('livewire.denied-rja', ['rjas' => $rjas]);
     }
