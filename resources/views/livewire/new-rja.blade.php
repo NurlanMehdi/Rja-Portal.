@@ -24,10 +24,9 @@
                                             Select Company Profile:
                                         </span>
                                         <select wire:model="company_profile" class="form-select" aria-label="Default select example">
-                                            <option selected>Select</option>
-                                            <option value="1">Company 1</option>
-                                            <option value="2">Company 2</option>
-                                            <option value="3">Company 3</option>
+                                            @foreach($companies as $company)
+                                                <option value="{{ $company->id }}">{{ $company->company_name }}</option>
+                                            @endforeach
                                         </select>
                                         @error('company_profile') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>

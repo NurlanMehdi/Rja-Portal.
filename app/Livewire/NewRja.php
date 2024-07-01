@@ -3,6 +3,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Rja;
+use App\Models\Company;
 use App\Models\Items;
 
 class NewRja extends Component
@@ -89,7 +90,8 @@ class NewRja extends Component
 
     public function render()
     {
-        return view('livewire.new-rja');
+        $companies = Company::all();
+        return view('livewire.new-rja', ['companies' => $companies]);
     }
 }
 

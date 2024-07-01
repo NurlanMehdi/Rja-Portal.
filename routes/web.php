@@ -23,5 +23,5 @@ Route::middleware('auth')->group(function () {
     //Rja detail
     Route::get('/rja/{id}', [RjaController::class, 'RjaDetail'])->name('rja-detail');
 
-    Route::get('/company-profile', [CompanyController::class, 'newCompany'])->name('company-profile');
+    Route::resource('company', CompanyController::class);
 });

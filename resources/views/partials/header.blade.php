@@ -402,7 +402,7 @@
         </a>
         <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="#">
+            <a href="{{ route('company.index') }}">
               <i class="bi bi-circle"></i><span>Company Profile</span>
             </a>
           </li>

@@ -45,4 +45,9 @@ class Rja extends Model
     {
         return $this->hasMany(Items::class);
     }
+
+    public function companies()
+    {
+        return $this->belongsTo(Company::class);
+    }
 }
