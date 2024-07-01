@@ -1,0 +1,126 @@
+@media (min-width: 992px) {
+    .error-404 img {
+      max-width: 50%;
+    }
+
+    .jd_title {
+        text-overflow: ellipsis;
+        width: 60%;
+    }
+
+    .jd_title:first-child {
+      width: 40%;
+    }
+
+    .datatable-search {
+      width: 100%;
+      max-width: 40%;
+    }
+}
+
+@media (min-width: 1200px) {
+
+    #main,
+    #footer {
+      margin-left: 270px;
+    }
+  
+    .toggle-sidebar #main,
+    .toggle-sidebar #footer {
+      margin-left: 0;
+    }
+  
+    .toggle-sidebar .sidebar {
+      left: -300px;
+    }
+
+    .header .toggle-sidebar-btn {
+        padding-left: 10px;
+        order: 0;
+        margin-right: 0px;
+      }
+}
+
+@media (min-width: 1600px) {
+      .jd_title {
+        min-width: 180px;
+      }
+      .jd_title, .jd_title:first-child {
+        width: auto;
+      }
+}
+
+
+@media (max-width: 1199px) {
+    .toggle-sidebar .sidebar {
+        left: 0;
+    }
+
+    #main {
+      padding: 20px;
+    }
+
+    .header .search-bar {
+      position: fixed;
+      top: 50px;
+      left: 0;
+      right: 0;
+      padding: 20px;
+      box-shadow: 0px 0px 15px 0px rgba(1, 41, 112, 0.1);
+      background: white;
+      z-index: 9999;
+      transition: 0.3s;
+      visibility: hidden;
+      opacity: 0;
+    }
+  
+    .header .search-bar-show {
+      top: 60px;
+      visibility: visible;
+      opacity: 1;
+    }
+    .sidebar {
+      left: -300px;
+    }
+}
+
+
+
+@media (min-width: 768px) {
+    .dropdown-menu-arrow::before {
+      content: "";
+      width: 13px;
+      height: 13px;
+      background: #fff;
+      position: absolute;
+      top: -7px;
+      right: 20px;
+      transform: rotate(45deg);
+      border-top: 1px solid #eaedf1;
+      border-left: 1px solid #eaedf1;
+    }
+}
+
+@media (max-width: 767px) {
+    .datatable-top .datatable-dropdown {
+        margin-bottom: 20px;
+    }
+    
+    .datatable-top  .datatable-search,.datatable-top .datatable-dropdown, .datatable-wrapper .datatable-bottom .datatable-info, 
+    .datatable-wrapper .datatable-bottom .datatable-pagination  {
+        float: none;
+    }
+      
+    .datatable-wrapper .datatable-bottom {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* row-gap: 20px; */
+    }
+}
+
+@media (max-width: 480px) {
+    .header .logo svg {
+        max-width: 130px;
+    }
+}
