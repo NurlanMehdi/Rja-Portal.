@@ -24,4 +24,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/rja/{id}', [RjaController::class, 'RjaDetail'])->name('rja-detail');
 
     Route::resource('company', CompanyController::class);
+
+    Route::post('/rja/{id}/approve', [RjaController::class, 'approve'])->name('rja.approve');
+    Route::post('/rja/{id}/reject', [RjaController::class, 'reject'])->name('rja.reject');
+
 });

@@ -26,8 +26,8 @@
                             <input type="text" class="form-control" id="company_name" name="company_name" value="{{ old('company_name', $company->company_name) }}">
                         </div>
                         <div class="mb-3">
-                            <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control" id="description" name="description">{{ old('description', $company->description) }}</textarea>
+                            <label for="email" class="form-label">E-Mail</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $company->email) }}">
                         </div>
                         <button type="submit" class="btn btn-success">Update</button>
                     </form>

@@ -29,7 +29,7 @@
                                             </th>
                                             <td><a href="{{ route('rja-detail', $rja->id) }}" class="text-primary">#{{ $rja->id }}</a></td>
                                             <td>{{ $rja->companies->company_name ?? '' }}</td>
-                                            <td>{{ $rja->maintenance_email }}</td>
+                                            <td>{{ $rja->companies->email ?? '' }}</td>
                                             <td>{{ $rja->b2b_reference }}</td>
                                             <td>{{ $rja->diagnosis }}</td>
                                             <td>{{ $rja->created_at }}</td>
@@ -43,7 +43,7 @@
                         <div class="select_all d-flex justify-content-center mt-3 btn_group">
                             <button wire:click="approveSelected" class="btn btn-success btn-sm">Approve</button>
                             <button wire:click="rejectSelected" class="btn btn-danger btn-sm">Reject</button>
-                            <a href="#" class="btn btn-success">Re-Notify Maintenance Department</a>
+                            <button wire:click="sendRjaEmail" class="btn btn-info btn-sm">Send RJA Email</button>
                         </div>
                     </div>
                 </div>

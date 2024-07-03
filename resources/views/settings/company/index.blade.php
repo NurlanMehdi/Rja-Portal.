@@ -21,7 +21,7 @@
                                 <tr>
                                     <th scope="col">ID</th>
                                     <th scope="col">Company Name</th>
-                                    <th scope="col">Description</th>
+                                    <th scope="col">E-Mail</th>
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
@@ -30,7 +30,7 @@
                                     <tr>
                                         <td>{{ $company->id }}</td>
                                         <td>{{ $company->company_name }}</td>
-                                        <td>{{ $company->description }}</td>
+                                        <td>{{ $company->email }}</td>
                                         <td>
                                             <a href="{{ route('company.edit', $company->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                             <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-company-id="{{ $company->id }}">Remove</button>

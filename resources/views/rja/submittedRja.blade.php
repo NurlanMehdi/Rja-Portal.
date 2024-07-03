@@ -7,5 +7,4 @@
 @elseif($key == 'denied')
   @livewire('denied-rja')
 @endif
-
 @endsection

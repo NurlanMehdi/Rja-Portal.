@@ -24,6 +24,7 @@
                                             Select Company Profile:
                                         </span>
                                         <select wire:model="company_id" class="form-select" aria-label="Default select example">
+                                            <option value="">Select</option>
                                             @foreach($companies as $company)
                                                 <option value="{{ $company->id }}">{{ $company->company_name }}</option>
                                             @endforeach
@@ -37,10 +38,8 @@
                                     </span>
                                 </div>
                                 <div class="col-lg-6 mb-3">
-                                    <div class="d-flex align-items-center">
-                                        <span class="fs_14 fw_6 me-2">
-                                            Maintenance Department Email:
-                                        </span>
+                                <div class="d-flex align-items-center">
+                                        <span class="fs_14 fw_6 me-2">Maintenance Department Email:</span>
                                         <input type="email" wire:model="maintenance_email" class="form-control" placeholder="Enter Maintenance Department Email">
                                         @error('maintenance_email') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>

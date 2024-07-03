@@ -19,7 +19,6 @@ class NewRja extends Component
 
     protected $rules = [
         'company_id' => 'required',
-        'maintenance_email' => 'required|email',
         'b2b_reference' => 'required',
         'diagnosis' => 'required',
         'labour_items.*.cost' => 'required|numeric',
@@ -55,6 +54,18 @@ class NewRja extends Component
         $this->parts_items = array_values($this->parts_items);
     }
 
+    public function updatedCompanyId($value)
+    {
+        if ($value) {
+            $company = Company::find($value);
+            if ($company) {
+                $this->maintenance_email = $company->email;
+            }
+        } else {
+            $this->maintenance_email = '';
+        }
+    }
+
     public function submit()
     {
         //dd($this->labour_items);
@@ -62,7 +73,6 @@ class NewRja extends Component
 
         $rja = Rja::create([
             'company_id' => $this->company_id,
-            'maintenance_email' => $this->maintenance_email,
             'b2b_reference' => $this->b2b_reference,
             'diagnosis' => $this->diagnosis,
         ]);

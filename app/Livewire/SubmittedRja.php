@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Rja;
+use Illuminate\Support\Facades\Mail;
 
 class SubmittedRja extends Component
 {
@@ -21,6 +22,24 @@ class SubmittedRja extends Component
     public function rejectSelected()
     {
         Rja::whereIn('id', $this->selectedRjas)->update(['status' => Rja::STATUS_REJECTED]);
+        $this->selectedRjas = [];
+    }
+
+    
+    public function sendRjaEmail()
+    {
+        $selectedRjas = Rja::with(['items', 'companies'])
+            ->whereIn('id', $this->selectedRjas)
+            ->get();
+
+        foreach ($selectedRjas as $rja) {
+            if ($rja->companies && $rja->companies->email) {
+                $toMail = $rja->companies->email;       
+                Mail::to($rja->companies->email)->send(new \App\Mail\RjaMail($rja));
+            }
+        }
+
+        session()->flash('message', 'Emails sent successfully.');
         $this->selectedRjas = [];
     }
 

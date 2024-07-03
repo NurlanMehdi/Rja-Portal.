@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('rjas', function (Blueprint $table) {
             $table->id();
             $table->string('company_id');
-            $table->string('maintenance_email');
             $table->string('b2b_reference');
             $table->text('diagnosis');
             $table->integer('status')->default(0);

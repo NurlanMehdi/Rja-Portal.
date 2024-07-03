@@ -12,7 +12,7 @@ class CompanyForm extends Component
 
     protected $rules = [
         'company_name' => 'required|string|max:255',
-        'description' => 'nullable|string',
+        'email' => 'nullable|string',
     ];
 
     public function submit()
@@ -21,11 +21,11 @@ class CompanyForm extends Component
 
         Company::create([
             'company_name' => $this->company_name,
-            'description' => $this->description,
+            'email' => $this->email,
         ]);
 
         session()->flash('message', 'Company added successfully.');
-        $this->reset(['company_name', 'description']);
+        $this->reset(['company_name', 'email']);
         $this->emit('companyAdded');
     }
 
