@@ -1612,3 +1612,26 @@ img {
 .btn-submitted {
   margin-right: 10px;
 }
+
+.rja-details table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.rja-details th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+.rja-details th {
+    background-color: #f2f2f2;
+}
+.rja-details tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+.rja-details tr:hover {
+    background-color: #ddd;
+}
+.rja-details .center-button {
+    text-align: center;
+    margin-top: 20px;
+}

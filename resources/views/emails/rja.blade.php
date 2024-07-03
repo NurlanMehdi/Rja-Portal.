@@ -5,37 +5,70 @@
 </head>
 <body>
     <h1>RJA Details</h1>
-    <p>Company Profile: {{ $rja->companies->company_name ?? 'N/A' }}</p>
-    <p>Maintenance Email: {{ $rja->maintenance_email ?? 'N/A' }}</p>
-    <p>B2B/Warranty Reference: {{ $rja->b2b_reference ?? 'N/A' }}</p>
-    <p>Diagnosis: {{ $rja->diagnosis ?? 'N/A' }}</p>
+    <table>
+        <tr>
+            <th>Company Profile</th>
+            <td>{{ $rja->companies->company_name ?? 'N/A' }}</td>
+        </tr>
+        <tr>
+            <th>Maintenance Email</th>
+            <td>{{ $rja->maintenance_email ?? 'N/A' }}</td>
+        </tr>
+        <tr>
+            <th>B2B/Warranty Reference</th>
+            <td>{{ $rja->b2b_reference ?? 'N/A' }}</td>
+        </tr>
+        <tr>
+            <th>Diagnosis</th>
+            <td>{{ $rja->diagnosis ?? 'N/A' }}</td>
+        </tr>
+    </table>
 
     <h2>Labour Items</h2>
-    @if ($rja->items->where('type', 'labour')->isNotEmpty())
-        @foreach($rja->items->where('type', 'labour') as $labour)
-            <p>Cost: {{ $labour->cost ?? 'N/A' }}</p>
-        @endforeach
-    @else
-        <p>No labour items found.</p>
-    @endif
+    <table>
+        @if ($rja->items->where('type', 'labour')->isNotEmpty())
+            @foreach($rja->items->where('type', 'labour') as $labour)
+                <tr>
+                    <th>Labour Cost</th>
+                    <td>{{ $labour->cost ?? 'N/A' }}</td>
+                </tr>
+            @endforeach
+        @else
+            <tr>
+                <td colspan="2">No labour items found.</td>
+            </tr>
+        @endif
+    </table>
 
     <h2>Parts Items</h2>
-    @if ($rja->items->where('type', 'part')->isNotEmpty())
-        @foreach($rja->items->where('type', 'part') as $part)
-            <p>Part Number: {{ $part->part_number ?? 'N/A' }}, Cost: {{ $part->cost ?? 'N/A' }}</p>
-        @endforeach
-    @else
-        <p>No parts items found.</p>
-    @endif
+    <table>
+        @if ($rja->items->where('type', 'part')->isNotEmpty())
+            @foreach($rja->items->where('type', 'part') as $part)
+                <tr>
+                    <th>Part Number</th>
+                    <td>{{ $part->part_number ?? 'N/A' }}</td>
+                </tr>
+                <tr>
+                    <th>Part Cost</th>
+                    <td>{{ $part->cost ?? 'N/A' }}</td>
+                </tr>
+            @endforeach
+        @else
+            <tr>
+                <td colspan="2">No parts items found.</td>
+            </tr>
+        @endif
+    </table>
 
-    <form action="{{ route('rja.approve', $rja->id) }}" method="POST">
-        @csrf
-        <button type="submit">Approve</button>
-    </form>
-
-    <form action="{{ route('rja.reject', $rja->id) }}" method="POST">
-        @csrf
-        <button type="submit">Reject</button>
-    </form>
+    <div class="center-button">
+        <form action="{{ route('rja.approve', $rja->id) }}" method="POST" style="display: inline-block;">
+            @csrf
+            <button type="submit">Approve</button>
+        </form>
+        <form action="{{ route('rja.reject', $rja->id) }}" method="POST" style="display: inline-block;">
+            @csrf
+            <button type="submit">Reject</button>
+        </form>
+    </div>
 </body>
 </html>
