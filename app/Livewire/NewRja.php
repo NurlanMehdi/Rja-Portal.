@@ -9,7 +9,7 @@ use App\Models\Items;
 class NewRja extends Component
 {
     public $company_id;
-    public $maintenance_email;
+    public $email;
     public $b2b_reference;
     public $diagnosis;
     public $labour_items = [];
@@ -52,18 +52,6 @@ class NewRja extends Component
     {
         unset($this->parts_items[$index]);
         $this->parts_items = array_values($this->parts_items);
-    }
-
-    public function updatedCompanyId($value)
-    {
-        if ($value) {
-            $company = Company::find($value);
-            if ($company) {
-                $this->maintenance_email = $company->email;
-            }
-        } else {
-            $this->maintenance_email = '';
-        }
     }
 
     public function submit()

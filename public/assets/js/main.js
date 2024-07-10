@@ -448,5 +448,13 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
+const companySelect = document.getElementById('company-select');
+const maintenanceEmail = document.getElementById('maintenance-email');
+
+companySelect.addEventListener('change', function () {
+    const selectedOption = companySelect.options[companySelect.selectedIndex];
+    const email = selectedOption.getAttribute('data-email');
+    maintenanceEmail.value = email ? email : '';
+});
 
 })();
