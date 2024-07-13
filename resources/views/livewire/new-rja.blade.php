@@ -1,8 +1,4 @@
 <div>
-    @if (session()->has('message'))
-        <div class="alert alert-success">{{ session('message') }}</div>
-    @endif
-
     <form wire:submit.prevent="submit">
         <div class="col-12">
             <div class="">
@@ -193,5 +189,8 @@
                 </div>
             </div>
         </div>
+        @if (session()->has('message'))
+        <div class="alert alert-success">{{ session('message') }}</div>
+    @endif
     </form>
 </div>

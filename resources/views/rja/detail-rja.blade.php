@@ -153,6 +153,7 @@
                                         <span class="fs_14 fw_4 jd_title" id="total-pre-hst">{{ $totalLabour + $totalParts }}</span>
                                     </div>
                                     <div class="center-button">
+                                        @if($rja->status == 0)
                                         <form action="{{ url('rja/'.$rja->id.'/approve') }}" method="POST" style="display: inline;">
                                             @csrf
                                             <button type="submit" class="btn btn-success btn-submitted mt-3 mr-2">Approve</button>
@@ -161,6 +162,8 @@
                                             @csrf
                                             <button type="submit" class="btn btn-danger btn-submitted mt-3 mr-2">Reject</button>
                                         </form>
+                                        @endif
+                                       
                                         <a href="{{ url()->previous() }}" class="btn btn-primary mt-3">Back</a>
                                     </div>
                                 </div>

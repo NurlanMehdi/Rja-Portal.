@@ -45,8 +45,10 @@ class SubmittedRja extends Component
 
     public function render()
     {
-      //  $perPage = $request->input('per_page', 24);
-        $rjas = Rja::with('companies')->where('status',Rja::STATUS_SUBMITTED)->paginate(10);
+        $rjas = Rja::with('companies')
+        ->where('status', Rja::STATUS_SUBMITTED)
+        ->orderBy('id', 'desc')  // Sorting by newest to oldest
+        ->paginate(10);
         
         return view('livewire.submitted-rja', ['rjas' => $rjas]);
     }

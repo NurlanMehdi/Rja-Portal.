@@ -10,7 +10,11 @@ class ApprovedRja extends Component
 {
     public function render()
     {
-        $rjas = Rja::with('companies')->where('status',Rja::STATUS_APPROVED)->paginate(10);
+
+        $rjas = Rja::with('companies')
+        ->where('status', Rja::STATUS_APPROVED)
+        ->orderBy('id', 'desc')
+        ->paginate(10);
         
         return view('livewire.approved-rja', ['rjas' => $rjas]);
     }

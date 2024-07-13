@@ -3,7 +3,7 @@
 <head>
     <title>RJA Details</title>
 </head>
-<body>
+<body class="rja-details">
     <h1>RJA Details</h1>
     <table>
         <tr>
