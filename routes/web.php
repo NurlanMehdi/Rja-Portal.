@@ -27,5 +27,6 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/rja/{id}/approve', [RjaController::class, 'approve'])->name('rja.approve');
     Route::post('/rja/{id}/reject', [RjaController::class, 'reject'])->name('rja.reject');
+    Route::post('rja/{id}/send-email', [RjaController::class, 'sendEmail'])->name('rja.send-email');
 
 });

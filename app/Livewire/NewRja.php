@@ -82,6 +82,8 @@ class NewRja extends Component
             ]);
         }
 
+        Rja::sendRjaEmail($rja->id);
+
         $this->reset();
         session()->flash('message', 'RJA submitted successfully.');
     }

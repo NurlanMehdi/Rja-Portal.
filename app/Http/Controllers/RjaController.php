@@ -26,6 +26,17 @@ class RjaController extends Controller
         return view('rja.detail-rja', compact('rja'));
     }
 
+    public function sendEmail($id)
+    {
+        $rja = Rja::with('companies')->findOrFail($id);
+
+        if ($rja->companies && $rja->companies->maintenance_email) {
+            Mail::to($rja->companies->maintenance_email)->send(new RjaMail($rja));
+        }
+
+        return redirect()->back()->with('message', 'Email sent successfully.');
+    }
+
     public function approve($id)
     {
         $rja = Rja::find($id);

@@ -162,9 +162,13 @@
                                             @csrf
                                             <button type="submit" class="btn btn-danger btn-submitted mt-3 mr-2">Reject</button>
                                         </form>
+                                        <form action="{{ url('rja/'.$rja->id.'/send-email') }}" method="POST" style="display: inline;">
+                                            @csrf
+                                            <button type="submit" class="btn btn-primary btn-submitted mt-3 mr-2">Send Email</button>
+                                        </form>
                                         @endif
                                        
-                                        <a href="{{ url()->previous() }}" class="btn btn-primary mt-3">Back</a>
+                        
                                     </div>
                                 </div>
                             </div>
