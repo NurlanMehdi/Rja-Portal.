@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 class Rja extends Model
 {
@@ -55,22 +56,21 @@ class Rja extends Model
 
     public static function sendRjaEmail($id)
     {
-        $selectedRjas = Rja::with(['items', 'companies'])
+        $rja = Rja::with(['items', 'companies'])
             ->whereIn('id', [$id])
-            ->get();
+            ->first();
 
-        foreach ($selectedRjas as $rja) {
+            
             if($rja->mail != '')
             {
-                if ($rja->companies && $rja->companies->maintenance_email) {
-                    $toMail = $rja->companies->maintenance_email;
-                }
-            }else{
                 $toMail = $rja->mail;
+                
+            }elseif ($rja->companies && $rja->companies->maintenance_email) {
+                $toMail = $rja->companies->maintenance_email;
             }
             
             Mail::to($toMail)->send(new \App\Mail\RjaMail($rja));
-        }
+        
 
         session()->flash('message', 'Emails sent successfully.');
     }
