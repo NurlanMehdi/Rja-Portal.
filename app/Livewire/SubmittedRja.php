@@ -33,10 +33,16 @@ class SubmittedRja extends Component
             ->get();
 
         foreach ($selectedRjas as $rja) {
-            if ($rja->companies && $rja->companies->email) {
-                $toMail = $rja->companies->email;       
-                Mail::to($rja->companies->email)->send(new \App\Mail\RjaMail($rja));
+            if($rja->mail != '')
+            {
+                if ($rja->companies && $rja->companies->maintenance_email) {
+                    $toMail = $rja->companies->maintenance_email;
+                }
+            }else{
+                $toMail = $rja->mail;
             }
+            
+            Mail::to($toMail)->send(new \App\Mail\RjaMail($rja));
         }
 
         session()->flash('message', 'Emails sent successfully.');

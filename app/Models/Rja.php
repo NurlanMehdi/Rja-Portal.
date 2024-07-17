@@ -11,6 +11,7 @@ class Rja extends Model
 
     protected $fillable = [
         'company_id',
+        'mail',
         'maintenance_email',
         'b2b_reference',
         'diagnosis',
@@ -58,13 +59,17 @@ class Rja extends Model
             ->whereIn('id', [$id])
             ->get();
 
-            dd($selectedRjas);
-
         foreach ($selectedRjas as $rja) {
-            if ($rja->companies && $rja->companies->maintenance_email) {
-                $toMail = $rja->companies->maintenance_email;
-                Mail::to($toMail)->send(new \App\Mail\RjaMail($rja));
+            if($rja->mail != '')
+            {
+                if ($rja->companies && $rja->companies->maintenance_email) {
+                    $toMail = $rja->companies->maintenance_email;
+                }
+            }else{
+                $toMail = $rja->mail;
             }
+            
+            Mail::to($toMail)->send(new \App\Mail\RjaMail($rja));
         }
 
         session()->flash('message', 'Emails sent successfully.');

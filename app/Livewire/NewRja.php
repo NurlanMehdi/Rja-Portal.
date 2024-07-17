@@ -18,7 +18,6 @@ class NewRja extends Component
   
 
     protected $rules = [
-        'company_id' => 'required',
         'b2b_reference' => 'required',
         'diagnosis' => 'required',
         'labour_items.*.cost' => 'required|numeric',
@@ -61,6 +60,7 @@ class NewRja extends Component
 
         $rja = Rja::create([
             'company_id' => $this->company_id,
+            'mail' => $this->email,
             'b2b_reference' => $this->b2b_reference,
             'diagnosis' => $this->diagnosis,
         ]);
