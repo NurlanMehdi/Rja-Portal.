@@ -68,6 +68,8 @@ class Rja extends Model
             }elseif ($rja->companies && $rja->companies->maintenance_email) {
                 $toMail = $rja->companies->maintenance_email;
             }
+
+            dd($toMail);
             
             Mail::to($toMail)->send(new \App\Mail\RjaMail($rja));
         
