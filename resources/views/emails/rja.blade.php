@@ -120,8 +120,8 @@
             </table>
 
             <div class="center-button">
-                <a href="{{ route('rja.approve', $rja->id) }}" class="approve-button">Approve</a>
-                <a href="{{ route('rja.reject', $rja->id) }}" class="reject-button">Reject</a>
+                <a href="{{ route('rja.approve.for.mail', $rja->id) }}" class="approve-button">Approve</a>
+                <a href="{{ route('rja.reject.for.mail', $rja->id) }}" class="reject-button">Reject</a>
             </div>
         </div>
     </div>
