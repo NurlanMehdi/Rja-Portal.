@@ -31,7 +31,7 @@
                             <div class="col-lg-6 mb-3">
                                 <div class="d-flex align-items-center">
                                     <span class="fs_14 fw_6 me-2">Maintenance Department Email:</span>
-                                    <span class="form-control"> {{ $rja->companies->email ?? 'N/A' }}</span>
+                                    <span class="form-control"> {{ $rja->companies->email ?? $rja->mail }}</span>
                                 </div>
                             </div>
                             <div class="col-lg-6 mb-3">
