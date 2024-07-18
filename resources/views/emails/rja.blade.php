@@ -108,11 +108,7 @@
                 @if ($rja->items->where('type', 'part')->isNotEmpty())
                     @foreach($rja->items->where('type', 'part') as $part)
                         <tr>
-                            <th>Part Number</th>
-                            <td>{{ $part->part_number ?? 'N/A' }}</td>
-                        </tr>
-                        <tr>
-                            <th>Part Cost</th>
+                            <th>{{ $part->part_number ?? 'N/A' }}</th>
                             <td>{{ $part->cost ?? 'N/A' }}</td>
                         </tr>
                     @endforeach
