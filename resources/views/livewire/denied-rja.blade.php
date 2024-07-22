@@ -12,7 +12,7 @@
                             <table id="rjaTable" class="table table-border datatable">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Select</th>
+                                        <!-- <th scope="col">Select</th> -->
                                         <th scope="col">RJA ID</th>
                                         <th scope="col">Company Profile</th>
                                         <th scope="col">Maintenance Email</th>
@@ -24,9 +24,9 @@
                                 <tbody>
                                     @foreach($rjas as $rja)
                                         <tr>
-                                            <th scope="row">
+                                            <!-- <th scope="row">
                                                 <input type="checkbox" name="select" class="" id="{{ $rja->id }}">
-                                            </th>
+                                            </th> -->
                                             <td><a href="{{ route('rja-detail', $rja->id) }}" class="text-primary">#{{ $rja->id }}</a></td>
                                             <td>{{ $rja->companies->company_name ?? '' }}</td>
                                             <td>{{ $rja->companies->email ?? $rja->mail }}</td>

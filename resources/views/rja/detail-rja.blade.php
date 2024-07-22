@@ -53,7 +53,7 @@
             <div class="col-lg-12 mb-4">
                 <div class="card h-100">
                     <div class="card-header bg-info-dark">
-                        <span class="fs_16 fw_6 text-white">Report - Summary</span>
+                        <span class="fs_16 fw_6 text-white">Tech Findings/ Suggested Resolution</span>
                     </div>
                     <div class="card-body pt-3">
                         <div class="row">
@@ -77,7 +77,7 @@
             <div class="col-lg-12 mb-4">
                 <div class="card h-100">
                     <div class="card-header bg-info-dark">
-                        <span class="fs_16 fw_6 text-white">RJA - Summary</span>
+                        <span class="fs_16 fw_6 text-white">RJA - Quote Details</span>
                     </div>
                     <div class="card-body pt-3">
                         <div class="row">
@@ -131,16 +131,16 @@
             <div class="col-lg-12 mb-4">
                 <div class="card h-100">
                     <div class="card-header bg-info-dark">
-                        <span class="fs_16 fw_6 text-white">RJA - Summary</span>
+                        <span class="fs_16 fw_6 text-white">RJA - Quote Summary</span>
                     </div>
                     <div class="card-body pt-3">
                         <div class="row">
                             <div class="col-lg-12 border-end">
                                 <div class="summary-section">
-                                    <div class="d-flex align-items-center">
+                                    <!-- <div class="d-flex align-items-center">
                                         <span class="fs_14 fw_6 jd_title">RJA Quote (Pre HST):</span>
                                         <span class="fs_14 fw_4 jd_title">{{ $rja->quote_pre_hst ?? 'N/A' }}</span>
-                                    </div>
+                                    </div> -->
                                     <div class="d-flex align-items-center">
                                         <span class="fs_14 fw_6 jd_title">Total Labour (Pre HST):</span>
                                         <span class="fs_14 fw_4 jd_title" id="total-labour">{{ $totalLabour }}</span>

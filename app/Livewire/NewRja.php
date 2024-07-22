@@ -20,9 +20,9 @@ class NewRja extends Component
     protected $rules = [
         'b2b_reference' => 'required',
         'diagnosis' => 'required',
-        'labour_items.*.cost' => 'required|numeric',
-        'parts_items.*.number' => 'required|string',
-        'parts_items.*.cost' => 'required|numeric',
+        'labour_items.*.cost' => 'numeric',
+        'parts_items.*.number' => 'string',
+        'parts_items.*.cost' => 'numeric',
     ];
 
     public function mount()
@@ -36,21 +36,22 @@ class NewRja extends Component
         $this->labour_items[] = ['cost' => 0];
     }
 
-    public function removeLabourItem($index)
-    {
-        unset($this->labour_items[$index]);
-        $this->labour_items = array_values($this->labour_items);
-    }
-
     public function addPartsItem()
     {
         $this->parts_items[] = ['number' => '', 'cost' => 0];
     }
 
+
+    public function removeLabourItem($index)
+    {
+        unset($this->labour_items[$index]);
+        $this->labour_items = array_values($this->labour_items);  // Reindex the array
+    }
+
     public function removePartsItem($index)
     {
         unset($this->parts_items[$index]);
-        $this->parts_items = array_values($this->parts_items);
+        $this->parts_items = array_values($this->parts_items);  // Reindex the array
     }
 
     public function submit()
@@ -65,27 +66,33 @@ class NewRja extends Component
             'diagnosis' => $this->diagnosis,
         ]);
 
-        foreach ($this->labour_items as $item) {
-            Items::create([
-                'rja_id' => $rja->id,
-                'type' => 'labour',
-                'cost' => $item['cost'] ?? 0,
-            ]);
+        if($rja)
+        {
+            foreach ($this->labour_items as $item) {
+                Items::create([
+                    'rja_id' => $rja->id,
+                    'type' => 'labour',
+                    'cost' => $item['cost'] ?? 0,
+                ]);
+            }
+    
+            foreach ($this->parts_items as $item) {
+                Items::create([
+                    'rja_id' => $rja->id,
+                    'type' => 'part',
+                    'part_number' => $item['number'] ?? null,
+                    'cost' => $item['cost'] ?? 0,
+                ]);
+            }
+    
+            Rja::sendRjaEmail($rja->id);
+    
+            
+            $this->reset();
+            session()->flash('message', 'RJA submitted successfully.');
+        }else {
+            session()->flash('error', 'An error occurred while submitting the RJA.');
         }
-
-        foreach ($this->parts_items as $item) {
-            Items::create([
-                'rja_id' => $rja->id,
-                'type' => 'part',
-                'part_number' => $item['number'] ?? null,
-                'cost' => $item['cost'] ?? 0,
-            ]);
-        }
-
-        Rja::sendRjaEmail($rja->id);
-
-        $this->reset();
-        session()->flash('message', 'RJA submitted successfully.');
     }
 
     public function render()
