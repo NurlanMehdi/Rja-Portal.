@@ -5,7 +5,7 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
-(function() {
+(function () {
   "use strict";
 
   /**
@@ -42,7 +42,7 @@
    * Sidebar toggle
    */
   if (select('.toggle-sidebar-btn')) {
-    on('click', '.toggle-sidebar-btn', function(e) {
+    on('click', '.toggle-sidebar-btn', function (e) {
       select('body').classList.toggle('toggle-sidebar')
     })
   }
@@ -51,7 +51,7 @@
    * Search bar toggle
    */
   if (select('.search-bar-toggle')) {
-    on('click', '.search-bar-toggle', function(e) {
+    on('click', '.search-bar-toggle', function (e) {
       select('.search-bar').classList.toggle('search-bar-show')
     })
   }
@@ -112,7 +112,7 @@
    * Initiate tooltips
    */
   var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-  var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
     return new bootstrap.Tooltip(tooltipTriggerEl)
   })
 
@@ -142,31 +142,31 @@
           }],
           ["bold", "italic", "underline", "strike"],
           [{
-              color: []
-            },
-            {
-              background: []
-            }
+            color: []
+          },
+          {
+            background: []
+          }
           ],
           [{
-              script: "super"
-            },
-            {
-              script: "sub"
-            }
+            script: "super"
+          },
+          {
+            script: "sub"
+          }
           ],
           [{
-              list: "ordered"
-            },
-            {
-              list: "bullet"
-            },
-            {
-              indent: "-1"
-            },
-            {
-              indent: "+1"
-            }
+            list: "ordered"
+          },
+          {
+            list: "bullet"
+          },
+          {
+            indent: "-1"
+          },
+          {
+            indent: "+1"
+          }
           ],
           ["direction", {
             align: []
@@ -200,31 +200,31 @@
     autosave_retention: '2m',
     image_advtab: true,
     link_list: [{
-        title: 'My page 1',
-        value: 'https://www.tiny.cloud'
-      },
-      {
-        title: 'My page 2',
-        value: 'http://www.moxiecode.com'
-      }
+      title: 'My page 1',
+      value: 'https://www.tiny.cloud'
+    },
+    {
+      title: 'My page 2',
+      value: 'http://www.moxiecode.com'
+    }
     ],
     image_list: [{
-        title: 'My page 1',
-        value: 'https://www.tiny.cloud'
-      },
-      {
-        title: 'My page 2',
-        value: 'http://www.moxiecode.com'
-      }
+      title: 'My page 1',
+      value: 'https://www.tiny.cloud'
+    },
+    {
+      title: 'My page 2',
+      value: 'http://www.moxiecode.com'
+    }
     ],
     image_class_list: [{
-        title: 'None',
-        value: ''
-      },
-      {
-        title: 'Some class',
-        value: 'class-name'
-      }
+      title: 'None',
+      value: ''
+    },
+    {
+      title: 'Some class',
+      value: 'class-name'
+    }
     ],
     importcss_append: true,
     file_picker_callback: (callback, value, meta) => {
@@ -251,20 +251,20 @@
       }
     },
     templates: [{
-        title: 'New Table',
-        description: 'creates a new table',
-        content: '<div class="mceTmpl"><table width="98%%"  border="0" cellspacing="0" cellpadding="0"><tr><th scope="col"> </th><th scope="col"> </th></tr><tr><td> </td><td> </td></tr></table></div>'
-      },
-      {
-        title: 'Starting my story',
-        description: 'A cure for writers block',
-        content: 'Once upon a time...'
-      },
-      {
-        title: 'New list with dates',
-        description: 'New List with dates',
-        content: '<div class="mceTmpl"><span class="cdate">cdate</span><br><span class="mdate">mdate</span><h2>My List</h2><ul><li></li><li></li></ul></div>'
-      }
+      title: 'New Table',
+      description: 'creates a new table',
+      content: '<div class="mceTmpl"><table width="98%%"  border="0" cellspacing="0" cellpadding="0"><tr><th scope="col"> </th><th scope="col"> </th></tr><tr><td> </td><td> </td></tr></table></div>'
+    },
+    {
+      title: 'Starting my story',
+      description: 'A cure for writers block',
+      content: 'Once upon a time...'
+    },
+    {
+      title: 'New list with dates',
+      description: 'New List with dates',
+      content: '<div class="mceTmpl"><span class="cdate">cdate</span><br><span class="mdate">mdate</span><h2>My List</h2><ul><li></li><li></li></ul></div>'
+    }
     ],
     template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
     template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
@@ -285,8 +285,8 @@
   var needsValidation = document.querySelectorAll('.needs-validation')
 
   Array.prototype.slice.call(needsValidation)
-    .forEach(function(form) {
-      form.addEventListener('submit', function(event) {
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
         if (!form.checkValidity()) {
           event.preventDefault()
           event.stopPropagation()
@@ -304,18 +304,18 @@
     new simpleDatatables.DataTable(datatable, {
       perPageSelect: [5, 10, 15, ["All", -1]],
       columns: [{
-          select: 2,
-          sortSequence: ["desc", "asc"]
-        },
-        {
-          select: 3,
-          sortSequence: ["desc"]
-        },
-        {
-          select: 4,
-          cellClass: "green",
-          headerClass: "red"
-        }
+        select: 2,
+        sortSequence: ["desc", "asc"]
+      },
+      {
+        select: 3,
+        sortSequence: ["desc"]
+      },
+      {
+        select: 4,
+        cellClass: "green",
+        headerClass: "red"
+      }
       ]
     });
   })
@@ -326,84 +326,87 @@
   const mainContainer = select('#main');
   if (mainContainer) {
     setTimeout(() => {
-      new ResizeObserver(function() {
+      new ResizeObserver(function () {
         select('.echart', true).forEach(getEchart => {
           echarts.getInstanceByDom(getEchart).resize();
         })
       }).observe(mainContainer);
     }, 200);
   }
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     function addRemoveEvent(button) {
-        button.addEventListener('click', function() {
-            this.parentElement.remove();
-            calculateTotals();
-        });
+      button.addEventListener('click', function () {
+        this.parentElement.remove();
+        calculateTotals();
+      });
     }
 
     function addLabourItem() {
-        const labourSection = document.getElementById('labour-section');
-        const labourCount = labourSection.getElementsByClassName('labour-item').length + 1;
-        const newLabourItem = document.createElement('div');
-        newLabourItem.className = 'labour-item input-group mb-3';
-        newLabourItem.innerHTML = `
+      const labourSection = document.getElementById('labour-section');
+      const labourCount = labourSection.getElementsByClassName('labour-item').length + 1;
+      const newLabourItem = document.createElement('div');
+      newLabourItem.className = 'labour-item input-group mb-3';
+      newLabourItem.innerHTML = `
             
             <label class="form-label fs_14 fw_6 me-2">LABOUR ${labourCount}:</label>
             <label class="form-label fs_14 fw_4 me-2">Labour Cost:</label>
-            <input type="text" wire:model="labour_items.${labourCount-1}.cost" class="form-control ms-2 labour-cost" value="0" oninput="updateTotals()">
+            <span class="currencyinput"><span class="doller">$</span>
+            <input type="text" wire:model="labour_items.${labourCount - 1}.cost" class="form-control ms-2 labour-cost" value="0.00" placeholder="0.00" onkeypress="return isNumberKey(event)">
+            </span>
             <button type="button" class="remove-button me-2 remove-labour-item btn-outline-danger">&times;</button>
         `;
-        labourSection.insertBefore(newLabourItem, labourSection.querySelector('#add-labour-item'));
-        addRemoveEvent(newLabourItem.querySelector('.remove-labour-item'));
-        addInputEvent(newLabourItem.querySelector('.labour-cost'));
+      labourSection.insertBefore(newLabourItem, labourSection.querySelector('#add-labour-item'));
+      addRemoveEvent(newLabourItem.querySelector('.remove-labour-item'));
+      addInputEvent(newLabourItem.querySelector('.labour-cost'));
     }
-
     function addPartsItem() {
-        const partsSection = document.getElementById('parts-section');
-        const partsCount = partsSection.getElementsByClassName('parts-item').length + 1;
-        const newPartsItem = document.createElement('div');
-        newPartsItem.className = 'parts-item input-group mb-3';
-        newPartsItem.innerHTML = `
+      const partsSection = document.getElementById('parts-section');
+      const partsCount = partsSection.getElementsByClassName('parts-item').length + 1;
+      const newPartsItem = document.createElement('div');
+      newPartsItem.className = 'parts-item input-group mb-3';
+      newPartsItem.innerHTML = `
              <label class="form-label fs_14 fw_6 me-2">Part ${partsCount}:</label>
             <div class="row w-100">
                 <div class="col-lg-2">
                     <label class="form-label fs_14 fw_6">Part Number:</label>
-                    <input type="text" wire:model="parts_items.${partsCount-1}.number" class="form-control" value="">
+                    <input type="text" wire:model="parts_items.${partsCount - 1}.number" class="form-control" value="">
                 </div>
                 <div class="col-lg-2">
                     <label class="form-label fs_14 fw_6">Part Cost:</label>
-                    <input type="text" wire:model="parts_items.${partsCount-1}.cost" class="form-control parts-cost" value="0" oninput="updateTotals()">
+                    <span class="currencyinput"><span class="doller">$</span>
+                    <input type="text" wire:model="parts_items.${partsCount - 1}.cost" class="form-control parts-cost" value="0.00" placeholder="0.00" onkeypress="return isNumberKey(event)">
+                    </span>
                 </div>
                 <div class="col-lg-2">
                     <button type="button" class="remove-button me-2 remove-parts-item btn-outline-danger">&times;</button>
                 </div>
             </div>
         `;
-        partsSection.insertBefore(newPartsItem, partsSection.querySelector('#add-parts-item'));
-        addRemoveEvent(newPartsItem.querySelector('.remove-parts-item'));
-        addInputEvent(newPartsItem.querySelector('.parts-cost'));
+      partsSection.insertBefore(newPartsItem, partsSection.querySelector('#add-parts-item'));
+      addRemoveEvent(newPartsItem.querySelector('.remove-parts-item'));
+      addInputEvent(newPartsItem.querySelector('.parts-cost'));
     }
 
     function addInputEvent(input) {
-        input.addEventListener('input', calculateTotals);
+      input.addEventListener('input', calculateTotals);
     }
 
     function calculateTotals() {
       let totalLabour = 0;
       let totalParts = 0;
 
-      document.querySelectorAll('.labour-cost').forEach(function(input) {
-          totalLabour += parseFloat(input.value) || 0;
+      document.querySelectorAll('.labour-cost').forEach(function (input) {
+        totalLabour += parseFloat(input.value) || 0;
       });
 
-      document.querySelectorAll('.parts-cost').forEach(function(input) {
-          totalParts += parseFloat(input.value) || 0;
+      document.querySelectorAll('.parts-cost').forEach(function (input) {
+        totalParts += parseFloat(input.value) || 0;
       });
 
       document.getElementById('total-labour').textContent = totalLabour.toFixed(2);
       document.getElementById('total-parts').textContent = totalParts.toFixed(2);
       document.getElementById('total-pre-hst').textContent = (totalLabour + totalParts).toFixed(2);
-  }
+    }
     // Initial remove event bindings
     document.querySelectorAll('.remove-labour-item').forEach(addRemoveEvent);
     document.querySelectorAll('.remove-parts-item').forEach(addRemoveEvent);
@@ -412,49 +415,57 @@
     document.querySelectorAll('.labour-cost').forEach(addInputEvent);
     document.querySelectorAll('.parts-cost').forEach(addInputEvent);
 
-    document.getElementById('add-labour-item').addEventListener('click', function(event) {
-        event.preventDefault();
-        addLabourItem();
-        calculateTotals();
+    document.getElementById('add-labour-item').addEventListener('click', function (event) {
+      event.preventDefault();
+      addLabourItem();
+      calculateTotals();
     });
 
-    document.getElementById('add-parts-item').addEventListener('click', function(event) {
-        event.preventDefault();
-        addPartsItem();
-        calculateTotals();
+    document.getElementById('add-parts-item').addEventListener('click', function (event) {
+      event.preventDefault();
+      addPartsItem();
+      calculateTotals();
     });
 
     calculateTotals();
-});
+  });
 
-document.addEventListener('livewire:load', function () {
-  // Check all checkboxes
-  document.getElementById('selectAll').addEventListener('change', function (event) {
+  document.addEventListener('livewire:load', function () {
+    // Check all checkboxes
+    document.getElementById('selectAll').addEventListener('change', function (event) {
       const checkboxes = document.querySelectorAll('input[type="checkbox"][wire:model="selectedRjas"]');
       checkboxes.forEach(checkbox => {
-          checkbox.checked = event.target.checked;
-          Livewire.emit('updateSelected', checkbox.value, checkbox.checked);
+        checkbox.checked = event.target.checked;
+        Livewire.emit('updateSelected', checkbox.value, checkbox.checked);
       });
+    });
   });
-});
 
-document.addEventListener('DOMContentLoaded', function () {
-  var deleteModal = document.getElementById('confirmDeleteModal');
-  deleteModal.addEventListener('show.bs.modal', function (event) {
+  document.addEventListener('DOMContentLoaded', function () {
+    var deleteModal = document.getElementById('confirmDeleteModal');
+    deleteModal.addEventListener('show.bs.modal', function (event) {
       var button = event.relatedTarget;
       var companyId = button.getAttribute('data-company-id');
       var form = deleteModal.querySelector('#deleteForm');
       form.action = '/company/' + companyId;
+    });
   });
-});
 
-const companySelect = document.getElementById('company-select');
-const maintenanceEmail = document.getElementById('maintenance-email');
+  const companySelect = document.getElementById('company-select');
+  const maintenanceEmail = document.getElementById('maintenance-email');
 
-companySelect.addEventListener('change', function () {
+  companySelect.addEventListener('change', function () {
     const selectedOption = companySelect.options[companySelect.selectedIndex];
     const email = selectedOption.getAttribute('data-email');
     maintenanceEmail.value = email ? email : '';
-});
+  });
 
 })();
+function isNumberKey(evt) {
+  console.log(evt);
+  var charCode = (evt.which) ? evt.which : evt.keyCode;
+  if (charCode != 46 && charCode > 31
+    && (charCode < 48 || charCode > 57))
+    return false;
+  return true;
+}

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
@@ -54,30 +55,39 @@ h6 {
 .fs_9 {
   font-size: 9px !important;
 }
+
 .fs_10 {
   font-size: 10px !important;
 }
+
 .fs_11 {
   font-size: 11px !important;
 }
+
 .fs_12 {
   font-size: 12px !important;
 }
+
 .fs_13 {
   font-size: 13px !important;
 }
+
 .fs_14 {
   font-size: 12px !important;
 }
+
 .fs_15 {
   font-size: 15px !important;
 }
+
 .fs_16 {
   font-size: 16px !important;
 }
+
 .fs_18 {
   font-size: 18px !important;
 }
+
 .fs_20 {
   font-size: 20px !important;
 }
@@ -95,6 +105,7 @@ img {
   padding: 20px 30px;
   transition: all 0.3s;
 }
+
 /* 
 @media (max-width: 1199px) {
   #main {
@@ -182,7 +193,9 @@ img {
   border-color: #ef1e24;
 }
 
-.btn.btn-primary:hover, .btn:focus, .btn:focus-visible  {
+.btn.btn-primary:hover,
+.btn:focus,
+.btn:focus-visible {
   background: #001f47;
   border-color: #001f47;
 }
@@ -486,7 +499,7 @@ img {
   max-width: 200px;
 }
 
-.logo svg{
+.logo svg {
   width: 100%;
 }
 
@@ -495,7 +508,7 @@ img {
   max-width: 296px;
 }
 
-.header .logo svg{
+.header .logo svg {
   display: inline-block;
   max-width: 185px;
 }
@@ -850,13 +863,15 @@ img {
   color: #899bbd;
 }
 
-.sidebar-nav .nav-link:hover, .sidebar-nav .nav-link.active {
+.sidebar-nav .nav-link:hover,
+.sidebar-nav .nav-link.active {
   /* color: #4154f1; */
   color: #001f47;
   background: #f6f9ff;
 }
 
-.sidebar-nav .nav-link:hover i, .sidebar-nav .nav-link.active i {
+.sidebar-nav .nav-link:hover i,
+.sidebar-nav .nav-link.active i {
   /* color: #4154f1; */
   color: #001f47;
 }
@@ -952,7 +967,9 @@ img {
   font-size: 14px;
 }
 
-.daterangepicker.opensright .ranges li.active, .daterangepicker td.active,  .daterangepicker td.active:hover {
+.daterangepicker.opensright .ranges li.active,
+.daterangepicker td.active,
+.daterangepicker td.active:hover {
   background-color: #012970;
 }
 
@@ -1182,7 +1199,14 @@ img {
 /*--------------------------------------------------------------
 # Input
 --------------------------------------------------------------*/
-.form-control, .form_input_d .input-group>.form-control, .datatable-input, .datatable-input:focus-visible, .form_input_d .input-group>.form-floating, .form_input_d .input-group>.form-select, .form_input_d .form-control, .form_input_d .form-select {
+.form-control,
+.form_input_d .input-group>.form-control,
+.datatable-input,
+.datatable-input:focus-visible,
+.form_input_d .input-group>.form-floating,
+.form_input_d .input-group>.form-select,
+.form_input_d .form-control,
+.form_input_d .form-select {
   width: 100% !important;
   border: 0 !important;
   border-radius: 0;
@@ -1194,8 +1218,16 @@ img {
   min-height: 46px;
 }
 
-.form-control, .form-control:focus , .form-control:focus-visible ,.datatable-input, .datatable-input:focus-visible, .form_input_d .input-group>.form-control, .form_input_d .input-group>.form-floating, .form_input_d .input-group>.form-select, 
-.form_input_d .form-control, .form_input_d .form-select {
+.form-control,
+.form-control:focus,
+.form-control:focus-visible,
+.datatable-input,
+.datatable-input:focus-visible,
+.form_input_d .input-group>.form-control,
+.form_input_d .input-group>.form-floating,
+.form_input_d .input-group>.form-select,
+.form_input_d .form-control,
+.form_input_d .form-select {
   background: #ecf4ff;
 }
 
@@ -1311,7 +1343,11 @@ img {
   font-weight: 500;
 }
 
-.bootstrap-select .dropdown-toggle, .bootstrap-select .dropdown-toggle:hover, .bootstrap-select .dropdown-toggle:focus, .bootstrap-select .dropdown-toggle:focus-visible, .bootstrap-select .dropdown-toggle:active {
+.bootstrap-select .dropdown-toggle,
+.bootstrap-select .dropdown-toggle:hover,
+.bootstrap-select .dropdown-toggle:focus,
+.bootstrap-select .dropdown-toggle:focus-visible,
+.bootstrap-select .dropdown-toggle:active {
   background: #ecf4ff;
   border-radius: 0;
   width: 100%;
@@ -1326,7 +1362,8 @@ img {
   width: 100%;
 }
 
-.dropdown-item.active, .dropdown-menu .dropdown-item.active:hover {
+.dropdown-item.active,
+.dropdown-menu .dropdown-item.active:hover {
   background: #012970;
 }
 
@@ -1367,11 +1404,11 @@ img {
   cursor: default;
 }
 
-.datatable-pagination .datatable-active a, 
-.datatable-pagination .datatable-active a:focus, 
-.datatable-pagination .datatable-active a:hover, 
-.datatable-pagination .datatable-active button, 
-.datatable-pagination .datatable-active button:focus, 
+.datatable-pagination .datatable-active a,
+.datatable-pagination .datatable-active a:focus,
+.datatable-pagination .datatable-active a:hover,
+.datatable-pagination .datatable-active button,
+.datatable-pagination .datatable-active button:focus,
 .datatable-pagination .datatable-active button:hover {
   background-color: #d9d9d9;
   cursor: default;
@@ -1383,11 +1420,12 @@ img {
 .datatable-pagination .datatable-disabled button,
 .datatable-pagination .datatable-disabled button:focus,
 .datatable-pagination .datatable-disabled button:hover {
-	cursor: not-allowed;
-	opacity: 0.4;
+  cursor: not-allowed;
+  opacity: 0.4;
 }
 
-.datatable-table th button, .datatable-pagination-list button {
+.datatable-table th button,
+.datatable-pagination-list button {
   color: inherit;
   border: 0;
   background-color: inherit;
@@ -1397,7 +1435,8 @@ img {
   font-size: inherit;
 }
 
-.datatable-pagination a, .datatable-pagination button {
+.datatable-pagination a,
+.datatable-pagination button {
   border: 1px solid transparent;
   float: left;
   margin-left: 2px;
@@ -1413,7 +1452,8 @@ img {
   float: left;
 }
 
-.datatable-pagination a:hover, .datatable-pagination button:hover {
+.datatable-pagination a:hover,
+.datatable-pagination button:hover {
   background-color: #d9d9d9;
 }
 
@@ -1437,25 +1477,29 @@ img {
   border-color: #001f47;
 }
 
-.datatable-table > thead > tr > th, .datatable-table > tbody > tr > td a, .datatable-table > tbody > tr > td {
+.datatable-table>thead>tr>th,
+.datatable-table>tbody>tr>td a,
+.datatable-table>tbody>tr>td {
   font-size: 14px;
 }
 
-.datatable-table > thead > tr > th {
+.datatable-table>thead>tr>th {
   border: 1px solid #d9d9d9;
   background: #001f47;
   color: #fff;
 }
 
-.datatable-table > thead > tr > th button {
+.datatable-table>thead>tr>th button {
   padding: 0;
 }
 
-.jd_column:nth-child(odd):last-child, .jd_column:nth-child(even):last-child {
+.jd_column:nth-child(odd):last-child,
+.jd_column:nth-child(even):last-child {
   margin-bottom: 0;
 }
 
-.jd_column input.form-control, .jd_column .bootstrap-select .dropdown-toggle {
+.jd_column input.form-control,
+.jd_column .bootstrap-select .dropdown-toggle {
   min-height: 30px;
   padding: 0 10px !important;
   height: 30px;
@@ -1604,7 +1648,7 @@ img {
   margin-right: 10px;
 }
 
-#parts-section .parts-item .row > .col-lg-6 {
+#parts-section .parts-item .row>.col-lg-6 {
   padding-right: 10px;
 }
 
@@ -1613,24 +1657,41 @@ img {
 }
 
 .rja-details table {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
-.rja-details th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
+
+.rja-details th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
 }
+
 .rja-details th {
-    background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
+
 .rja-details tr:nth-child(even) {
-    background-color: #f9f9f9;
+  background-color: #f9f9f9;
 }
+
 .rja-details tr:hover {
-    background-color: #ddd;
+  background-color: #ddd;
 }
+
 .rja-details .center-button {
-    text-align: center;
-    margin-top: 20px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.currencyinput {
+  position: relative;
+}
+
+.currencyinput .doller {
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+  right: 10px;
 }
