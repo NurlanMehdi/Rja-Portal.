@@ -64,6 +64,13 @@
         }
     </style>
 </head>
+*****************************************************************
+
+PLEASE DO NOT REPLY TO THIS EMAIL.
+
+THIS EMAIL IS SENT AUTOMATICALLY AND IS NOT MONITORED.
+
+*****************************************************************
 <body>
     <div class="container">
         <div class="rja-details">
@@ -82,7 +89,7 @@
                     <td>{{ $rja->b2b_reference ?? 'N/A' }}</td>
                 </tr>
                 <tr>
-                    <th>Diagnosis</th>
+                    <th>Tech Findings/ Suggested Resolution</th>
                     <td>{{ $rja->diagnosis ?? 'N/A' }}</td>
                 </tr>
             </table>

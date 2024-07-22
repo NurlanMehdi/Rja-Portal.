@@ -14,7 +14,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('index');
-    });
+    })->name('dashboard');
     //New RJA
     Route::get('/rja/new', [RjaController::class, 'newRja'])->name('rja.new');
     Route::post('/new-rja', [NewRja::class]);

@@ -73,7 +73,6 @@ class Rja extends Model
         }
         Mail::to($toMail)->cc($ccEmails)->send(new \App\Mail\RjaMail($rja));
 
-
         session()->flash('message', 'Emails sent successfully.');
     }
 }

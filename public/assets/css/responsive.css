@@ -5,7 +5,7 @@
 
     .jd_title {
         text-overflow: ellipsis;
-        width: 60%;
+        width: 30%;
     }
 
     .jd_title:first-child {
