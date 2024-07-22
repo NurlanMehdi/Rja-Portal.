@@ -22,6 +22,7 @@
                                         <select id="company-select" wire:model="company_id" class="form-select" aria-label="Default select example">
                                             <option value="">Select</option>
                                             @foreach($companies as $company)
+
                                             <option data-email="{{ $company->email }}" value="{{ $company->id }}">{{ $company->company_name }}</option>
                                             @endforeach
                                         </select>
@@ -36,9 +37,17 @@
                                 <div class="col-lg-6 mb-3">
                                     <div class="d-flex align-items-center">
                                         <span class="fs_14 fw_6 me-2">Maintenance Department Email:</span>
-                                        <input id="maintenance-email" type="email" wire:model="email" class="form-control" placeholder="Enter Maintenance Department Email">
+
+                                        <input id="maintenance-email" type="email" wire:model="email" class="form-control" placeholder="Enter Maintenance Department Email"><button type="button" class="btn btn-sm btn-success" wire:click="addCCEmails">+</button>
+
                                         @error('email') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
+                                    @foreach($cc_emails as $index => $cc_email)
+                                    <div class="d-flex align-items-center mt-2">
+                                        <span class="fs_14 fw_6 me-2">Maintenance Department Email:</span>
+                                        <input type="email" wire:model="cc_emails.{{ $index }}.email" class="form-control" placeholder="Enter Maintenance Department CC Email"><button type="button" class="btn btn-sm btn-danger" wire:click="removeCCEmail({{ $index }})"><i class="bi bi-trash"></i></button>
+                                    </div>
+                                    @endforeach
                                 </div>
                                 <div class="col-lg-6 mb-3">
                                     <div class="d-flex align-items-center">
@@ -62,7 +71,9 @@
                     <div class="card h-100">
                         <div class="card-header bg-info-dark">
                             <span class="fs_16 fw_6 text-white">
-                            Tech Findings/ Suggested Resolution
+
+                                Tech Findings/ Suggested Resolution
+
                             </span>
                         </div>
                         <div class="card-body pt-3">
@@ -88,7 +99,9 @@
                     <div class="card h-100">
                         <div class="card-header bg-info-dark">
                             <span class="fs_16 fw_6 text-white">
-                            RJA - Quote Details
+
+                                RJA - Quote Details
+
                             </span>
                         </div>
                         <div class="card-body pt-3">
@@ -104,14 +117,14 @@
                                     </span>
                                     <div class="col-lg-12" id="labour-section">
                                         <div class="labour-item input-group mb-3">
-                                            <label class="form-label fs_14 fw_6 me-2">LABOUR 1:</label>
-                                            <div class="row w-100">
-                                                <div class="col-lg-2">
-                                                    <label class="form-label fs_14 fw_6">Labour Cost:</label>
-                                                    <input type="text" wire:model="labour_items.0.cost" class="form-control labour-cost" placeholder="0.00$" oninput="updateTotals()">
-                                                </div>
-                                                <button type="button" class="remove-button me-2 remove-labour-item btn-outline-danger" wire:click="removeLabourItem(0)">&times;</button>
-                                            </div>
+
+
+                                            <label class="form-label fs_14 fw_6 me-3">LABOUR 1:</label>
+                                            <label class="form-label fs_14 fw_4">Labour Cost:</label>
+                                            <span class="currencyinput"><span class="doller">$</span>
+                                                <input type="text" wire:model="labour_items.0.cost" class="form-control labour-cost" onkeypress="return isNumberKey(event)">
+                                            </span>
+                                            <button type="button" class="remove-button me-2 remove-labour-item btn-outline-danger" onclick="removeLabourItem(this)">&times;</button>
                                         </div>
                                         <a href="#" class="fs_14 fw_6 text-primary add-link" id="add-labour-item">Add Additional Labour Item Line +</a>
                                     </div>
@@ -130,7 +143,10 @@
                                                 </div>
                                                 <div class="col-lg-2">
                                                     <label class="form-label fs_14 fw_6">Part Cost:</label>
-                                                    <input type="text" wire:model="parts_items.0.cost" class="form-control parts-cost" placeholder="0.00$" oninput="updateTotals()">
+
+                                                    <span class="currencyinput"><span class="doller">$</span>
+                                                        <input type="text" wire:model="parts_items.0.cost" class="form-control parts-cost" onkeypress="return isNumberKey(event)" oninput="updateTotals()">
+                                                    </span>
                                                 </div>
                                                 <button type="button" class="remove-button me-2 remove-parts-item btn-outline-danger" wire:click="removePartsItem(0)">&times;</button>
                                             </div>
@@ -185,3 +201,7 @@
         </div>
     @endif
 </div>
+
+    </form>
+</div>
+

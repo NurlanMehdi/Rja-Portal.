@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Livewire;
 
 use Livewire\Component;
@@ -14,8 +15,9 @@ class NewRja extends Component
     public $diagnosis;
     public $labour_items = [];
     public $parts_items = [];
+    public $cc_emails = [];
 
-  
+
 
     protected $rules = [
         'b2b_reference' => 'required',
@@ -27,20 +29,29 @@ class NewRja extends Component
 
     public function mount()
     {
-        $this->labour_items = [['cost' => 0]];
-        $this->parts_items = [['number' => '', 'cost' => 0]];
+        $this->labour_items = [['cost' => '0.00']];
+        $this->parts_items = [['number' => '', 'cost' => '0.00']];
     }
 
     public function addLabourItem()
     {
-        $this->labour_items[] = ['cost' => 0];
+        $this->labour_items[] = ['cost' => '0.00'];
+    }
+    public function addCCEmails()
+    {
+        $this->cc_emails[] = [
+            'email' => ''
+        ];
+    }
+    public function removeCCEmail($key)
+    {
+        unset($this->cc_emails[$key]);
     }
 
     public function addPartsItem()
     {
-        $this->parts_items[] = ['number' => '', 'cost' => 0];
+        $this->parts_items[] = ['number' => '', 'cost' => '0.00'];
     }
-
 
     public function removeLabourItem($index)
     {
@@ -93,6 +104,12 @@ class NewRja extends Component
         }else {
             session()->flash('error', 'An error occurred while submitting the RJA.');
         }
+
+        Rja::sendRjaEmail($rja->id, $this->cc_emails);
+
+        $this->reset();
+        session()->flash('message', 'RJA submitted successfully.');
+
     }
 
     public function render()
@@ -101,4 +118,3 @@ class NewRja extends Component
         return view('livewire.new-rja', ['companies' => $companies]);
     }
 }
-

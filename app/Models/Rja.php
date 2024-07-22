@@ -50,27 +50,28 @@ class Rja extends Model
 
     public function companies()
     {
-        return $this->belongsTo(Company::class,'company_id', 'id');
+        return $this->belongsTo(Company::class, 'company_id', 'id');
     }
 
 
-    public static function sendRjaEmail($id)
+    public static function sendRjaEmail($id, $cc_emails)
     {
         $rja = Rja::with(['items', 'companies'])
             ->whereIn('id', [$id])
             ->first();
+        //dd($rja->companies);
 
-            
-            if($rja->mail != '')
-            {
-                $toMail = $rja->mail;
-                
-            }elseif ($rja->companies && $rja->companies->maintenance_email) {
-                $toMail = $rja->companies->maintenance_email;
-            }
-            
-            Mail::to($toMail)->send(new \App\Mail\RjaMail($rja));
-        
+        if ($rja->mail != '') {
+            $toMail = $rja->mail;
+        } elseif ($rja->companies && $rja->companies->email) {
+            $toMail = $rja->companies->email;
+        }
+        //dd($cc_emails);
+        $ccEmails = [];
+        foreach ($cc_emails as $cc_email) {
+            $ccEmails[] = $cc_email['email'];
+        }
+        Mail::to($toMail)->cc($ccEmails)->send(new \App\Mail\RjaMail($rja));
 
         session()->flash('message', 'Emails sent successfully.');
     }
