@@ -77,8 +77,7 @@ class NewRja extends Component
             'diagnosis' => $this->diagnosis,
         ]);
 
-        if($rja)
-        {
+        if ($rja) {
             foreach ($this->labour_items as $item) {
                 Items::create([
                     'rja_id' => $rja->id,
@@ -86,7 +85,7 @@ class NewRja extends Component
                     'cost' => $item['cost'] ?? 0,
                 ]);
             }
-    
+
             foreach ($this->parts_items as $item) {
                 Items::create([
                     'rja_id' => $rja->id,
@@ -95,13 +94,13 @@ class NewRja extends Component
                     'cost' => $item['cost'] ?? 0,
                 ]);
             }
-    
-            Rja::sendRjaEmail($rja->id);
-    
-            
+
+            Rja::sendRjaEmail($rja->id, $this->cc_emails);
+
+
             $this->reset();
             session()->flash('message', 'RJA submitted successfully.');
-        }else {
+        } else {
             session()->flash('error', 'An error occurred while submitting the RJA.');
         }
 
@@ -109,7 +108,6 @@ class NewRja extends Component
 
         $this->reset();
         session()->flash('message', 'RJA submitted successfully.');
-
     }
 
     public function render()
