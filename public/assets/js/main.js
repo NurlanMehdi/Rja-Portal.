@@ -408,8 +408,8 @@
       document.getElementById('total-pre-hst').textContent = (totalLabour + totalParts).toFixed(2);
     }
     // Initial remove event bindings
-    // document.querySelectorAll('.remove-labour-item').forEach(addRemoveEvent);
-    // document.querySelectorAll('.remove-parts-item').forEach(addRemoveEvent);
+    document.querySelectorAll('.remove-labour-item').forEach(addRemoveEvent);
+    document.querySelectorAll('.remove-parts-item').forEach(addRemoveEvent);
 
     // Initial input event bindings
     document.querySelectorAll('.labour-cost').forEach(addInputEvent);
