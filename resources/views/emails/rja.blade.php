@@ -41,7 +41,7 @@
                             </tr>
                             <tr>
                                 <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;">Maintenance Department Email</td>
-                                <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $rja->companies->maintenance_email ?? $rja->mail }}</td>
+                                <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $rja->companies->maintenance_email ?? $rja->companies->email }}</td>
                             </tr>
                             <tr>
                                 <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;">B2B/Warranty Reference</td>
@@ -124,7 +124,9 @@
                                 <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;">{{ $part->part_number ?? 'N/A' }}</td>
                                 <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $part->cost ?? 'N/A' }}</td>
                             </tr>
+                            @php
                             $total_part_cost += $part->cost;
+                            @endphp
                             @endforeach
                             <tr>
                                 <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;">Total Parts Cost:</td>
@@ -175,9 +177,9 @@
             </tr>
             <tr>
                 <td colspan="2" style="color:#212529; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;">
-                    <div class="" style=" display: flex;align-items: center;justify-content: center; gap: 12px;width: 100%;">
-                        <a href="{{ route('rja.approve.for.mail', $rja->id) }}" style="border: 1px solid #198754;background: #198754;border-radius: 4px;line-height: 31px;font-size: 13px;min-height: 20px;color:#fff;">Approve</a>
-                        <a href="{{ route('rja.reject.for.mail', $rja->id) }}" style="border: 1px solid #dc3545;background: #dc3545;border-radius: 4px;line-height: 31px;font-size: 13px;min-height: 20px;color:#fff;">Reject</a>
+                    <div class="" style="display:flex;width:100%;justify-content: center;gap: 12px;">
+                        <a href="{{ route('rja.approve.for.mail', $rja->id) }}" style="background: #198754;color:#fff;border:1px solid #198754;border-radius:4px;line-height:31px;font-size:13px;min-height:20px;display: inline-block;padding: 5px 15px;text-decoration: none;font-size: 16px;">Approve</a>
+                        <a href="{{ route('rja.reject.for.mail', $rja->id) }}" style="background: #dc3545;color:#fff;;border:1px solid #198754;border-radius:4px;line-height:31px;font-size:13px;min-height:20px;display: inline-block;padding: 5px 15px;text-decoration: none;font-size: 16px;">Reject</a>
                     </div>
                 </td>
             </tr>
