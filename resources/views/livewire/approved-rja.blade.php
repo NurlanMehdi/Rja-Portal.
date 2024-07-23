@@ -29,7 +29,7 @@
                                             </th> -->
                                             <td><a href="{{ route('rja-detail', $rja->id) }}" class="text-primary">#{{ $rja->id }}</a></td>
                                             <td>{{ $rja->companies->company_name ?? ''  }}</td>
-                                            <td>{{ $rja->companies->email ?? $rja->mail }}</td>
+                                            <td>{{ $rja->companies->emails[0]->email ?? ($rja->emails[0]->mail ?? '') }}</td>
                                             <td>{{ $rja->b2b_reference }}</td>
                                             <td>{{ $rja->diagnosis }}</td>
                                             <td>{{ $rja->created_at }}</td>

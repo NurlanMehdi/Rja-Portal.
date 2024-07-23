@@ -23,7 +23,7 @@
                                             <option value="">Select</option>
                                             @foreach($companies as $company)
 
-                                            <option data-email="{{ $company->email }}" value="{{ $company->id }}">{{ $company->company_name }}</option>
+                                            <option data-emails="{{ json_encode($company->emails->pluck('email')->toArray()) }}" value="{{ $company->id }}">{{ $company->company_name }}</option>
                                             @endforeach
                                         </select>
                                         @error('company_id') <span class="text-danger">{{ $message }}</span> @enderror
@@ -34,12 +34,12 @@
                                     Company Details:
                                     </span>
                                 </div>
-                                <div class="col-lg-6 mb-3">
+                                <div id="maintenance-email-container-2" class="col-lg-6 mb-3">
                                     <div class="d-flex align-items-center">
                                         <span class="fs_14 fw_6 me-2">Maintenance Department Email:</span>
 
                                         <input id="maintenance-email" type="email" wire:model="email" class="form-control" placeholder="Enter Maintenance Department Email"><button type="button" class="btn btn-sm btn-success" wire:click="addCCEmails">+</button>
-
+                                        
                                         @error('email') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                     @foreach($cc_emails as $index => $cc_email)

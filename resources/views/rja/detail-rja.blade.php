@@ -29,10 +29,14 @@
                                 <span class="fs_16 fw_6 mb-3 d-block text-muted line_behind">Company Details:</span>
                             </div>
                             <div class="col-lg-6 mb-3">
-                                <div class="d-flex align-items-center">
+                            @foreach($emails as $email)
+                            <div class="d-flex align-items-center">
                                     <span class="fs_14 fw_6 me-2">Maintenance Department Email:</span>
-                                    <span class="form-control"> {{ $rja->companies->email ?? $rja->mail }}</span>
+                                    <span class="form-control"> {{ $email->mail ?? '' }}</span>
                                 </div>
+                            @endforeach
+
+                                
                             </div>
                             <div class="col-lg-6 mb-3">
                                 <div class="d-flex align-items-center">
@@ -64,7 +68,7 @@
                                             <span class="fs_14 fw_6 d-block mb-2">
                                                 Diagnosis findings/ Suggested Resolution (Mandatory, brief description):
                                             </span>
-                                            <span class="form-control">{{ $rja->diagnosis }}</span>
+                                            <span class="form-control">{!! nl2br(e($rja->diagnosis)) !!}</span>
                                         </div>
                                     </div>
                                 </div>
