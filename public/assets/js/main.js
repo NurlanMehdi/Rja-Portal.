@@ -408,8 +408,8 @@
       document.getElementById('total-pre-hst').textContent = (totalLabour + totalParts).toFixed(2);
     }
     // Initial remove event bindings
-    document.querySelectorAll('.remove-labour-item').forEach(addRemoveEvent);
-    document.querySelectorAll('.remove-parts-item').forEach(addRemoveEvent);
+    // document.querySelectorAll('.remove-labour-item').forEach(addRemoveEvent);
+    // document.querySelectorAll('.remove-parts-item').forEach(addRemoveEvent);
 
     // Initial input event bindings
     document.querySelectorAll('.labour-cost').forEach(addInputEvent);
@@ -471,126 +471,6 @@ function closeModal() {
   }, 2000);
 }
 
-
-document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('add-labour-item').addEventListener('click', function (event) {
-    event.preventDefault();
-    addLabourItem();
-    calculateTotals();
-  });
-
-  document.getElementById('add-parts-item').addEventListener('click', function (event) {
-    event.preventDefault();
-    addPartsItem();
-    calculateTotals();
-  });
-
-  function addLabourItem() {
-    const labourSection = document.getElementById('labour-section');
-    const labourCount = labourSection.getElementsByClassName('labour-item').length;
-    const newLabourItem = document.createElement('div');
-    newLabourItem.className = 'labour-item input-group mb-3';
-    newLabourItem.innerHTML = `
-          <label class="form-label fs_14 fw_6 me-2">LABOUR ${labourCount + 1}:</label>
-          <div class="row w-100">
-              <div class="col-lg-2">
-                  <label class="form-label fs_14 fw_6">Labour Cost:</label>
-                  <input type="text" wire:model="labour_items.${labourCount}.cost" class="form-control labour-cost" placeholder="0.00$" value="0.00$" oninput="formatNumber(this); updateTotals()">
-              </div>
-              <button type="button" class="remove-button me-2 remove-labour-item btn-outline-danger" onclick="removeLabourItem(this, ${labourCount})">&times;</button>
-          </div>
-      `;
-    labourSection.insertBefore(newLabourItem, labourSection.querySelector('#add-labour-item'));
-    addRemoveEvent(newLabourItem.querySelector('.remove-labour-item'));
-    addInputEvent(newLabourItem.querySelector('.labour-cost'));
-    renumberItems('labour-item', 'LABOUR');
-  }
-
-  function addPartsItem() {
-    const partsSection = document.getElementById('parts-section');
-    const partsCount = partsSection.getElementsByClassName('parts-item').length;
-    const newPartsItem = document.createElement('div');
-    newPartsItem.className = 'parts-item input-group mb-3';
-    newPartsItem.innerHTML = `
-          <label class="form-label fs_14 fw_6 me-2">Part ${partsCount + 1}:</label>
-          <div class="row w-100">
-              <div class="col-lg-2">
-                  <label class="form-label fs_14 fw_6">Part Number:</label>
-                  <input type="text" wire:model="parts_items.${partsCount}.number" class="form-control" placeholder="I.e. W10821385">
-              </div>
-              <div class="col-lg-2">
-                  <label class="form-label fs_14 fw_6">Part Cost:</label>
-                  <input type="text" wire:model="parts_items.${partsCount}.cost" class="form-control parts-cost" placeholder="0.00$" value="" oninput="formatNumber(this); updateTotals()">
-              </div>
-              <button type="button" class="remove-button me-2 remove-parts-item btn-outline-danger"  onclick="removePartsItem(this, ${partsCount})">&times;</button>
-          </div>
-      `;
-    partsSection.insertBefore(newPartsItem, partsSection.querySelector('#add-parts-item'));
-    addRemoveEvent(newPartsItem.querySelector('.remove-parts-item'));
-    addInputEvent(newPartsItem.querySelector('.parts-cost'));
-    renumberItems('parts-item', 'Part');
-
-  }
-
-  function renumberItems(className, label) {
-    const items = document.getElementsByClassName(className);
-    Array.from(items).forEach((item, index) => {
-      item.querySelector('label').textContent = `${label} ${index + 1}:`;
-    });
-  }
-
-  function addRemoveEvent(button) {
-    button.addEventListener('click', function () {
-      calculateTotals();
-      renumberItems(button.closest('.input-group').classList.contains('labour-item') ? 'labour-item' : 'parts-item', button.closest('.input-group').classList.contains('labour-item') ? 'LABOUR' : 'Part');
-    });
-  }
-
-  function addInputEvent(input) {
-    input.value = '';
-    input.addEventListener('input', function () {
-      formatNumber(input);
-      calculateTotals();
-    });
-  }
-
-  function calculateTotals() {
-    let totalLabour = 0;
-    let totalParts = 0;
-
-    document.querySelectorAll('.labour-cost').forEach(function (input) {
-      totalLabour += parseFloat(input.value.replace(/,/g, '').replace('$', '')) || 0;
-    });
-
-    document.querySelectorAll('.parts-cost').forEach(function (input) {
-      totalParts += parseFloat(input.value.replace(/,/g, '').replace('$', '')) || 0;
-    });
-
-    document.getElementById('total-labour').textContent = totalLabour.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '$';
-    document.getElementById('total-parts').textContent = totalParts.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '$';
-    document.getElementById('total-pre-hst').textContent = (totalLabour + totalParts).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '$';
-  }
-
-  function formatNumber(input) {
-    let value = input.value.replace(/,/g, '').replace('$', '');
-    if (!isNaN(value) && value !== '') {
-      let parts = value.split('.');
-      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-      input.value = parts.join('.');
-    } else {
-      input.value = '';
-    }
-  }
-
-  document.querySelectorAll('.remove-labour-item').forEach(addRemoveEvent);
-  document.querySelectorAll('.remove-parts-item').forEach(addRemoveEvent);
-
-  document.querySelectorAll('.labour-cost').forEach(addInputEvent);
-  document.querySelectorAll('.parts-cost').forEach(addInputEvent);
-
-  setInitialValues();
-  calculateTotals();
-});
 function isNumberKey(evt) {
   console.log(evt);
   var charCode = (evt.which) ? evt.which : evt.keyCode;
