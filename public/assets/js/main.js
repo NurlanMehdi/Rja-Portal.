@@ -592,7 +592,6 @@ document.addEventListener('DOMContentLoaded', function() {
   calculateTotals();
 });
 
-=======
 function isNumberKey(evt) {
   console.log(evt);
   var charCode = (evt.which) ? evt.which : evt.keyCode;
