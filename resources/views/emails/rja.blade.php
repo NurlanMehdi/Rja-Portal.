@@ -177,8 +177,8 @@
             </tr>
             <tr>
                 <td colspan="2" style="color:#212529; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;">
-                    <div class="" style="display:flex;width:100%;justify-content: center;gap: 12px;">
-                        <a href="{{ route('rja.approve.for.mail', $rja->id) }}" style="background: #198754;color:#fff;border:1px solid #198754;border-radius:4px;line-height:31px;font-size:13px;min-height:20px;display: inline-block;padding: 5px 15px;text-decoration: none;font-size: 16px;">Approve</a>
+                    <div class="" style="display:block;width:100%;text-align:center;">
+                        <a href="{{ route('rja.approve.for.mail', $rja->id) }}" style="background: #198754;color:#fff;border:1px solid #198754;border-radius:4px;line-height:31px;font-size:13px;min-height:20px;display: inline-block;padding: 5px 15px;text-decoration: none;font-size: 16px;margin-right:15px;">Approve</a>
                         <a href="{{ route('rja.reject.for.mail', $rja->id) }}" style="background: #dc3545;color:#fff;;border:1px solid #198754;border-radius:4px;line-height:31px;font-size:13px;min-height:20px;display: inline-block;padding: 5px 15px;text-decoration: none;font-size: 16px;">Reject</a>
                     </div>
                 </td>
