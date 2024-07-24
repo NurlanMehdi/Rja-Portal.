@@ -500,9 +500,10 @@
 
     const maintenanceEmailInput = document.getElementById('maintenance-email');
     maintenanceEmailInput.value = '';
+    
 
-    while (maintenanceEmailContainer.childElementCount > 2) {
-        maintenanceEmailContainer.lastChild.remove();
+    while (maintenanceEmailContainer.childElementCount > 1) {
+        maintenanceEmailContainer.removeChild(maintenanceEmailContainer.lastChild);
     }
 
 
