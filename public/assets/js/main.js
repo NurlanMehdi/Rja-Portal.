@@ -333,6 +333,23 @@
     }, 200);
   }
 
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('.add-email').addEventListener('click', function() {
+            var emailWrapper = document.getElementById('email-wrapper');
+            var newEmailInput = document.createElement('div');
+            newEmailInput.classList.add('input-group', 'mb-2', 'email-input-group');
+            newEmailInput.innerHTML = `
+                <input type="email" name="emails[]" class="form-control email-input" placeholder="Enter email">
+                <button type="button" class="btn btn-sm btn-danger remove-email email-action-button">-</button>
+            `;
+            emailWrapper.appendChild(newEmailInput);
+
+            newEmailInput.querySelector('.remove-email').addEventListener('click', function() {
+                newEmailInput.remove();
+            });
+        });
+    });
+
   document.addEventListener('DOMContentLoaded', function () {
     function addRemoveEvent(button) {
       button.addEventListener('click', function () {
