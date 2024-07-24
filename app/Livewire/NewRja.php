@@ -30,13 +30,13 @@ class NewRja extends Component
 
     public function mount()
     {
-        $this->labour_items = [['cost' => '0.00']];
-        $this->parts_items = [['number' => '', 'cost' => '0.00']];
+        $this->labour_items = [['cost' => '']];
+        $this->parts_items = [['number' => '', 'cost' => '']];
     }
 
     public function addLabourItem()
     {
-        $this->labour_items[] = ['cost' => '0.00'];
+        $this->labour_items[] = ['cost' => ''];
     }
 
     public function addCCEmails()
@@ -53,7 +53,7 @@ class NewRja extends Component
 
     public function addPartsItem()
     {
-        $this->parts_items[] = ['number' => '', 'cost' => '0.00'];
+        $this->parts_items[] = ['number' => '', 'cost' => ''];
     }
 
     public function removeLabourItem($index)
