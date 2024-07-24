@@ -1688,7 +1688,7 @@ td {
     margin-top: 20px;
 }
 
-.modal {
+#success-modal {
   display: block;
   position: fixed;
   z-index: 39;
@@ -1739,8 +1739,7 @@ td {
   100% {
       transform: scale(1);
   }
-  text-align: center;
-  margin-top: 20px;
+
 }
 
 .currencyinput {
@@ -1752,4 +1751,43 @@ td {
   transform: translateY(-50%);
   top: 50%;
   right: 10px;
+}
+
+.email-input-group {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.email-input {
+  flex: 1 !important;
+}
+
+.email-action-button {
+  margin-left: 10px !important;
+}
+
+#error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: serif;
+}
+.error-container {
+  margin-top: -30%;
+  text-align: center;
+}
+.error-logo {
+  margin-left: 18%;
+text-align: center;
+width: 58%;
+margin-bottom: 20px;
+}
+.error-message {
+  font-size: 1.2em;
+  color: #333;
+}
+.error-message p {
+  margin: 0;
 }

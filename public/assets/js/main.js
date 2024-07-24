@@ -387,6 +387,17 @@
       addInputEvent(newPartsItem.querySelector('.parts-cost'));
     }
 
+    function formatNumber(input) {
+      let value = input.value.replace(/,/g, '').replace('$', '');
+      if (!isNaN(value) && value !== '') {
+          let parts = value.split('.');
+          parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+          input.value = parts.join('.');
+      } else {
+          input.value = '';
+      }
+  }
+
     function addInputEvent(input) {
       input.addEventListener('input', calculateTotals);
     }
@@ -395,18 +406,18 @@
       let totalLabour = 0;
       let totalParts = 0;
 
-      document.querySelectorAll('.labour-cost').forEach(function (input) {
-        totalLabour += parseFloat(input.value) || 0;
+      document.querySelectorAll('.labour-cost').forEach(function(input) {
+          totalLabour += parseFloat(input.value.replace(/,/g, '').replace('$', '')) || 0;
       });
 
-      document.querySelectorAll('.parts-cost').forEach(function (input) {
-        totalParts += parseFloat(input.value) || 0;
+      document.querySelectorAll('.parts-cost').forEach(function(input) {
+          totalParts += parseFloat(input.value.replace(/,/g, '').replace('$', '')) || 0;
       });
 
-      document.getElementById('total-labour').textContent = totalLabour.toFixed(2);
-      document.getElementById('total-parts').textContent = totalParts.toFixed(2);
-      document.getElementById('total-pre-hst').textContent = (totalLabour + totalParts).toFixed(2);
-    }
+      document.getElementById('total-labour').textContent = totalLabour.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '$';
+      document.getElementById('total-parts').textContent = totalParts.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '$';
+      document.getElementById('total-pre-hst').textContent = (totalLabour + totalParts).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '$';
+  }
     // Initial remove event bindings
     document.querySelectorAll('.remove-labour-item').forEach(addRemoveEvent);
     document.querySelectorAll('.remove-parts-item').forEach(addRemoveEvent);
@@ -452,12 +463,55 @@
   });
 
   const companySelect = document.getElementById('company-select');
-  const maintenanceEmail = document.getElementById('maintenance-email');
 
   companySelect.addEventListener('change', function () {
+    const maintenanceEmailContainer = document.getElementById('maintenance-email-container-2');
     const selectedOption = companySelect.options[companySelect.selectedIndex];
-    const email = selectedOption.getAttribute('data-email');
-    maintenanceEmail.value = email ? email : '';
+    let emails = selectedOption.getAttribute('data-emails');
+
+    if (emails) {
+      emails = emails.replace(/&quot;/g, '"'); // Replace HTML entities
+    }
+
+    try {
+      emails = JSON.parse(emails);
+    } catch (e) {
+        console.error("Invalid JSON format:", e);
+        emails = [];
+    }
+    console.log(emails)
+
+    const maintenanceEmailInput = document.getElementById('maintenance-email');
+    maintenanceEmailInput.value = '';
+
+    while (maintenanceEmailContainer.childElementCount > 2) {
+        maintenanceEmailContainer.lastChild.remove();
+    }
+
+
+
+    for (let i = 0; i < emails.length; i++) {
+     
+      let email = emails[i];
+
+      if (i === 0) {
+          maintenanceEmailInput.value = email;
+      } else {
+        const emailInputGroup = document.createElement('div');
+        emailInputGroup.classList.add('d-flex', 'align-items-center', 'mt-2');
+        emailInputGroup.innerHTML = `
+            <span class="fs_14 fw_6 me-2">Maintenance Department Email:</span>
+            <input type="email" class="form-control" value="${email}" placeholder="Enter Maintenance Department CC Email">
+            <button type="button" class="btn btn-sm btn-danger remove-email"><i class="bi bi-trash"></i></button>
+        `;
+    maintenanceEmailContainer.appendChild(emailInputGroup);
+
+          emailInputGroup.querySelector('.remove-email').addEventListener('click', function () {
+              emailInputGroup.remove();
+          });
+      }
+  }
+   // maintenanceEmail.value = email ? email : '';
   });
 
 })();
@@ -479,3 +533,4 @@ function isNumberKey(evt) {
     return false;
   return true;
 }
+

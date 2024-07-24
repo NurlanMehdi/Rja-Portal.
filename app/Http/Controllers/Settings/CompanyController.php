@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Settings;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Company;
+use App\Models\CompanyMail;
 
 class CompanyController extends Controller
 {
@@ -23,16 +24,32 @@ class CompanyController extends Controller
     {
         $request->validate([
             'company_name' => 'required|string|max:255',
-            'description' => 'nullable|string|max:500',
+            'emails.*' => 'nullable|email|max:255',
         ]);
 
-        Company::create($request->all());
+        $company = Company::create([
+            'company_name' => $request->company_name,
+        ]);
+
+       
+
+        if ($request->emails) {
+            foreach ($request->emails as $email) {
+                if ($email) {
+                    CompanyMail::create([
+                        'company_id' => $company->id,
+                        'email' => $email,
+                    ]);
+                }
+            }
+        }
 
         return redirect()->route('company.index')->with('success', 'Company added successfully.');
     }
 
     public function edit(Company $company)
     {
+        $company->load('emails');
         return view('settings.company.edit', compact('company'));
     }
 
@@ -40,16 +57,32 @@ class CompanyController extends Controller
     {
         $request->validate([
             'company_name' => 'required|string|max:255',
-            'description' => 'nullable|string|max:500',
+            'emails.*' => 'nullable|email|max:255',
         ]);
 
-        $company->update($request->all());
+        $company->update([
+            'company_name' => $request->company_name,
+        ]);
+
+        CompanyMail::where('company_id', $company->id)->delete();
+
+        if ($request->emails) {
+            foreach ($request->emails as $email) {
+                if ($email) {
+                    CompanyMail::create([
+                        'company_id' => $company->id,
+                        'email' => $email,
+                    ]);
+                }
+            }
+        }
 
         return redirect()->route('company.index')->with('success', 'Company updated successfully.');
     }
 
     public function destroy(Company $company)
     {
+        CompanyMail::where('company_id', $company->id)->delete();
         $company->delete();
 
         return redirect()->route('company.index')->with('success', 'Company deleted successfully.');

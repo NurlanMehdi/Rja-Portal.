@@ -25,34 +25,22 @@ class RjaController extends Controller
             $query->orderBy('type');
         },'companies'])->findOrFail($id);
         
-        return view('rja.detail-rja', compact('rja'));
-    }
+        $emails = $rja->company->emails ?? $rja->emails;
 
-    public function sendEmail($id)
-    {
-        $rja = Rja::with('companies')->findOrFail($id);
-            
-            if($rja->mail != '')
-            {
-                $toMail = $rja->mail;
-                
-            }elseif ($rja->companies && $rja->companies->maintenance_email) {
-                $toMail = $rja->companies->maintenance_email;
-            }
-
-            Mail::to($toMail)->send(new RjaMail($rja));
-        
-
-        return redirect()->back()->with('message', 'Email sent successfully.');
+        return view('rja.detail-rja', compact('rja', 'emails'));
     }
 
     public function approve($id)
     {
         $rja = Rja::find($id);
-        if ($rja) {
+        if ($rja && $rja->status == Rja::STATUS_SUBMITTED) {
             $rja->status = Rja::STATUS_APPROVED; // Approved
             $rja->save();
+            Rja::sendRjaEmail($id);
             return redirect()->back()->with('message', 'RJA approved successfully.');
+        }else{
+            $message = 'Action already taken, cannot take another action at this time';
+            return view('rja.error', compact('message'));
         }
         return redirect()->back()->with('error', 'RJA not found.');
     }
@@ -60,11 +48,16 @@ class RjaController extends Controller
     public function reject($id)
     {
         $rja = Rja::find($id);
-        if ($rja) {
+        if ($rja && $rja->status == Rja::STATUS_SUBMITTED) {
             $rja->status = Rja::STATUS_REJECTED; // Rejected
             $rja->save();
+            Rja::sendRjaEmail($id);
             return redirect()->back()->with('message', 'RJA rejected successfully.');
+        }else{
+            $message = 'Action already taken, cannot take another action at this time';
+            return view('rja.error', compact('message'));
         }
+        
         return redirect()->back()->with('error', 'RJA not found.');
     }
 

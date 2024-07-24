@@ -26,8 +26,20 @@
                             <input type="text" class="form-control" id="company_name" name="company_name" value="{{ old('company_name', $company->company_name) }}">
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">E-Mail</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $company->email) }}">
+                            <label for="emails" class="form-label">E-Mails</label>
+                            <div id="email-wrapper">
+                            <div class="input-group mb-2 email-input-group">
+                                    <input type="email" name="emails[]" class="form-control email-input" value="{{ old('emails.0', $company->emails->first() ? $company->emails->first()->email : '') }}" placeholder="Enter email">
+                                    <button type="button" class="btn btn-sm btn-success add-email email-action-button">+</button>
+                                </div>
+                                @foreach($company->emails->slice(1) as $email)
+                                    <div class="input-group mb-2 email-input-group">
+                                        <input type="email" name="emails[]" class="form-control email-input" value="{{ old('emails.'.$loop->index, $email->email) }}" placeholder="Enter email">
+                                        <button type="button" class="btn btn-sm btn-danger remove-email email-action-button">-</button>
+                                    </div>
+                                @endforeach
+                            
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-success">Update</button>
                     </form>
@@ -36,4 +48,5 @@
         </div>
     </div>
 </section>
+
 @endsection

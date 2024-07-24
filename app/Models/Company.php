@@ -13,4 +13,9 @@ class Company extends Model
         'company_name',
         'email',
     ];
+
+    public function emails()
+    {
+        return $this->hasMany(CompanyMail::class);
+    }
 }
