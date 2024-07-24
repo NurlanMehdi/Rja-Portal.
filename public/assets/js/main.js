@@ -364,13 +364,22 @@
       const newLabourItem = document.createElement('div');
       newLabourItem.className = 'labour-item input-group mb-3';
       newLabourItem.innerHTML = `
-            
+            <div class="row w-100">
+            <div class="col-lg-1">
             <label class="form-label fs_14 fw_6 me-2">LABOUR ${labourCount}:</label>
-            <label class="form-label fs_14 fw_4 me-2">Labour Cost:</label>
+            </div>
+            
+            <div class="col-lg-2">
+            <label class="form-label fs_14 fw_6">Labour Cost:</label>
             <span class="currencyinput"><span class="doller">$</span>
-            <input type="text" wire:model="labour_items.${labourCount - 1}.cost" class="form-control ms-2 labour-cost" value="0.00" placeholder="0.00" onkeypress="return isNumberKey(event)">
+            <input type="text" wire:model="labour_items.${labourCount - 1}.cost" class="form-control ms-2 labour-cost" placeholder="0.00" oninput="formatNumber(this)" onkeypress="return isNumberKey(event)">
             </span>
+            </div>
             <button type="button" class="remove-button me-2 remove-labour-item btn-outline-danger">&times;</button>
+        </div>
+            
+            
+           
         `;
       labourSection.insertBefore(newLabourItem, labourSection.querySelector('#add-labour-item'));
       addRemoveEvent(newLabourItem.querySelector('.remove-labour-item'));
@@ -382,38 +391,28 @@
       const newPartsItem = document.createElement('div');
       newPartsItem.className = 'parts-item input-group mb-3';
       newPartsItem.innerHTML = `
-             <label class="form-label fs_14 fw_6 me-2">Part ${partsCount}:</label>
+            
             <div class="row w-100">
+            <div class="col-lg-1">
+            <label class="form-label fs_14 fw_6 me-2">Part ${partsCount}:</label>
+            </div>
                 <div class="col-lg-2">
                     <label class="form-label fs_14 fw_6">Part Number:</label>
-                    <input type="text" wire:model="parts_items.${partsCount - 1}.number" class="form-control" value="">
+                    <input type="text" wire:model="parts_items.${partsCount - 1}.number" class="form-control" placeholder="I.e. W10821385" value="">
                 </div>
                 <div class="col-lg-2">
                     <label class="form-label fs_14 fw_6">Part Cost:</label>
                     <span class="currencyinput"><span class="doller">$</span>
-                    <input type="text" wire:model="parts_items.${partsCount - 1}.cost" class="form-control parts-cost" value="0.00" placeholder="0.00" onkeypress="return isNumberKey(event)">
+                    <input type="text" wire:model="parts_items.${partsCount - 1}.cost" class="form-control parts-cost"  placeholder="0.00" oninput="formatNumber(this)" onkeypress="return isNumberKey(event)">
                     </span>
                 </div>
-                <div class="col-lg-2">
-                    <button type="button" class="remove-button me-2 remove-parts-item btn-outline-danger">&times;</button>
-                </div>
+                <button type="button" class="remove-button me-2 remove-parts-item btn-outline-danger">&times;</button>
             </div>
         `;
       partsSection.insertBefore(newPartsItem, partsSection.querySelector('#add-parts-item'));
       addRemoveEvent(newPartsItem.querySelector('.remove-parts-item'));
       addInputEvent(newPartsItem.querySelector('.parts-cost'));
     }
-
-    function formatNumber(input) {
-      let value = input.value.replace(/,/g, '').replace('$', '');
-      if (!isNaN(value) && value !== '') {
-          let parts = value.split('.');
-          parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-          input.value = parts.join('.');
-      } else {
-          input.value = '';
-      }
-  }
 
     function addInputEvent(input) {
       input.addEventListener('input', calculateTotals);
@@ -540,11 +539,12 @@ function closeModal() {
     if (modal) {
       modal.style.display = "none";
     }
-  }, 2000);
+  }, 3000);
 }
 
+
+
 function isNumberKey(evt) {
-  console.log(evt);
   var charCode = (evt.which) ? evt.which : evt.keyCode;
   if (charCode != 46 && charCode > 31
     && (charCode < 48 || charCode > 57))
@@ -552,3 +552,14 @@ function isNumberKey(evt) {
   return true;
 }
 
+function formatNumber(input) {
+  let value = input.value.replace(/,/g, '').replace('$', '');
+ 
+  if (!isNaN(value) && value !== '') {
+      let parts = value.split('.');
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      input.value = parts.join('.');
+  } else {
+      input.value = '';
+  }
+}

@@ -40,9 +40,6 @@
                         </div>
                         {{ $rjas->links('pagination::bootstrap-5') }}
 
-                        <div class="select_all d-flex justify-content-center mt-3 btn_group">
-                            <a href="#" class="btn btn-success">Re-Notify Maintenance Department</a>
-                        </div>
                     </div>
                 </div>
             </div>
