@@ -18,9 +18,19 @@
 
 <body style=" font-family: 'Poppins', sans-serif; background: #fff;">
     <h1 style="padding: 12px;text-align: center;width: 100%;max-width: 800px; margin-left: auto; margin-right: auto;color:#212529;  background: #ccd4e2; box-sizing: border-box;margin-bottom: 0;">RJA Details</h1>
+    
+        <!-- Notification Text -->
+     <div style="padding: 15px; text-align: center; font-weight: bold;">
+        ***********************<br>
+        PLEASE DO NOT REPLY TO THIS EMAIL.<br>
+        THIS EMAIL IS SENT AUTOMATICALLY AND IS NOT MONITORED.<br>
+        ***********************
+    </div>
+    
     <table style="width: 100%;max-width: 800px;border:1px solid #ccd4e2;border-spacing: 0;margin-left: auto; margin-right: auto;">
         <tbody>
             <!--Heading 1 (Company and Authorization Details)-->
+
             <tr>
                 <td style="color:#212529; background: #ffffff; padding: 15px 20px;text-align: left;">
                     <table style="width: 100%;border: 1px solid #ccd4e2;border-spacing: 0;border-radius: 5px;overflow: hidden;">

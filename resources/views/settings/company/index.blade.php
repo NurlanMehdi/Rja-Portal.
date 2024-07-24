@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+
 <section class="section dashboard">
     <div class="row">
         <div class="col-12">
