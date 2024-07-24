@@ -126,7 +126,7 @@
                                                 <div class="col-lg-2">
                                                 <label class="form-label fs_14 fw_6">Labour Cost:</label>
                                                 <span class="currencyinput"><span class="doller">$</span>
-                                                    <input type="text" wire:model="labour_items.0.cost" class="form-control labour-cost" oninput="formatNumber(this)" onkeypress="return isNumberKey(event)">
+                                                    <input type="text" wire:model="labour_items.0.cost" class="form-control labour-cost" placeholder="0.00" oninput="formatNumber(this)" onkeypress="return isNumberKey(event)">
                                                 </span>
                                                 
                                                 </div>
@@ -156,7 +156,7 @@
                                                     <label class="form-label fs_14 fw_6">Part Cost:</label>
 
                                                     <span class="currencyinput"><span class="doller">$</span>
-                                                        <input type="text" wire:model="parts_items.0.cost" class="form-control parts-cost"  onkeypress="return isNumberKey(event)" oninput="formatNumber(this);">
+                                                        <input type="text" wire:model="parts_items.0.cost" class="form-control parts-cost" placeholder="0.00"  onkeypress="return isNumberKey(event)" oninput="formatNumber(this);">
                                                     </span>
                                                 </div>
                                                 <button type="button" class="remove-button me-2 remove-parts-item btn-outline-danger" wire:click="removePartsItem(0)">&times;</button>
