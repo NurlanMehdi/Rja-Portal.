@@ -41,7 +41,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between logo_container">
-      <a href="../" class="logo d-flex align-items-center">
+      <a href="{{route('dashboard')}}" class="logo d-flex align-items-center">
         <!-- <img src="../assets/img/logo.png" alt=""> -->
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 282.2 75.9" style="enable-background:new 0 0 282.2 75.9;" xml:space="preserve">
           <style type="text/css">
