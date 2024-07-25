@@ -333,6 +333,23 @@
     }, 200);
   }
 
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('.add-email').addEventListener('click', function() {
+            var emailWrapper = document.getElementById('email-wrapper');
+            var newEmailInput = document.createElement('div');
+            newEmailInput.classList.add('input-group', 'mb-2', 'email-input-group');
+            newEmailInput.innerHTML = `
+                <input type="email" name="emails[]" class="form-control email-input" placeholder="Enter email">
+                <button type="button" class="btn btn-sm btn-danger remove-email email-action-button">-</button>
+            `;
+            emailWrapper.appendChild(newEmailInput);
+
+            newEmailInput.querySelector('.remove-email').addEventListener('click', function() {
+                newEmailInput.remove();
+            });
+        });
+    });
+
   document.addEventListener('DOMContentLoaded', function () {
     function addRemoveEvent(button) {
       button.addEventListener('click', function () {
@@ -347,13 +364,22 @@
       const newLabourItem = document.createElement('div');
       newLabourItem.className = 'labour-item input-group mb-3';
       newLabourItem.innerHTML = `
-            
+            <div class="row w-100">
+            <div class="col-lg-1">
             <label class="form-label fs_14 fw_6 me-2">LABOUR ${labourCount}:</label>
-            <label class="form-label fs_14 fw_4 me-2">Labour Cost:</label>
+            </div>
+            
+            <div class="col-lg-2">
+            <label class="form-label fs_14 fw_6">Labour Cost:</label>
             <span class="currencyinput"><span class="doller">$</span>
-            <input type="text" wire:model="labour_items.${labourCount - 1}.cost" class="form-control ms-2 labour-cost" value="0.00" placeholder="0.00" onkeypress="return isNumberKey(event)">
+            <input type="text" wire:model="labour_items.${labourCount - 1}.cost" class="form-control ms-2 labour-cost" placeholder="0.00" oninput="formatNumber(this)" onkeypress="return isNumberKey(event)">
             </span>
+            </div>
             <button type="button" class="remove-button me-2 remove-labour-item btn-outline-danger">&times;</button>
+        </div>
+            
+            
+           
         `;
       labourSection.insertBefore(newLabourItem, labourSection.querySelector('#add-labour-item'));
       addRemoveEvent(newLabourItem.querySelector('.remove-labour-item'));
@@ -365,21 +391,22 @@
       const newPartsItem = document.createElement('div');
       newPartsItem.className = 'parts-item input-group mb-3';
       newPartsItem.innerHTML = `
-             <label class="form-label fs_14 fw_6 me-2">Part ${partsCount}:</label>
+            
             <div class="row w-100">
+            <div class="col-lg-1">
+            <label class="form-label fs_14 fw_6 me-2">Part ${partsCount}:</label>
+            </div>
                 <div class="col-lg-2">
                     <label class="form-label fs_14 fw_6">Part Number:</label>
-                    <input type="text" wire:model="parts_items.${partsCount - 1}.number" class="form-control" value="">
+                    <input type="text" wire:model="parts_items.${partsCount - 1}.number" class="form-control" placeholder="I.e. W10821385" value="">
                 </div>
                 <div class="col-lg-2">
                     <label class="form-label fs_14 fw_6">Part Cost:</label>
                     <span class="currencyinput"><span class="doller">$</span>
-                    <input type="text" wire:model="parts_items.${partsCount - 1}.cost" class="form-control parts-cost" value="0.00" placeholder="0.00" onkeypress="return isNumberKey(event)">
+                    <input type="text" wire:model="parts_items.${partsCount - 1}.cost" class="form-control parts-cost"  placeholder="0.00" oninput="formatNumber(this)" onkeypress="return isNumberKey(event)">
                     </span>
                 </div>
-                <div class="col-lg-2">
-                    <button type="button" class="remove-button me-2 remove-parts-item btn-outline-danger">&times;</button>
-                </div>
+                <button type="button" class="remove-button me-2 remove-parts-item btn-outline-danger">&times;</button>
             </div>
         `;
       partsSection.insertBefore(newPartsItem, partsSection.querySelector('#add-parts-item'));
@@ -395,18 +422,18 @@
       let totalLabour = 0;
       let totalParts = 0;
 
-      document.querySelectorAll('.labour-cost').forEach(function (input) {
-        totalLabour += parseFloat(input.value) || 0;
+      document.querySelectorAll('.labour-cost').forEach(function(input) {
+          totalLabour += parseFloat(input.value.replace(/,/g, '').replace('$', '')) || 0;
       });
 
-      document.querySelectorAll('.parts-cost').forEach(function (input) {
-        totalParts += parseFloat(input.value) || 0;
+      document.querySelectorAll('.parts-cost').forEach(function(input) {
+          totalParts += parseFloat(input.value.replace(/,/g, '').replace('$', '')) || 0;
       });
 
-      document.getElementById('total-labour').textContent = totalLabour.toFixed(2);
-      document.getElementById('total-parts').textContent = totalParts.toFixed(2);
-      document.getElementById('total-pre-hst').textContent = (totalLabour + totalParts).toFixed(2);
-    }
+      document.getElementById('total-labour').textContent = totalLabour.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '$';
+      document.getElementById('total-parts').textContent = totalParts.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '$';
+      document.getElementById('total-pre-hst').textContent = (totalLabour + totalParts).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '$';
+  }
     // Initial remove event bindings
     document.querySelectorAll('.remove-labour-item').forEach(addRemoveEvent);
     document.querySelectorAll('.remove-parts-item').forEach(addRemoveEvent);
@@ -452,12 +479,56 @@
   });
 
   const companySelect = document.getElementById('company-select');
-  const maintenanceEmail = document.getElementById('maintenance-email');
 
   companySelect.addEventListener('change', function () {
+    const maintenanceEmailContainer = document.getElementById('maintenance-email-container-2');
     const selectedOption = companySelect.options[companySelect.selectedIndex];
-    const email = selectedOption.getAttribute('data-email');
-    maintenanceEmail.value = email ? email : '';
+    let emails = selectedOption.getAttribute('data-emails');
+
+    if (emails) {
+      emails = emails.replace(/&quot;/g, '"'); // Replace HTML entities
+    }
+
+    try {
+      emails = JSON.parse(emails);
+    } catch (e) {
+        console.error("Invalid JSON format:", e);
+        emails = [];
+    }
+    console.log(emails)
+
+    const maintenanceEmailInput = document.getElementById('maintenance-email');
+    maintenanceEmailInput.value = '';
+    
+
+    while (maintenanceEmailContainer.childElementCount > 1) {
+        maintenanceEmailContainer.removeChild(maintenanceEmailContainer.lastChild);
+    }
+
+
+
+    for (let i = 0; i < emails.length; i++) {
+     
+      let email = emails[i];
+
+      if (i === 0) {
+          maintenanceEmailInput.value = email;
+      } else {
+        const emailInputGroup = document.createElement('div');
+        emailInputGroup.classList.add('d-flex', 'align-items-center', 'mt-2');
+        emailInputGroup.innerHTML = `
+            <span class="fs_14 fw_6 me-2">Maintenance Department Email:</span>
+            <input type="email" class="form-control" value="${email}" placeholder="Enter Maintenance Department CC Email">
+            <button type="button" class="btn btn-sm btn-danger remove-email"><i class="bi bi-trash"></i></button>
+        `;
+    maintenanceEmailContainer.appendChild(emailInputGroup);
+
+          emailInputGroup.querySelector('.remove-email').addEventListener('click', function () {
+              emailInputGroup.remove();
+          });
+      }
+  }
+   // maintenanceEmail.value = email ? email : '';
   });
 
 })();
@@ -468,14 +539,27 @@ function closeModal() {
     if (modal) {
       modal.style.display = "none";
     }
-  }, 2000);
+  }, 3000);
 }
 
+
+
 function isNumberKey(evt) {
-  console.log(evt);
   var charCode = (evt.which) ? evt.which : evt.keyCode;
   if (charCode != 46 && charCode > 31
     && (charCode < 48 || charCode > 57))
     return false;
   return true;
+}
+
+function formatNumber(input) {
+  let value = input.value.replace(/,/g, '').replace('$', '');
+ 
+  if (!isNaN(value) && value !== '') {
+      let parts = value.split('.');
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      input.value = parts.join('.');
+  } else {
+      input.value = '';
+  }
 }

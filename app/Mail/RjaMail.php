@@ -23,9 +23,9 @@ class RjaMail extends Mailable
         dd($this->rja->companies);
         return $this->from(config('mail.from.address'), config('mail.from.name'))
             ->subject('RJA Details for ' . $this->rja->b2b_reference)
-            ->view('emails.rja')
-            ->with([
-                'rja' => $this->rja,
-            ]);
+        ->view('emails.rja')
+        ->with([
+            'rja' => $this->rja,
+        ]);
     }
 }

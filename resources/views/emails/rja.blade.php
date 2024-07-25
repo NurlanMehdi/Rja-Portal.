@@ -18,9 +18,19 @@
 
 <body style=" font-family: 'Poppins', sans-serif; background: #fff;">
     <h1 style="padding: 12px;text-align: center;width: 100%;max-width: 800px; margin-left: auto; margin-right: auto;color:#212529;  background: #ccd4e2; box-sizing: border-box;margin-bottom: 0;">RJA Details</h1>
+    
+        <!-- Notification Text -->
+     <div style="padding: 15px; text-align: center; font-weight: bold;">
+        ***********************<br>
+        PLEASE DO NOT REPLY TO THIS EMAIL.<br>
+        THIS EMAIL IS SENT AUTOMATICALLY AND IS NOT MONITORED.<br>
+        ***********************
+    </div>
+    
     <table style="width: 100%;max-width: 800px;border:1px solid #ccd4e2;border-spacing: 0;margin-left: auto; margin-right: auto;">
         <tbody>
             <!--Heading 1 (Company and Authorization Details)-->
+
             <tr>
                 <td style="color:#212529; background: #ffffff; padding: 15px 20px;text-align: left;">
                     <table style="width: 100%;border: 1px solid #ccd4e2;border-spacing: 0;border-radius: 5px;overflow: hidden;">
@@ -41,7 +51,7 @@
                             </tr>
                             <tr>
                                 <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;">Maintenance Department Email</td>
-                                <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $rja->companies->maintenance_email ?? $rja->companies->email }}</td>
+                                <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $rja->companies->emails[0]->email ?? $rja->mail }}</td>
                             </tr>
                             <tr>
                                 <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;">B2B/Warranty Reference</td>
@@ -67,7 +77,7 @@
                             </tr>
                             <tr>
                                 <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;">Diagnosis findings/ Suggested Resolution (Mandatory, brief description):</td>
-                                <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $rja->diagnosis ?? 'N/A' }}</td>
+                                <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{!! nl2br(e($rja->diagnosis))  ?? 'N/A' !!}</td>
                             </tr>
                         </tbody>
                     </table>

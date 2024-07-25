@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Rja;
+use App\Models\RjaMail;
 use App\Models\Company;
 use App\Models\Items;
 
@@ -29,20 +30,31 @@ class NewRja extends Component
 
     public function mount()
     {
+<<<<<<< HEAD
         $this->labour_items = [['cost' => 0.00]];
         $this->parts_items = [['number' => '', 'cost' => 0.00]];
+=======
+        $this->labour_items = [['cost' => '']];
+        $this->parts_items = [['number' => '', 'cost' => '']];
+>>>>>>> master
     }
 
     public function addLabourItem()
     {
+<<<<<<< HEAD
         $this->labour_items[] = ['cost' => 0.00];
+=======
+        $this->labour_items[] = ['cost' => ''];
+>>>>>>> master
     }
+
     public function addCCEmails()
     {
         $this->cc_emails[] = [
             'email' => ''
         ];
     }
+    
     public function removeCCEmail($key)
     {
         unset($this->cc_emails[$key]);
@@ -50,7 +62,11 @@ class NewRja extends Component
 
     public function addPartsItem()
     {
+<<<<<<< HEAD
         $this->parts_items[] = ['number' => '', 'cost' => 0.00];
+=======
+        $this->parts_items[] = ['number' => '', 'cost' => ''];
+>>>>>>> master
     }
 
     public function removeLabourItem($index)
@@ -70,9 +86,9 @@ class NewRja extends Component
         //dd($this->labour_items);
         $this->validate();
 
+
         $rja = Rja::create([
             'company_id' => $this->company_id,
-            'mail' => $this->email,
             'b2b_reference' => $this->b2b_reference,
             'diagnosis' => $this->diagnosis,
         ]);
@@ -95,7 +111,23 @@ class NewRja extends Component
                 ]);
             }
 
-            Rja::sendRjaEmail($rja->id, $this->cc_emails);
+            if($this->email != '')
+            {
+                RjaMail::create([
+                    'rja_id' => $rja->id,
+                    'mail' => $this->email
+                ]);
+            }
+
+            foreach ($this->cc_emails as $item) {
+              
+                RjaMail::create([
+                    'rja_id' => $rja->id,
+                    'mail' => $item['email']
+                ]);
+            }
+
+            Rja::sendRjaEmail($rja->id);
 
 
             $this->reset();
@@ -103,13 +135,18 @@ class NewRja extends Component
         } else {
             session()->flash('error', 'An error occurred while submitting the RJA.');
         }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> master
         $this->reset();
         session()->flash('message', 'RJA submitted successfully.');
     }
 
     public function render()
     {
-        $companies = Company::all();
+        $companies = Company::with('emails')->get();
         return view('livewire.new-rja', ['companies' => $companies]);
     }
 }

@@ -29,7 +29,7 @@
                                             </th> -->
                                             <td><a href="{{ route('rja-detail', $rja->id) }}" class="text-primary">#{{ $rja->id }}</a></td>
                                             <td>{{ $rja->companies->company_name ?? '' }}</td>
-                                            <td>{{ $rja->companies->email ?? $rja->mail }}</td>
+                                            <td>{{ $rja->companies->emails[0]->email ?? ($rja->emails[0]->mail ?? '') }}</td>
                                             <td>{{ $rja->b2b_reference }}</td>
                                             <td>{{ $rja->diagnosis }}</td>
                                             <td>{{ $rja->created_at }}</td>
@@ -39,10 +39,6 @@
                             </table>
                         </div>
                         {{ $rjas->links('pagination::bootstrap-5') }}
-
-                        <div class="select_all d-flex justify-content-center mt-3 btn_group">
-                            <a href="#" class="btn btn-success">Re-Notify Maintenance Department</a>
-                        </div>
                     </div>
                 </div>
             </div>
