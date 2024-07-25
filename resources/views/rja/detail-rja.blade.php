@@ -95,7 +95,7 @@
                                     @foreach($rja->items->where('type', 'labour') as $index => $labour)
                                         <div class="labour-item input-group mb-3">
                                             <label class="form-label fs_14 fw_6 me-3">LABOUR {{ $index + 1 }}:</label>
-                                            <span class="form-control labour-cost">{{ $labour->cost }}</span>
+                                            <span class="form-control labour-cost">{{ number_format($labour->cost, 2, '.', ',') }}$</span>
                                         </div>
                                     @endforeach
                                     <div class="total-labour">
@@ -116,7 +116,7 @@
                                                     <span class="form-control">{{ $part->part_number }}</span>
                                                 </div>
                                                 <div class="col-lg-2">
-                                                    <span class="form-control parts-cost">{{ $part->cost }}</span>
+                                                    <span class="form-control parts-cost">{{ number_format($part->cost, 2, '.', ',') }}$</span>
                                                 </div>
                                             </div>
                                         </div>

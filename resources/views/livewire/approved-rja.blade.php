@@ -12,7 +12,6 @@
                             <table id="rjaTable" class="table table-border datatable">
                                 <thead>
                                     <tr>
-                                        <!-- <th scope="col">Select</th> -->
                                         <th scope="col">RJA ID</th>
                                         <th scope="col">Company Profile</th>
                                         <th scope="col">Maintenance Email</th>
