@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-
 <section class="section dashboard">
     <div class="row">
         <div class="col-12">
@@ -23,7 +22,8 @@
                                     <th scope="col">ID</th>
                                     <th scope="col">Company Name</th>
                                     <th scope="col">E-Mail</th>
-                                    <th scope="col">Actions</th>
+                                    <th scope="col">Edit</th>
+                                    <th scope="col">Remove</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -31,20 +31,15 @@
                                     <tr>
                                         <td>{{ $company->id }}</td>
                                         <td>{{ $company->company_name }}</td>
+                                        <td>{{ $company->emails[0]->email ?? ''}}</td>
                                         <td>
-                                        @foreach($company->emails as $key => $email)
-                                        @if($key == 0)
-                                        {{ $email->email }}
-                                        @endif
-                                     
-                                        @endforeach
+                                            <a href="{{ route('company.edit', $company->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                             
                                         </td>
                                         <td>
-                                            <a href="{{ route('company.edit', $company->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-company-id="{{ $company->id }}">Remove</button>
+                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-company-id="{{ $company->id }}">Remove</button>
                                         </td>
-                                    </tr>
+                                    </tr>   
                                 @endforeach
                             </tbody>
                         </table>
