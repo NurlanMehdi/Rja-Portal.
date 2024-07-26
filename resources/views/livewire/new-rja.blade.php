@@ -125,8 +125,8 @@
                                             <div class="row w-100">
                                                 <div class="col-lg-2">
                                                 <label class="form-label fs_14 fw_6">Labour Cost:</label>
-                                                <span class="currencyinput"><span class="doller">$</span>
-                                                    <input type="text" wire:model="labour_items.0.cost" class="form-control labour-cost" placeholder="0.00" oninput="formatNumber(this)" onkeypress="return isNumberKey(event)">
+                                                <span class="currencyinput"><span class="doller">.00$</span>
+                                                    <input type="text" wire:model="labour_items.0.cost" class="form-control labour-cost" placeholder="0" oninput="formatNumber(this)" onkeypress="return isNumberKey(event)">
                                                 </span>
                                                 
                                                 </div>
@@ -155,8 +155,8 @@
                                                 <div class="col-lg-2">
                                                     <label class="form-label fs_14 fw_6">Part Cost:</label>
 
-                                                    <span class="currencyinput"><span class="doller">$</span>
-                                                        <input type="text" wire:model="parts_items.0.cost" class="form-control parts-cost" placeholder="0.00"  onkeypress="return isNumberKey(event)" oninput="formatNumber(this);">
+                                                    <span class="currencyinput"><span class="doller">.00$</span>
+                                                        <input type="text" wire:model="parts_items.0.cost" class="form-control parts-cost" placeholder="0"  onkeypress="return isNumberKey(event)" oninput="formatNumber(this);">
                                                     </span>
                                                 </div>
                                                 <button type="button" class="remove-button me-2 remove-parts-item btn-outline-danger" wire:click="removePartsItem(0)">&times;</button>
@@ -192,7 +192,7 @@
                                             <span class="fs_14 fw_4 jd_title" id="total-pre-hst">0.00$</span>
                                         </div>
                                         <div class="center-button">
-                                            <button type="submit" class="btn btn-success mt-3">Send RJA to Maintenance Dept</button>
+                                            <button type="submit" onclick="checkAndShowModal()" class="btn btn-success mt-3">Send RJA to Maintenance Dept</button>
                                         </div>
                                     </div>
                                 </div>
@@ -204,13 +204,14 @@
         </div>
     </form>
     @livewireScripts
-    @if(session()->has('message'))
-        <div id="success-modal" class="modal">
-            <div class="modal-content">
-                <p>RJA submitted successfully.</p>
-            </div>
-        </div>
-    @endif
+
+    <div id="success-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <p id="success-message">{{ session('message') }}</p>
+    </div>
+</div>
+
+
 </div>
 
     </form>

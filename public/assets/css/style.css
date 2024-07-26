@@ -1689,7 +1689,7 @@ td {
 }
 
 #success-modal {
-  display: block;
+  display: none;
   position: fixed;
   z-index: 39;
   left: 0;
@@ -1751,6 +1751,8 @@ td {
   transform: translateY(-50%);
   top: 50%;
   right: 10px;
+  font-weight: 400;
+  font-size: 14px;
 }
 
 .email-input-group {

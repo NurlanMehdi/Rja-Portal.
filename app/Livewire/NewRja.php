@@ -81,9 +81,23 @@ class NewRja extends Component
         $this->parts_items = array_values($this->parts_items);  // Reindex the array
     }
 
+    private function cleanNumericFields()
+    {
+        $this->labour_items = array_map(function($item) {
+            $item['cost'] = str_replace(',', '', $item['cost']);
+            return $item;
+        }, $this->labour_items);
+
+        $this->parts_items = array_map(function($item) {
+            $item['cost'] = str_replace(',', '', $item['cost']);
+            return $item;
+        }, $this->parts_items);
+    }
+    
     public function submit()
     {
-        //dd($this->labour_items);
+        $this->cleanNumericFields();
+
         $this->validate();
 
 
