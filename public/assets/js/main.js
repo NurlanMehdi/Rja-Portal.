@@ -605,5 +605,5 @@ function checkAndShowModal() {
         if (successMessage !== '') {
             showModal();
         }
-    }, 500);
+    }, 1000);
 }
