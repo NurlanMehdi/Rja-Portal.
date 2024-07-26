@@ -10,6 +10,7 @@ use App\Models\Items;
 
 class NewRja extends Component
 {
+    protected $listeners = ['refreshComponent' => '$refresh'];
     public $company_id;
     public $email;
     public $b2b_reference;
@@ -17,8 +18,6 @@ class NewRja extends Component
     public $labour_items = [];
     public $parts_items = [];
     public $cc_emails = [];
-
-
 
     protected $rules = [
         'b2b_reference' => 'required',
@@ -30,22 +29,13 @@ class NewRja extends Component
 
     public function mount()
     {
-<<<<<<< HEAD
-        $this->labour_items = [['cost' => 0.00]];
-        $this->parts_items = [['number' => '', 'cost' => 0.00]];
-=======
         $this->labour_items = [['cost' => '']];
         $this->parts_items = [['number' => '', 'cost' => '']];
->>>>>>> master
     }
 
     public function addLabourItem()
     {
-<<<<<<< HEAD
-        $this->labour_items[] = ['cost' => 0.00];
-=======
         $this->labour_items[] = ['cost' => ''];
->>>>>>> master
     }
 
     public function addCCEmails()
@@ -54,7 +44,7 @@ class NewRja extends Component
             'email' => ''
         ];
     }
-    
+
     public function removeCCEmail($key)
     {
         unset($this->cc_emails[$key]);
@@ -62,11 +52,7 @@ class NewRja extends Component
 
     public function addPartsItem()
     {
-<<<<<<< HEAD
-        $this->parts_items[] = ['number' => '', 'cost' => 0.00];
-=======
         $this->parts_items[] = ['number' => '', 'cost' => ''];
->>>>>>> master
     }
 
     public function removeLabourItem($index)
@@ -83,17 +69,17 @@ class NewRja extends Component
 
     private function cleanNumericFields()
     {
-        $this->labour_items = array_map(function($item) {
+        $this->labour_items = array_map(function ($item) {
             $item['cost'] = str_replace(',', '', $item['cost']);
             return $item;
         }, $this->labour_items);
 
-        $this->parts_items = array_map(function($item) {
+        $this->parts_items = array_map(function ($item) {
             $item['cost'] = str_replace(',', '', $item['cost']);
             return $item;
         }, $this->parts_items);
     }
-    
+
     public function submit()
     {
         $this->cleanNumericFields();
@@ -125,8 +111,7 @@ class NewRja extends Component
                 ]);
             }
 
-            if($this->email != '')
-            {
+            if ($this->email != '') {
                 RjaMail::create([
                     'rja_id' => $rja->id,
                     'mail' => $this->email
@@ -134,7 +119,7 @@ class NewRja extends Component
             }
 
             foreach ($this->cc_emails as $item) {
-              
+
                 RjaMail::create([
                     'rja_id' => $rja->id,
                     'mail' => $item['email']
@@ -142,22 +127,19 @@ class NewRja extends Component
             }
 
             Rja::sendRjaEmail($rja->id);
-
-
             $this->reset();
             session()->flash('message', 'RJA submitted successfully.');
         } else {
             session()->flash('error', 'An error occurred while submitting the RJA.');
         }
-<<<<<<< HEAD
-=======
 
 
->>>>>>> master
-        $this->reset();
-        session()->flash('message', 'RJA submitted successfully.');
+
+        // session()->flash('message', 'RJA submitted successfully.');
     }
-
+    protected function refreshComponent()
+    {
+    }
     public function render()
     {
         $companies = Company::with('emails')->get();
