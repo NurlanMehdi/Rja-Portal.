@@ -192,7 +192,7 @@
                                             <span class="fs_14 fw_4 jd_title" id="total-pre-hst">0.00$</span>
                                         </div>
                                         <div class="center-button">
-                                            <button type="submit" onclick="checkAndShowModal()" wire:click="$refresh" class="btn btn-success mt-3">Send RJA to Maintenance Dept</button>
+                                            <button type="submit" class="btn btn-success mt-3">Send RJA to Maintenance Dept</button>
                                         </div>
                                     </div>
                                 </div>
@@ -205,11 +205,6 @@
     </form>
     @livewireScripts
 
-    <div id="success-modal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <p id="success-message">{{ session('message') }}</p>
-        </div>
-    </div>
 
 
 </div>

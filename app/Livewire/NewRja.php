@@ -111,23 +111,26 @@ class NewRja extends Component
                 ]);
             }
 
-            if ($this->email != '') {
-                RjaMail::create([
-                    'rja_id' => $rja->id,
-                    'mail' => $this->email
-                ]);
-            }
+            // if ($this->email != '') {
+            //     RjaMail::create([
+            //         'rja_id' => $rja->id,
+            //         'mail' => $this->email
+            //     ]);
+            // }
 
-            foreach ($this->cc_emails as $item) {
+            // foreach ($this->cc_emails as $item) {
 
-                RjaMail::create([
-                    'rja_id' => $rja->id,
-                    'mail' => $item['email']
-                ]);
-            }
+            //     RjaMail::create([
+            //         'rja_id' => $rja->id,
+            //         'mail' => $item['email']
+            //     ]);
+            // }
 
-            Rja::sendRjaEmail($rja->id);
+            // Rja::sendRjaEmail($rja->id);
             $this->reset();
+            $this->dispatch(
+                'success_modal'
+            );
             session()->flash('message', 'RJA submitted successfully.');
         } else {
             session()->flash('error', 'An error occurred while submitting the RJA.');
