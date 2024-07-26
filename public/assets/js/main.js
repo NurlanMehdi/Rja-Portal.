@@ -597,7 +597,7 @@ function showModal() {
 function hideModal() {
     const modal = document.getElementById('success-modal');
     modal.style.display = 'none';
-    window.reload();
+    window.location.reload();
 }
 function checkAndShowModal() {
     setTimeout(function () {
