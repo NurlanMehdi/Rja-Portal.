@@ -159,7 +159,7 @@
                                                         <input type="text" wire:model="parts_items.0.cost" class="form-control parts-cost" placeholder="0" onkeypress="return isNumberKey(event)" oninput="formatNumber(this);">
                                                     </span>
                                                 </div>
-                                                <button type="button" class="remove-button me-2 remove-parts-item btn-outline-danger" wire:click="removePartsItem(0)">&times;</button>
+                                                <button type="button" class="remove-button me-2 remove-parts-item btn-outline-danger">&times;</button>
                                             </div>
                                         </div>
                                         <a href="#" class="fs_14 fw_6 text-primary add-link" id="add-parts-item">Add Additional Part Item Line +</a>

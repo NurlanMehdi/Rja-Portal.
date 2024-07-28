@@ -20,9 +20,9 @@ class RjaMail extends Mailable
 
     public function build()
     {
-<<<<<<< HEAD
-        dd($this->rja->companies);
-=======
+
+       // dd($this->rja->companies);
+
         
         $subject = 'RJA Details for ' . $this->rja->b2b_reference;
 
@@ -32,7 +32,7 @@ class RjaMail extends Mailable
             $subject = 'RJA Rejected Successfully ' . $this->rja->b2b_reference;
         }
         //dd('RJA Details for ' . $this->rja->b2b_reference);
->>>>>>> master
+
         return $this->from(config('mail.from.address'), config('mail.from.name'))
             ->subject($subject)
         ->view('emails.rja')

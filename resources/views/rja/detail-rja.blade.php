@@ -25,6 +25,14 @@
                                     </span>
                                 </div>
                             </div>
+                            <div class="col-lg-6 mb-3">
+                                <div class="d-flex align-items-center">
+                                    <span class="fs_14 fw_6 me-2">Date Created At:</span>
+                                    <span class="form-control" aria-label="Default select example">
+                                        {{ $rja->created_at ?? 'N/A' }}
+                                    </span>
+                                </div>
+                            </div>
                             <div class="col-12 mt-4">
                                 <span class="fs_16 fw_6 mb-3 d-block text-muted line_behind">Company Details:</span>
                             </div>
@@ -91,40 +99,46 @@
                             <div class="col-12">
                                 <span class="fs_16 fw_6 mb-3 d-block bg-light p-2 rounded-1">LABOUR:</span>
                                 <div class="col-lg-6 mb-3" id="labour-section">
-                                    @php $totalLabour = $rja->items->where('type', 'labour')->sum('cost'); @endphp
+                                    @php 
+                                    $totalLabour = $rja->items->where('type', 'labour')->map(function($item) {
+                                        return (float) $item->cost; 
+                                    })->sum();
+                                    @endphp
                                     @foreach($rja->items->where('type', 'labour') as $index => $labour)
+                                 
                                         <div class="labour-item input-group mb-3">
                                             <label class="form-label fs_14 fw_6 me-3">LABOUR {{ $index + 1 }}:</label>
-                                            <span class="form-control labour-cost">{{ number_format($labour->cost, 2, '.', ',') }}$</span>
+                                            <span class="form-control labour-cost">{{ number_format( (float) $labour->cost, 2, '.', ',') }}$</span>
                                         </div>
                                     @endforeach
-                                    <div class="total-labour">
-                                        <label class="form-label fs_14 fw_6 me-3">Total Labour Cost:</label>
-                                        <span class="form-control">{{ $totalLabour }}</span>
-                                    </div>
                                 </div>
                             </div>
                             <div class="col-12 mt-4">
                                 <span class="fs_16 fw_6 mb-3 d-block bg-light p-2 rounded-1">PARTS:</span>
                                 <div class="col-lg-12" id="parts-section">
-                                    @php $totalParts = $rja->items->where('type', 'part')->sum('cost'); @endphp
-                                    @foreach($rja->items->where('type', 'part') as $index => $part)
+                                @php 
+                                    $totalParts = $rja->items->where('type', 'part')->map(function($item) {
+                                        return (float) $item->cost; 
+                                    })->sum();
+                                    $index = 0;
+                                    @endphp
+                       
+                                    @foreach($rja->items->where('type', 'part') as $part)
+                                    @php
+                                    $index = $index + 1
+                                    @endphp
                                         <div class="parts-item input-group mb-3">
-                                            <label class="form-label fs_14 fw_6 me-2">Part {{ $index + 1 }}:</label>
+                                            <label class="form-label fs_14 fw_6 me-2">Part {{ $index }}:</label>
                                             <div class="row w-100">
                                                 <div class="col-lg-2">
                                                     <span class="form-control">{{ $part->part_number }}</span>
                                                 </div>
                                                 <div class="col-lg-2">
-                                                    <span class="form-control parts-cost">{{ number_format($part->cost, 2, '.', ',') }}$</span>
+                                                    <span class="form-control parts-cost">{{ number_format( (float) $part->cost, 2, '.', ',') }}$</span>
                                                 </div>
                                             </div>
                                         </div>
                                     @endforeach
-                                    <div class="total-parts">
-                                        <label class="form-label fs_14 fw_6 me-3">Total Parts Cost:</label>
-                                        <span class="form-control">{{ $totalParts }}</span>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -168,7 +182,7 @@
                                         </form>
                                         <form action="{{ url('rja/'.$rja->id.'/send-email') }}" method="POST" style="display: inline;">
                                             @csrf
-                                            <button type="submit" class="btn btn-primary btn-submitted mt-3 mr-2">Send Email</button>
+                                            <button type="submit" class="btn btn-primary btn-submitted mt-3 mr-2">Re-Notify Email(s)</button>
                                         </form>
                                         @endif
                                        
