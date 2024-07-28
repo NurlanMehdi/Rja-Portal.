@@ -605,7 +605,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(function() {  
             const successMessage = document.getElementById('success-message').innerText.trim();
             if (successMessage !== '') {
-                showModal();
+   
             }
         }, 500);
     };
