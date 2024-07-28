@@ -6,17 +6,17 @@
         <div class="col-12">
             <div class="card recent-sales overflow-auto">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between mb-4">  
+                    <div class="d-flex justify-content-between mb-4 align-items-center">
                         <h5 class="card-title">Company Profile</h5>
                         <a href="{{ route('company.create') }}" class="btn btn-primary">Add Company</a>
                     </div>
 
                     @if (session()->has('success'))
-                        <div class="alert alert-success">{{ session('success') }}</div>
+                    <div class="alert alert-success">{{ session('success') }}</div>
                     @endif
 
                     <div class="table-responsive">
-                        <table  id="companyTable" class="table table-bordered datatable">
+                        <table id="companyTable" class="table table-bordered datatable">
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
@@ -28,18 +28,18 @@
                             </thead>
                             <tbody>
                                 @foreach($companies as $company)
-                                    <tr>
-                                        <td>{{ $company->id }}</td>
-                                        <td>{{ $company->company_name }}</td>
-                                        <td>{{ $company->emails[0]->email ?? ''}}</td>
-                                        <td>
-                                            <a href="{{ route('company.edit', $company->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                            
-                                        </td>
-                                        <td>
+                                <tr>
+                                    <td>{{ $company->id }}</td>
+                                    <td>{{ $company->company_name }}</td>
+                                    <td>{{ $company->emails[0]->email ?? ''}}</td>
+                                    <td>
+                                        <a href="{{ route('company.edit', $company->id) }}" class="btn btn-primary btn-sm">Edit</a>
+
+                                    </td>
+                                    <td>
                                         <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-company-id="{{ $company->id }}">Remove</button>
-                                        </td>
-                                    </tr>   
+                                    </td>
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>
