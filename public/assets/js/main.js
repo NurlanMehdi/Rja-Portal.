@@ -361,7 +361,7 @@
             newLabourItem.innerHTML = `
         <div class="row w-100">
             <div class="col-lg-1">
-                <label class="form-label fs_14 fw_6 me-2">LABOUR ${labourCount + 1}:</label>
+                <label class="form-label fs_14 fw_6 me-2 text-nowrap">LABOUR ${labourCount + 1}:</label>
             </div>
             <div class="col-lg-2">
                 <label class="form-label fs_14 fw_6">Labour Cost:</label>
