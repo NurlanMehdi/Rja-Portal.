@@ -584,15 +584,27 @@ function isNumberKey(evt) {
 }
 
 function formatNumber(input) {
-    let value = input.value.replace(/,/g, '').replace('0.00', '0.00$');
+    let value = input.value.replace(/,/g, '');
 
-    if (!isNaN(value) && value !== '') {
-        let parts = value.split('.');
-        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        input.value = parts.join('.');
+    if (value === '' || isNaN(value)) {
+        input.value = '';
+        return;
     }
-    // else {
-    //     input.value = '';
-    // }
+
+    let [integerPart, decimalPart] = value.split('.');
+
+    // Limit decimal part to two digits
+    if (decimalPart !== undefined) {
+        decimalPart = decimalPart.substring(0, 2);
+    }
+
+    //let [integerPart, decimalPart] = number.split('.');
+
+    // Add commas to the integer part
+    integerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    let formattedNumber = integerPart + (decimalPart !== undefined ? '.' + decimalPart : '');
+
+    input.value = formattedNumber;
 }
 
