@@ -590,8 +590,9 @@ function formatNumber(input) {
         let parts = value.split('.');
         parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         input.value = parts.join('.');
-    } else {
-        input.value = '';
     }
+    // else {
+    //     input.value = '';
+    // }
 }
 
