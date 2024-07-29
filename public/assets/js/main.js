@@ -563,7 +563,14 @@
         // maintenanceEmail.value = email ? email : '';
     });
 
+    function hideModal() {
+        window.location.reload();
+    }
+    window.addEventListener('success_modal', event => {
 
+        jQuery('#success-modal').modal('show');
+        setTimeout(hideModal, 3000);
+    });
 })();
 
 
@@ -588,25 +595,3 @@ function formatNumber(input) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    function showModal() {
-        const modal = document.getElementById('success-modal');
-        modal.style.display = 'block';
-
-        setTimeout(hideModal, 3000);
-    }
-
-    function hideModal() {
-        const modal = document.getElementById('success-modal');
-        modal.style.display = 'none';
-    }
-
-    window.checkAndShowModal = function () {
-        setTimeout(function () {
-            const successMessage = document.getElementById('success-message').innerText.trim();
-            if (successMessage !== '') {
-                showModal()
-            }
-        }, 500);
-    };
-});
