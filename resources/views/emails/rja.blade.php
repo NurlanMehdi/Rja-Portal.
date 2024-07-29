@@ -56,12 +56,14 @@
                                     <span class="" style="border-bottom: 1px solid #585858;">Company Details:</span>
                                 </td>
                             </tr>
+                            @foreach($rja->companies->emails as $email)
                             <tr>
-                                @foreach($rja->companies->emails as $email)
+
                                 <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;">Maintenance Department Email</td>
                                 <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $email->email ?? $rja->mail }}</td>
-                                @endforeach
+
                             </tr>
+                            @endforeach
                             <tr>
                                 <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;">B2B/Warranty Reference</td>
                                 <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $rja->b2b_reference ?? 'N/A' }}</td>
@@ -136,13 +138,13 @@
                             @php
                             $total_part_cost = 0;
                             @endphp
-                            @foreach($rja->items->where('type', 'part') as $key => $part)
+                            @foreach($rja->items->where('type', 'part') as $keyp => $part)
                             <tr>
                                 <td colspan="2" style="color:#212529; background: #f6f9ff;text-align: left;padding:0;">
                                     <table style="width: 100%;border: 1px solid #ccd4e2;border-spacing: 0;border-radius: 5px;overflow: hidden;">
                                         <tbody>
                                             <tr>
-                                                <th style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;">Part {{$key+1}}</th>
+                                                <th style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;">Part {{$keyp+1}}</th>
                                                 <th style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;">Part Number</th>
                                                 <th style="border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">Part Cost</th>
                                             </tr>
