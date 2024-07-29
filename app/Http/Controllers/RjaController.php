@@ -16,16 +16,16 @@ class RjaController extends Controller
 
     public function listRja($key)
     {
-        return view('rja.submittedRja',['key'=>$key]);
+        return view('rja.submittedRja', ['key' => $key]);
     }
 
     public function RjaDetail($id)
     {
-        $rja = Rja::with(['items' => function($query) {
+        $rja = Rja::with(['items' => function ($query) {
             $query->orderBy('type');
-        },'companies'])->findOrFail($id);
-        
-        $emails = $rja->company->emails ?? $rja->emails;
+        }, 'companies'])->findOrFail($id);
+
+        $emails = $rja->companies->emails ?? $rja->emails;
 
         return view('rja.detail-rja', compact('rja', 'emails'));
     }
@@ -38,7 +38,7 @@ class RjaController extends Controller
             $rja->save();
             Rja::sendRjaEmail($id);
             return redirect()->back()->with('message', 'RJA approved successfully.');
-        }else{
+        } else {
             $message = 'Action already taken, cannot take another action at this time';
             return view('rja.error', compact('message'));
         }
@@ -50,7 +50,7 @@ class RjaController extends Controller
         Rja::sendRjaEmail($id);
         return redirect()->back()->with('message', 'Email sent successfully.');
     }
-    
+
     public function reject($id)
     {
         $rja = Rja::find($id);
@@ -59,12 +59,11 @@ class RjaController extends Controller
             $rja->save();
             Rja::sendRjaEmail($id);
             return redirect()->back()->with('message', 'RJA rejected successfully.');
-        }else{
+        } else {
             $message = 'Action already taken, cannot take another action at this time';
             return view('rja.error', compact('message'));
         }
-        
+
         return redirect()->back()->with('error', 'RJA not found.');
     }
-
 }
