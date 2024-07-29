@@ -137,14 +137,15 @@
                             @if ($rja->items->where('type', 'part')->isNotEmpty())
                             @php
                             $total_part_cost = 0;
+                            $i =1;
                             @endphp
-                            @foreach($rja->items->where('type', 'part') as $keyp => $part)
+                            @foreach($rja->items->where('type', 'part') as $part)
                             <tr>
                                 <td colspan="2" style="color:#212529; background: #f6f9ff;text-align: left;padding:0;">
                                     <table style="width: 100%;border: 1px solid #ccd4e2;border-spacing: 0;border-radius: 5px;overflow: hidden;">
                                         <tbody>
                                             <tr>
-                                                <th style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;">Part {{$keyp}}</th>
+                                                <th style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;">Part {{$i}}</th>
                                                 <th style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;">Part Number</th>
                                                 <th style="border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">Part Cost</th>
                                             </tr>
@@ -160,6 +161,7 @@
                             </tr>
                             @php
                             $total_part_cost += (float) $part->cost;
+                            $i++;
                             @endphp
                             @endforeach
                             @else
