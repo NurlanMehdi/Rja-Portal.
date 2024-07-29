@@ -17,7 +17,18 @@
 </head>
 
 <body style=" font-family: 'Poppins', sans-serif; background: #fff;">
-    <h1 style="padding: 12px;text-align: center;width: 100%;max-width: 800px; margin-left: auto; margin-right: auto;color:#212529;  background: #ccd4e2; box-sizing: border-box;margin-bottom: 0;">RJA Details</h1>
+@php
+$subject = 'RJA Details for ' . $this->rja->b2b_reference;
+
+if($this->rja->status == 1){
+    $subject = 'RJA Approved Successfully for' . $this->rja->b2b_reference;
+}elseif($this->rja->status == 2){
+    $subject = 'RJA Rejected Successfully for ' . $this->rja->b2b_reference;
+}
+@endphp
+    <h1 style="padding: 12px;text-align: center;width: 100%;max-width: 800px; margin-left: auto; margin-right: auto;color:#212529;  background: #ccd4e2; box-sizing: border-box;margin-bottom: 0;">
+    {{$subject ?? ''}}
+</h1>
     
         <!-- Notification Text -->
      <div style="padding: 15px; text-align: center; font-weight: bold;">
@@ -43,6 +54,10 @@
                             <tr>
                                 <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;">Company Profile</td>
                                 <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $rja->companies->company_name ?? 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                                <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;">Date Created At</td>
+                                <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $rja->created_at ?? '' }}</td>
                             </tr>
                             <tr>
                                 <td colspan="2" style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;font-size: 20px;font-weight: 600;">
@@ -107,14 +122,9 @@
                                 <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $labour->cost ?? 'N/A' }}</td>
                             </tr>
                             @php
-                            $total_labour_cost += $labour->cost;
+                            $total_labour_cost += (float) $labour->cost;
                             @endphp
                             @endforeach
-
-                            <tr>
-                                <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;">Total Labour Cost:</td>
-                                <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{$total_labour_cost}}</td>
-                            </tr>
                             @else
                             <tr>
                                 <td colspan="2" style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">No labour items found.</td>
@@ -135,13 +145,9 @@
                                 <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $part->cost ?? 'N/A' }}</td>
                             </tr>
                             @php
-                            $total_part_cost += $part->cost;
+                            $total_part_cost += (float)  $part->cost;
                             @endphp
                             @endforeach
-                            <tr>
-                                <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;">Total Parts Cost:</td>
-                                <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{$total_part_cost}}</td>
-                            </tr>
                             @else
                             <tr>
                                 <td colspan="2" style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">No parts items found.</td>

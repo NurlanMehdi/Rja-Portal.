@@ -45,6 +45,12 @@ class RjaController extends Controller
         return redirect()->back()->with('error', 'RJA not found.');
     }
 
+    public function sendEmail($id)
+    {
+        Rja::sendRjaEmail($id);
+        return redirect()->back()->with('message', 'Email sent successfully.');
+    }
+    
     public function reject($id)
     {
         $rja = Rja::find($id);
