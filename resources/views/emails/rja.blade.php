@@ -118,7 +118,7 @@
                             @foreach($rja->items->where('type', 'labour') as $key => $labour)
                             <tr>
                                 <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;">Labour {{$key+1}}:</td>
-                                <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $labour->cost ?? 'N/A' }}</td>
+                                <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $labour->cost.'$' ?? 'N/A' }}</td>
                             </tr>
                             @php
                             $total_labour_cost += (float) $labour->cost;
@@ -144,14 +144,14 @@
                                     <table style="width: 100%;border: 1px solid #ccd4e2;border-spacing: 0;border-radius: 5px;overflow: hidden;">
                                         <tbody>
                                             <tr>
-                                                <th style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;">Part {{$keyp+1}}</th>
+                                                <th style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;">Part {{$keyp}}</th>
                                                 <th style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;">Part Number</th>
                                                 <th style="border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">Part Cost</th>
                                             </tr>
                                             <tr>
                                                 <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;"></td>
                                                 <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;">{{ $part->part_number ?? 'N/A' }}</td>
-                                                <td style="border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $part->cost ?? 'N/A' }}</td>
+                                                <td style="border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $part->cost.'$' ?? 'N/A' }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
