@@ -117,16 +117,15 @@
                                     </span>
                                     <div class="col-lg-12" id="labour-section">
                                         <div class="labour-item input-group mb-3 align-items-start">
-                                            <div class="col-lg-1">
-                                                <label class="form-label fs_14 fw_6 me-3">LABOUR 1:</label>
-                                            </div>
-
 
                                             <div class="row w-100">
+                                                <div class="col-lg-1">
+                                                    <label class="form-label fs_14 fw_6 me-2">LABOUR 1:</label>
+                                                </div>
                                                 <div class="col-lg-2">
                                                     <label class="form-label fs_14 fw_6">Labour Cost:</label>
-                                                    <span class="currencyinput"><span class="doller">.00$</span>
-                                                        <input type="text" wire:model="labour_items.0.cost" class="form-control labour-cost" placeholder="0" oninput="formatNumber(this)" onkeypress="return isNumberKey(event)">
+                                                    <span class="currencyinput"><span class="doller">$</span>
+                                                        <input type="text" wire:model="labour_items.0.cost" class="form-control labour-cost" placeholder="0.00" oninput="formatNumber(this)" onkeypress="return isNumberKey(event)">
                                                     </span>
 
                                                 </div>
@@ -155,8 +154,8 @@
                                                 <div class="col-lg-2">
                                                     <label class="form-label fs_14 fw_6">Part Cost:</label>
 
-                                                    <span class="currencyinput"><span class="doller">.00$</span>
-                                                        <input type="text" wire:model="parts_items.0.cost" class="form-control parts-cost" placeholder="0" onkeypress="return isNumberKey(event)" oninput="formatNumber(this);">
+                                                    <span class="currencyinput"><span class="doller">$</span>
+                                                        <input type="text" wire:model="parts_items.0.cost" class="form-control parts-cost" placeholder="0.00" onkeypress="return isNumberKey(event)" oninput="formatNumber(this);">
                                                     </span>
                                                 </div>
                                                 <button type="button" class="remove-button me-2 remove-parts-item btn-outline-danger">&times;</button>
@@ -206,10 +205,10 @@
     @livewireScripts
 
     <div id="success-modal" class="modal" style="display: none;">
-    <div class="modal-content">
-        <p id="success-message">RJA submitted successfully.</p>
+        <div class="modal-content">
+            <p id="success-message">RJA submitted successfully.</p>
+        </div>
     </div>
-</div>
 
 
 </div>
