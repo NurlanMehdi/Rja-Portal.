@@ -366,7 +366,7 @@
             <div class="col-lg-2">
                 <label class="form-label fs_14 fw_6">Labour Cost:</label>
                 <span class="currencyinput"><span class="doller">$</span>
-                <input type="text" wire:model="labour_items.${uniqueId}.cost" class="form-control ms-2 labour-cost" placeholder="0.00" oninput="formatNumber(this)" onkeypress="return isNumberKey(event)">
+                <input type="text" wire:model="labour_items.${uniqueId}.cost" class="form-control labour-cost" placeholder="0.00" oninput="formatNumber(this)" onkeypress="return isNumberKey(event)">
                 </span>
             </div>
             <button type="button" class="remove-button me-2 remove-labour-item btn-outline-danger">&times;</button>
