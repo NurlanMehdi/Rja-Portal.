@@ -2,7 +2,7 @@
 @section('content')
 <div>
     @if (session()->has('message'))
-        <div class="alert alert-success">{{ session('message') }}</div>
+    <div class="alert alert-success">{{ session('message') }}</div>
     @endif
 
     <div class="col-12">
@@ -37,14 +37,14 @@
                                 <span class="fs_16 fw_6 mb-3 d-block text-muted line_behind">Company Details:</span>
                             </div>
                             <div class="col-lg-6 mb-3">
-                            @foreach($emails as $email)
-                            <div class="d-flex align-items-center">
+                                @foreach($emails as $email)
+                                <div class="d-flex align-items-center">
                                     <span class="fs_14 fw_6 me-2">Maintenance Department Email:</span>
-                                    <span class="form-control"> {{ $email->mail ?? '' }}</span>
+                                    <span class="form-control"> {{ $email->email ?? '' }}</span>
                                 </div>
-                            @endforeach
+                                @endforeach
 
-                                
+
                             </div>
                             <div class="col-lg-6 mb-3">
                                 <div class="d-flex align-items-center">
@@ -99,45 +99,45 @@
                             <div class="col-12">
                                 <span class="fs_16 fw_6 mb-3 d-block bg-light p-2 rounded-1">LABOUR:</span>
                                 <div class="col-lg-6 mb-3" id="labour-section">
-                                    @php 
+                                    @php
                                     $totalLabour = $rja->items->where('type', 'labour')->map(function($item) {
-                                        return (float) $item->cost; 
+                                    return (float) $item->cost;
                                     })->sum();
                                     @endphp
                                     @foreach($rja->items->where('type', 'labour') as $index => $labour)
-                                 
-                                        <div class="labour-item input-group mb-3">
-                                            <label class="form-label fs_14 fw_6 me-3">LABOUR {{ $index + 1 }}:</label>
-                                            <span class="form-control labour-cost">{{ number_format( (float) $labour->cost, 2, '.', ',') }}$</span>
-                                        </div>
+
+                                    <div class="labour-item input-group mb-3">
+                                        <label class="form-label fs_14 fw_6 me-3">LABOUR {{ $index + 1 }}:</label>
+                                        <span class="form-control labour-cost">{{ number_format( (float) $labour->cost, 2, '.', ',') }}$</span>
+                                    </div>
                                     @endforeach
                                 </div>
                             </div>
                             <div class="col-12 mt-4">
                                 <span class="fs_16 fw_6 mb-3 d-block bg-light p-2 rounded-1">PARTS:</span>
                                 <div class="col-lg-12" id="parts-section">
-                                @php 
+                                    @php
                                     $totalParts = $rja->items->where('type', 'part')->map(function($item) {
-                                        return (float) $item->cost; 
+                                    return (float) $item->cost;
                                     })->sum();
                                     $index = 0;
                                     @endphp
-                       
+
                                     @foreach($rja->items->where('type', 'part') as $part)
                                     @php
                                     $index = $index + 1
                                     @endphp
-                                        <div class="parts-item input-group mb-3">
-                                            <label class="form-label fs_14 fw_6 me-2">Part {{ $index }}:</label>
-                                            <div class="row w-100">
-                                                <div class="col-lg-2">
-                                                    <span class="form-control">{{ $part->part_number }}</span>
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <span class="form-control parts-cost">{{ number_format( (float) $part->cost, 2, '.', ',') }}$</span>
-                                                </div>
+                                    <div class="parts-item input-group mb-3">
+                                        <label class="form-label fs_14 fw_6 me-2">Part {{ $index }}:</label>
+                                        <div class="row w-100">
+                                            <div class="col-lg-2">
+                                                <span class="form-control">{{ $part->part_number }}</span>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <span class="form-control parts-cost">{{ number_format( (float) $part->cost, 2, '.', ',') }}$</span>
                                             </div>
                                         </div>
+                                    </div>
                                     @endforeach
                                 </div>
                             </div>
@@ -161,14 +161,14 @@
                                     </div> -->
                                     <div class="d-flex align-items-center">
                                         <span class="fs_14 fw_6 jd_title">Total Labour (Pre HST):</span>
-                                        <span class="fs_14 fw_4 jd_title" id="total-labour">{{ $totalLabour }}</span>
+                                        <span class="fs_14 fw_4 jd_title" id="total-labour">{{ number_format( (float) $totalLabour, 2, '.', ',') }}$</span>
                                         <span class="fs_14 fw_6 jd_title">Total Parts (Pre HST):</span>
-                                        <span class="fs_14 fw_4 jd_title" id="total-parts">{{ $totalParts }}</span>
+                                        <span class="fs_14 fw_4 jd_title" id="total-parts">{{ number_format( (float) $totalParts, 2, '.', ',') }}$</span>
                                     </div>
                                     <span class="fs_16 fw_6 mb-3 d-block text-muted line_behind"></span>
                                     <div class="d-flex align-items-center">
                                         <span class="fs_14 fw_6 jd_title">Total (Pre HST):</span>
-                                        <span class="fs_14 fw_4 jd_title" id="total-pre-hst">{{ $totalLabour + $totalParts }}</span>
+                                        <span class="fs_14 fw_4 jd_title" id="total-pre-hst">{{ number_format( (float) $totalLabour + $totalParts, 2, '.', ',') }}$</span>
                                     </div>
                                     <div class="center-button">
                                         @if($rja->status == 0)
@@ -185,8 +185,8 @@
                                             <button type="submit" class="btn btn-primary btn-submitted mt-3 mr-2">Re-Notify Email(s)</button>
                                         </form>
                                         @endif
-                                       
-                        
+
+
                                     </div>
                                 </div>
                             </div>
