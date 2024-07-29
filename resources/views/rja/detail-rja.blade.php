@@ -27,7 +27,7 @@
                             </div>
                             <div class="col-lg-6 mb-3">
                                 <div class="d-flex align-items-center">
-                                    <span class="fs_14 fw_6 me-2">Date Created At:</span>
+                                    <span class="fs_14 fw_6 me-2 text-nowrap">Date Created At:</span>
                                     <span class="form-control" aria-label="Default select example">
                                         {{ $rja->created_at ?? 'N/A' }}
                                     </span>
@@ -107,7 +107,7 @@
                                     @foreach($rja->items->where('type', 'labour') as $index => $labour)
 
                                     <div class="labour-item input-group mb-3">
-                                        <label class="form-label fs_14 fw_6 me-3">LABOUR {{ $index + 1 }}:</label>
+                                        <label class="form-label fs_14 fw_6 me-3 text-nowrap">LABOUR {{ $index + 1 }}:</label>
                                         <span class="form-control labour-cost">{{ number_format( (float) $labour->cost, 2, '.', ',') }}$</span>
                                     </div>
                                     @endforeach
@@ -128,7 +128,7 @@
                                     $index = $index + 1
                                     @endphp
                                     <div class="parts-item input-group mb-3">
-                                        <label class="form-label fs_14 fw_6 me-2">Part {{ $index }}:</label>
+                                        <label class="form-label fs_14 fw_6 me-2 text-nowrap">Part {{ $index }}:</label>
                                         <div class="row w-100">
                                             <div class="col-lg-2">
                                                 <span class="form-control">{{ $part->part_number }}</span>
