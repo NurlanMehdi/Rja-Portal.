@@ -203,14 +203,6 @@
         </div>
     </form>
     @livewireScripts
-
-    <div id="success-modal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <p id="success-message">RJA submitted successfully.</p>
-        </div>
-    </div>
-
-
 </div>
 
 </form>
