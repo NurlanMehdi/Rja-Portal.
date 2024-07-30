@@ -56,6 +56,7 @@
                                     <span class="" style="border-bottom: 1px solid #585858;">Company Details:</span>
                                 </td>
                             </tr>
+                            @if(isset($rja->companies->company_name))
                             @foreach($rja->companies->emails as $email)
                             <tr>
 
@@ -64,6 +65,14 @@
 
                             </tr>
                             @endforeach
+                            @else
+                            <tr>
+
+                                <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;">Maintenance Department Email</td>
+                                <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $rja->mail }}</td>
+
+                            </tr>
+                            @endif
                             <tr>
                                 <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;">B2B/Warranty Reference</td>
                                 <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $rja->b2b_reference ?? 'N/A' }}</td>
