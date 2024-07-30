@@ -37,7 +37,8 @@ class RjaController extends Controller
             $rja->status = Rja::STATUS_APPROVED; // Approved
             $rja->save();
             Rja::sendRjaEmail($id);
-            return redirect()->back()->with('message', 'RJA approved successfully.');
+            $message = 'RJA approved successfully.';
+            return view('rja.success', compact('message'));
         } else {
             $message = 'Action already taken, cannot take another action at this time';
             return view('rja.error', compact('message'));
@@ -58,7 +59,8 @@ class RjaController extends Controller
             $rja->status = Rja::STATUS_REJECTED; // Rejected
             $rja->save();
             Rja::sendRjaEmail($id);
-            return redirect()->back()->with('message', 'RJA rejected successfully.');
+            $message = 'RJA rejected successfully.';
+            return view('rja.success', compact('message'));
         } else {
             $message = 'Action already taken, cannot take another action at this time';
             return view('rja.error', compact('message'));
