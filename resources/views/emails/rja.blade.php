@@ -69,7 +69,7 @@
                             <tr>
 
                                 <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;">Maintenance Department Email</td>
-                                <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $rja->mail }}</td>
+                                <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $rja->emails[0]->mail ?? '' }}</td>
 
                             </tr>
                             @endif
@@ -216,6 +216,7 @@
                     </table>
                 </td>
             </tr>
+            @if($rja->status == 0)
             <tr>
                 <td colspan="2" style="color:#212529; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;">
                     <div class="" style="display:block;width:100%;text-align:center;">
@@ -224,6 +225,7 @@
                     </div>
                 </td>
             </tr>
+            @endif
         </tbody>
     </table>
 </body>
