@@ -10,7 +10,6 @@ use App\Models\Items;
 
 class NewRja extends Component
 {
-    //protected $listeners = ['removeLabourItem', 'removePartsItem'];
     public $company_id;
     public $email;
     public $b2b_reference;
@@ -67,14 +66,12 @@ class NewRja extends Component
     {
 
         unset($this->labour_items[$index]);
-        $this->labour_items = array_values($this->labour_items);  // Reindex the array
         $this->totalCalculation();
     }
 
     public function removePartsItem($index)
     {
         unset($this->parts_items[$index]);
-        $this->parts_items = array_values($this->parts_items);  // Reindex the array
         $this->totalCalculation();
     }
 
