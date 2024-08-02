@@ -419,15 +419,17 @@
                 const itemIndex = Array.from(button.closest('.input-group').parentElement.children).indexOf(button.closest('.input-group'));
 
                 // Clear Livewire model data
-                if (typeof Livewire !== 'undefined' && typeof Livewire.emit === 'function') {
-                    if (isLabourItem) {
-                        Livewire.emit('removeLabourItem', itemIndex);
-                    } else {
-                        Livewire.emit('removePartsItem', itemIndex);
-                    }
-                } else {
-                    console.error('Livewire is not available or not initialized correctly.');
-                }
+                // if (typeof Livewire !== 'undefined' && typeof Livewire.dispatch === 'function') {
+                //     if (isLabourItem) {
+
+                //         Livewire.dispatch('removeLabourItem', { index: itemIndex });
+                //     }
+                //     else {
+                //         Livewire.dispatch('removePartsItem', { index: itemIndex });
+                //     }
+                // } else {
+                //     console.error('Livewire is not available or not initialized correctly.');
+                // }
 
                 this.closest('.input-group').remove();
                 renumberItems(isLabourItem ? 'labour-item' : 'parts-item', isLabourItem ? 'LABOUR' : 'Part');
@@ -440,29 +442,30 @@
         }
 
         function calculateTotals() {
-            let totalLabour = 0;
-            let totalParts = 0;
+            // //alert('hi');
+            // let totalLabour = 0;
+            // let totalParts = 0;
 
-            document.querySelectorAll('.labour-cost').forEach(function (input) {
-                totalLabour += parseFloat(input.value.replace(/,/g, '').replace('$', '')) || 0;
-            });
+            // document.querySelectorAll('.labour-cost').forEach(function (input) {
+            //     totalLabour += parseFloat(input.value.replace(/,/g, '').replace('$', '')) || 0;
+            // });
 
-            document.querySelectorAll('.parts-cost').forEach(function (input) {
-                totalParts += parseFloat(input.value.replace(/,/g, '').replace('$', '')) || 0;
-            });
+            // document.querySelectorAll('.parts-cost').forEach(function (input) {
+            //     totalParts += parseFloat(input.value.replace(/,/g, '').replace('$', '')) || 0;
+            // });
 
-            document.getElementById('total-labour').textContent = totalLabour.toLocaleString(undefined, {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            }) + '$';
-            document.getElementById('total-parts').textContent = totalParts.toLocaleString(undefined, {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            }) + '$';
-            document.getElementById('total-pre-hst').textContent = (totalLabour + totalParts).toLocaleString(undefined, {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            }) + '$';
+            // document.getElementById('total-labour').textContent = totalLabour.toLocaleString(undefined, {
+            //     minimumFractionDigits: 2,
+            //     maximumFractionDigits: 2
+            // }) + '$';
+            // document.getElementById('total-parts').textContent = totalParts.toLocaleString(undefined, {
+            //     minimumFractionDigits: 2,
+            //     maximumFractionDigits: 2
+            // }) + '$';
+            // document.getElementById('total-pre-hst').textContent = (totalLabour + totalParts).toLocaleString(undefined, {
+            //     minimumFractionDigits: 2,
+            //     maximumFractionDigits: 2
+            // }) + '$';
         }
 
         // Initial remove event bindings
@@ -570,6 +573,9 @@
 
         jQuery('#success-modal').modal('show');
         setTimeout(hideModal, 3000);
+    });
+    window.addEventListener('calculate_Totals', event => {
+        calculateTotals();
     });
 })();
 
