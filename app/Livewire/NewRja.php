@@ -10,10 +10,13 @@ use App\Models\Items;
 
 class NewRja extends Component
 {
-    protected $listeners = ['refreshComponent' => '$refresh'];
+    //protected $listeners = ['removeLabourItem', 'removePartsItem'];
     public $company_id;
     public $email;
     public $b2b_reference;
+    public $total_labour_cost;
+    public $total_parts_cost;
+    public $total;
     public $diagnosis;
     public $labour_items = [];
     public $parts_items = [];
@@ -29,6 +32,9 @@ class NewRja extends Component
 
     public function mount()
     {
+        $this->total_labour_cost = 0.00;
+        $this->total_parts_cost = 0.00;
+        $this->total = 0.00;
         $this->labour_items = [['cost' => '']];
         $this->parts_items = [['number' => '', 'cost' => '']];
     }
@@ -36,6 +42,7 @@ class NewRja extends Component
     public function addLabourItem()
     {
         $this->labour_items[] = ['cost' => ''];
+        $this->totalCalculation();
     }
 
     public function addCCEmails()
@@ -53,18 +60,22 @@ class NewRja extends Component
     public function addPartsItem()
     {
         $this->parts_items[] = ['number' => '', 'cost' => ''];
+        $this->totalCalculation();
     }
 
     public function removeLabourItem($index)
     {
+
         unset($this->labour_items[$index]);
         $this->labour_items = array_values($this->labour_items);  // Reindex the array
+        $this->totalCalculation();
     }
 
     public function removePartsItem($index)
     {
         unset($this->parts_items[$index]);
         $this->parts_items = array_values($this->parts_items);  // Reindex the array
+        $this->totalCalculation();
     }
 
     private function cleanNumericFields()
@@ -79,13 +90,26 @@ class NewRja extends Component
             return $item;
         }, $this->parts_items);
     }
+    public function totalCalculation()
+    {
+        $this->total_labour_cost = 0;
+        foreach ($this->labour_items as $labour_items) {
+            $this->total_labour_cost += (float)str_replace(",", "", $labour_items['cost']);
+        }
+        $this->total_parts_cost = 0;
+        foreach ($this->parts_items as $parts_items) {
+            $this->total_parts_cost += (float)str_replace(",", "", $parts_items['cost']);
+        }
 
+        $this->total = $this->total_labour_cost + $this->total_parts_cost;
+        $this->total_labour_cost = number_format($this->total_parts_cost, 2, '.', ',');
+        $this->total_parts_cost = number_format($this->total_parts_cost, 2, '.', ',');
+        $this->total = number_format($this->total, 2, '.', ',');
+    }
     public function submit()
     {
         $this->cleanNumericFields();
-
         $this->validate();
-
 
         $rja = Rja::create([
             'company_id' => $this->company_id,
