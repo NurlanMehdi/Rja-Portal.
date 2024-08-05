@@ -113,7 +113,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;font-size: 20px;font-weight: 600;">
+                                <td colspan="2" style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;font-size: 20px;font-weight: 600;">
                                     <span class="" style="border-bottom: 1px solid #585858;">Labour:</span>
                                 </td>
                             </tr>
