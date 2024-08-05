@@ -19,7 +19,7 @@
                                         <span class="fs_14 fw_6 me-2">
                                             Select Company Profile:
                                         </span>
-                                        <select id="company-select" wire:model="company_id" class="form-select" aria-label="Default select example">
+                                        <select wire:model="company_id" wire:change="getCompanyEmails();" class="form-select" aria-label="Default select example">
                                             <option value="">Select</option>
                                             @foreach($companies as $company)
 
@@ -34,14 +34,20 @@
                                         Company Details:
                                     </span>
                                 </div>
-                                <div id="maintenance-email-container-2" class="col-lg-6 mb-3">
+                                <div class="col-lg-6 mb-3">
                                     <div class="d-flex align-items-center">
                                         <span class="fs_14 fw_6 me-2">Maintenance Department Email:</span>
 
-                                        <input id="maintenance-email" type="email" wire:model="email" class="form-control" placeholder="Enter Maintenance Department Email"><button type="button" class="btn btn-sm btn-success" wire:click="addCCEmails">+</button>
+                                        <input type="email" wire:model="email" value="{{$email}}" class="form-control" placeholder="Enter Maintenance Department Email" /><button type="button" class="btn btn-sm btn-success" wire:click="addCCEmails">+</button>
 
                                         @error('email') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
+                                    @foreach($company_emails as $index => $company_email)
+                                    <div class="d-flex align-items-center mt-2">
+                                        <span class="fs_14 fw_6 me-2">Maintenance Department Email:</span>
+                                        <input type="email" class="form-control" value="{{$company_email}}" placeholder="Enter Maintenance Department Email" /><button type="button" class="btn btn-sm btn-danger" wire:click="removeCompanyEmail({{ $index }})"><i class="bi bi-trash"></i></button>
+                                    </div>
+                                    @endforeach
                                     @foreach($cc_emails as $index => $cc_email)
                                     <div class="d-flex align-items-center mt-2">
                                         <span class="fs_14 fw_6 me-2">Maintenance Department Email:</span>
@@ -206,8 +212,6 @@
             </div>
         </div>
     </form>
-    @livewireScripts
-</div>
 
-</form>
 </div>
+@livewireScripts

@@ -74,7 +74,12 @@ class Rja extends Model
                 $ccEmails[] = $cc_email['email'];
             }
         }
-        $to_emails = [$toMail, 'rja@primeappliancerepairs.com'];
+        if ($rja->status == 0) {
+            $to_emails = $toMail;
+        } else {
+            $to_emails = ['rja@primeappliancerepairs.com'];
+        }
+
         Mail::to($to_emails)->cc($ccEmails)->send(new \App\Mail\RjaMail($rja));
 
         session()->flash('message', 'Emails sent successfully.');

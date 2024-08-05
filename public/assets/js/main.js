@@ -333,22 +333,7 @@
         }, 200);
     }
 
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelector('.add-email').addEventListener('click', function () {
-            var emailWrapper = document.getElementById('email-wrapper');
-            var newEmailInput = document.createElement('div');
-            newEmailInput.classList.add('input-group', 'mb-2', 'email-input-group');
-            newEmailInput.innerHTML = `
-              <input type="email" name="emails[]" class="form-control email-input" placeholder="Enter email">
-              <button type="button" class="btn btn-sm btn-danger remove-email email-action-button">-</button>
-          `;
-            emailWrapper.appendChild(newEmailInput);
 
-            newEmailInput.querySelector('.remove-email').addEventListener('click', function () {
-                newEmailInput.remove();
-            });
-        });
-    });
 
 
 
@@ -373,58 +358,6 @@
         });
     });
 
-    const companySelect = document.getElementById('company-select');
-
-    companySelect.addEventListener('change', function () {
-        const maintenanceEmailContainer = document.getElementById('maintenance-email-container-2');
-        const selectedOption = companySelect.options[companySelect.selectedIndex];
-        let emails = selectedOption.getAttribute('data-emails');
-
-        if (emails) {
-            emails = emails.replace(/&quot;/g, '"'); // Replace HTML entities
-        }
-
-        try {
-            emails = JSON.parse(emails);
-        } catch (e) {
-            console.error("Invalid JSON format:", e);
-            emails = [];
-        }
-        console.log(emails)
-
-        const maintenanceEmailInput = document.getElementById('maintenance-email');
-        maintenanceEmailInput.value = '';
-
-
-        while (maintenanceEmailContainer.childElementCount > 1) {
-            maintenanceEmailContainer.removeChild(maintenanceEmailContainer.lastChild);
-        }
-
-
-
-        for (let i = 0; i < emails.length; i++) {
-
-            let email = emails[i];
-
-            if (i === 0) {
-                maintenanceEmailInput.value = email;
-            } else {
-                const emailInputGroup = document.createElement('div');
-                emailInputGroup.classList.add('d-flex', 'align-items-center', 'mt-2');
-                emailInputGroup.innerHTML = `
-          <span class="fs_14 fw_6 me-2">Maintenance Department Email:</span>
-          <input type="email" class="form-control" value="${email}" placeholder="Enter Maintenance Department CC Email">
-          <button type="button" class="btn btn-sm btn-danger remove-email"><i class="bi bi-trash"></i></button>
-      `;
-                maintenanceEmailContainer.appendChild(emailInputGroup);
-
-                emailInputGroup.querySelector('.remove-email').addEventListener('click', function () {
-                    emailInputGroup.remove();
-                });
-            }
-        }
-        // maintenanceEmail.value = email ? email : '';
-    });
 
     function hideModal() {
         window.location.reload();
