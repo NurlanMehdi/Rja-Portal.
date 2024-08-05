@@ -122,12 +122,15 @@
                                         LABOUR:
                                     </span>
                                     <div class="col-lg-12" id="labour-section">
+                                        @php
+                                        $lb = 1;
+                                        @endphp
                                         @foreach($labour_items as $index => $labour_item)
                                         <div class="labour-item input-group mb-3 align-items-start">
 
                                             <div class="row w-100">
                                                 <div class="col-lg-1">
-                                                    <label class="form-label fs_14 fw_6 me-2 text-nowrap">LABOUR {{$index+1}}:</label>
+                                                    <label class="form-label fs_14 fw_6 me-2 text-nowrap">LABOUR {{$lb}}:</label>
                                                 </div>
                                                 <div class="col-lg-2">
                                                     <label class="form-label fs_14 fw_6">Labour Cost:</label>
@@ -140,6 +143,9 @@
                                             </div>
 
                                         </div>
+                                        @php
+                                        $lb++;
+                                        @endphp
                                         @endforeach
                                         <a href="javascript:void(0);" class="fs_14 fw_6 text-primary add-link" id="add-labour-item" wire:click="addLabourItem">Add Additional Labour Item Line +</a>
                                     </div>
