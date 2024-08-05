@@ -114,11 +114,12 @@
                             </tr>
                             <tr>
                                 <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;font-size: 20px;font-weight: 600;">
-                                    <span class="" style="border-bottom: 1px solid #585858;">Labour</span>
+                                    <span class="" style="border-bottom: 1px solid #585858;">Labour:</span>
                                 </td>
-                                <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;font-size: 20px;font-weight: 600;">
-                                    <span class="" style="border-bottom: 1px solid #585858;">Labour Cost</span>
-                                </td>
+                            </tr>
+                            <tr>
+                                <th style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;">Labour Description</th>
+                                <th style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;">Labour Cost</th>
                             </tr>
                             @if ($rja->items->where('type', 'labour')->isNotEmpty())
                             @php
