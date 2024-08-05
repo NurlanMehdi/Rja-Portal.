@@ -149,12 +149,15 @@
                                         PARTS:
                                     </span>
                                     <div class="col-lg-12" id="parts-section">
+                                        @php
+                                        $pt = 1;
+                                        @endphp
                                         @foreach($parts_items as $index => $parts_item)
                                         <div class="parts-item input-group mb-3">
 
                                             <div class="row w-100">
                                                 <div class="col-lg-1">
-                                                    <label class="form-label fs_14 fw_6 me-2">Part {{$index+1}}:</label>
+                                                    <label class="form-label fs_14 fw_6 me-2">Part {{$pt}}:</label>
                                                 </div>
                                                 <div class="col-lg-2">
                                                     <label class="form-label fs_14 fw_6">Part Number:</label>
@@ -170,6 +173,9 @@
                                                 <button type="button" class="remove-button me-2 btn-outline-danger" wire:click="removePartsItem({{ $index }})">&times;</button>
                                             </div>
                                         </div>
+                                        @php
+                                        $pt++;
+                                        @endphp
                                         @endforeach
                                         <a href="javascript:void(0);" class="fs_14 fw_6 text-primary add-link" wire:click="addPartsItem">Add Additional Part Item Line +</a>
                                     </div>
