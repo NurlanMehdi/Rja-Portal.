@@ -77,7 +77,7 @@ class Rja extends Model
         if ($rja->status == 0) {
             $to_emails = $toMail;
         } else {
-            $to_emails = ['rja@primeappliancerepairs.com'];
+            $to_emails = [$toMail, 'rja@primeappliancerepairs.com'];
         }
 
         Mail::to($to_emails)->cc($ccEmails)->send(new \App\Mail\RjaMail($rja));
