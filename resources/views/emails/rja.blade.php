@@ -5,20 +5,23 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title><No-Reply> Prime RJA Notification</title>
+    <title>No-Reply Prime RJA Notification</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
+    <style>
+        .table-striped tbody tr:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
-
+        .table-striped tbody tr:nth-child(even) {
+            background-color: #e9ecef;
+        }
+    </style>
 </head>
 
-<body style=" font-family: 'Poppins', sans-serif; background: #fff;">
+<body style="font-family: 'Poppins', sans-serif; background: #fff; margin: 0; padding: 0;">
 
-    <h1 style="padding: 12px;text-align: center;width: 100%;max-width: 800px; margin-left: auto; margin-right: auto;color:#212529;  background: #ccd4e2; box-sizing: border-box;margin-bottom: 0;">
+    <h1 style="padding: 12px; text-align: center; width: 100%; max-width: 800px; margin-left: auto; margin-right: auto; color: #212529; background: #ccd4e2; box-sizing: border-box; margin-bottom: 0;">
         {{$rja->subject ?? ''}}
     </h1>
 
@@ -30,205 +33,209 @@
         ***********************
     </div>
 
-    <table style="width: 100%;max-width: 800px;border:1px solid #ccd4e2;border-spacing: 0;margin-left: auto; margin-right: auto;">
-        <tbody>
-            <!--Heading 1 (Company and Authorization Details)-->
+    <div style="width: 100%; max-width: 800px; margin-left: auto; margin-right: auto; border-spacing: 0;">
+        <div style="font-size: 22px; font-weight: bold; text-align: center; color: #fff; background: #001f47; border-radius: 8px; padding: 10px 0; margin: 20px 0; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+            Transmission Details
+        </div>
+        <div style="margin: 20px 0; padding: 20px; border: 1px solid #ccd4e2; border-radius: 8px; background: #f9f9f9; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+            <table style="width: 100%; border: 1px solid #ccd4e2; border-spacing: 0; border-radius: 5px; overflow: hidden; margin-bottom: 20px; background: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                <tbody>
+                    <tr>
+                        <td colspan="2" style="text-align: left; background: linear-gradient(90deg, rgba(0, 31, 71, 1) 0%, rgba(0, 55, 121, 1) 100%); color: #fff; padding: 15px; font-size: 16px; font-weight: 600; border-radius: 5px 5px 0 0;">
+                            RJA Transmission Details
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="color: #212529; background: #f6f9ff; font-size: 18px; font-weight: 600; padding: 12px; border-bottom: 1px solid #ccd4e2;">
+                            <span style="border-bottom: 2px solid #585858;">Request Job Authorization Details:</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border-bottom: 1px solid #ccd4e2; font-weight: bold;">B2B/Warranty Reference:</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #ccd4e2;">{{ $rja->b2b_reference ?? 'N/A' }}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border-bottom: 1px solid #ccd4e2; font-weight: bold;">RJA Created At:</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #ccd4e2;">{{ $rja->created_at ?? '' }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="color: #212529; background: #f6f9ff; font-size: 18px; font-weight: 600; padding: 12px; border-bottom: 1px solid #ccd4e2;">
+                            <span style="border-bottom: 2px solid #585858;">Company Details:</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border-bottom: 1px solid #ccd4e2; font-weight: bold;">Company Profile:</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #ccd4e2;">{{ $rja->companies->company_name ?? 'N/A' }}</td>
+                    </tr>
+                    @if(isset($rja->companies->company_name))
+                    @foreach($rja->companies->emails as $email)
+                    <tr>
+                        <td style="padding: 12px; font-weight: bold;">Maintenance Department Email:</td>
+                        <td style="padding: 12px;"><a href="mailto:{{ $email->email ?? $rja->mail }}" style="color: #001f47; text-decoration: none;">{{ $email->email ?? $rja->mail }}</a></td>
+                    </tr>
+                    @endforeach
+                    @else
+                    <tr>
+                        <td style="padding: 12px; font-weight: bold;">Maintenance Department Email:</td>
+                        <td style="padding: 12px;"><a href="mailto:{{ $rja->emails[0]->mail ?? '' }}" style="color: #001f47; text-decoration: none;">{{ $rja->emails[0]->mail ?? '' }}</a></td>
+                    </tr>
+                    @endif
+                </tbody>
+            </table>
+        </div>
 
-            <tr>
-                <td style="color:#212529; background: #ffffff; padding: 15px 20px;text-align: left;">
-                    <table style="width: 100%;border: 1px solid #ccd4e2;border-spacing: 0;border-radius: 5px;overflow: hidden;">
-                        <tbody>
-                            <tr>
-                                <td colspan="2" style="text-align: left;background-color: #001f47;color:#fff;padding: 15px 20px;font-size: 16px;font-weight: 600;">
-                                    RJA Transmission Details
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;">Company Profile</td>
-                                <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $rja->companies->company_name ?? 'N/A' }}</td>
-                            </tr>
-                            <tr>
-                                <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;">Date Created At</td>
-                                <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $rja->created_at ?? '' }}</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;font-size: 20px;font-weight: 600;">
-                                    <span class="" style="border-bottom: 1px solid #585858;">Company Details:</span>
-                                </td>
-                            </tr>
-                            @if(isset($rja->companies->company_name))
-                            @foreach($rja->companies->emails as $email)
-                            <tr>
+        <div style="font-size: 22px; font-weight: bold; text-align: center; color: #fff; background: #001f47; border-radius: 8px; padding: 10px 0; margin: 20px 0; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+            Tech Report Details
+        </div>
+        <div style="margin: 20px 0; padding: 20px; border: 1px solid #ccd4e2; border-radius: 8px; background: #f9f9f9; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+            <table class="table-striped" style="width: 100%; border: 1px solid #ccd4e2; border-spacing: 0; border-radius: 5px; overflow: hidden; margin-bottom: 20px; background: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                <tbody>
+                    <tr>
+                        <td colspan="2" style="text-align: left; background: linear-gradient(90deg, rgba(0, 31, 71, 1) 0%, rgba(0, 55, 121, 1) 100%); color: #fff; padding: 15px; font-size: 16px; font-weight: 600; border-radius: 5px 5px 0 0;">
+                            Diagnosis findings/ Suggested Resolution (Mandatory, brief description):
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="padding: 12px; background: #fff;">
+                            {!! nl2br(e($rja->diagnosis)) ?? 'N/A' !!}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-                                <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;">Maintenance Department Email</td>
-                                <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $email->email ?? $rja->mail }}</td>
+        <div style="font-size: 22px; font-weight: bold; text-align: center; color: #fff; background: #001f47; border-radius: 8px; padding: 10px 0; margin: 20px 0; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+            RJA Quote Details
+        </div>
+        <div style="margin: 20px 0; padding: 20px; border: 1px solid #ccd4e2; border-radius: 8px; background: #f9f9f9; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+            <table class="table-striped" style="width: 100%; border: 1px solid #ccd4e2; border-spacing: 0; border-radius: 5px; overflow: hidden; margin-bottom: 20px; background: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                <tbody>
+                    <tr>
+                        <td colspan="2" style="text-align: left; background: linear-gradient(90deg, rgba(0, 31, 71, 1) 0%, rgba(0, 55, 121, 1) 100%); color: #fff; padding: 15px; font-size: 16px; font-weight: 600; border-radius: 5px 5px 0 0;">
+                            RJA - Quote Details
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="color: #212529; background: #f6f9ff; font-size: 18px; font-weight: 600; padding: 12px;">
+                            <span style="border-bottom: 2px solid #585858;">Labour:</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="padding: 0;">
+                            <table class="table-striped" style="width: 100%; border-collapse: collapse; border-spacing: 0; border-radius: 5px; overflow: hidden;">
+                                <thead>
+                                    <tr>
+                                        <th style="padding: 10px; border: 1px solid #ccd4e2; background: rgba(0, 31, 71, 0.9); color: #fff; text-align: left; font-size: 14px;">Labour Description</th>
+                                        <th style="padding: 10px; border: 1px solid #ccd4e2; background: rgba(0, 31, 71, 0.9); color: #fff; text-align: center; font-size: 14px;">Labour Cost</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if ($rja->items->where('type', 'labour')->isNotEmpty())
+                                    @php
+                                    $total_labour_cost = 0;
+                                    @endphp
+                                    @foreach($rja->items->where('type', 'labour') as $key => $labour)
+                                    <tr>
+                                        <td style="padding: 10px; border: 1px solid #ccd4e2; font-weight: bold;">Labour {{$key+1}}:</td>
+                                        <td style="padding: 10px; border: 1px solid #ccd4e2; text-align: center;">{{ $labour->cost.'$' ?? 'N/A' }}</td>
+                                    </tr>
+                                    @php
+                                    $total_labour_cost += (float) $labour->cost;
+                                    @endphp
+                                    @endforeach
+                                    @else
+                                    <tr>
+                                        <td colspan="2" style="padding: 10px; border: 1px solid #ccd4e2; font-weight: bold;">No labour items found.</td>
+                                    </tr>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="color: #212529; background: #f6f9ff; font-size: 18px; font-weight: 600; padding: 12px;">
+                            <span style="border-bottom: 2px solid #585858;">Parts:</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="padding: 0;">
+                            <table class="table-striped" style="width: 100%; border-collapse: collapse; border-spacing: 0; border-radius: 5px; overflow: hidden;">
+                                <thead>
+                                    <tr>
+                                        <th style="padding: 10px; border: 1px solid #ccd4e2; background: rgba(0, 31, 71, 0.9); color: #fff; text-align: left; font-size: 14px;">Part Description</th>
+                                        <th style="padding: 10px; border: 1px solid #ccd4e2; background: rgba(0, 31, 71, 0.9); color: #fff; text-align: left; font-size: 14px;">Part Number</th>
+                                        <th style="padding: 10px; border: 1px solid #ccd4e2; background: rgba(0, 31, 71, 0.9); color: #fff; text-align: center; font-size: 14px;">Part Cost</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    if ($rja->items->where('type', 'part')->isNotEmpty())
+                                    @php
+                                    $total_part_cost = 0;
+                                    $i =1;
+                                    @endphp
+                                    @foreach($rja->items->where('type', 'part') as $part)
+                                    <tr>
+                                        <td style="padding: 10px; border: 1px solid #ccd4e2; font-weight: bold;">Part {{$i}}:</td>
+                                        <td style="padding: 10px; border: 1px solid #ccd4e2;">{{ $part->part_number ?? 'N/A' }}</td>
+                                        <td style="padding: 10px; border: 1px solid #ccd4e2; text-align: center;">{{ $part->cost.'$' ?? 'N/A' }}</td>
+                                    </tr>
+                                    @php
+                                    $total_part_cost += (float) $part->cost;
+                                    $i++;
+                                    @endphp
+                                    @endforeach
+                                    @else
+                                    <tr>
+                                        <td colspan="3" style="padding: 10px; border: 1px solid #ccd4e2; text-align: center;">No parts items found.</td>
+                                    </tr>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-                            </tr>
-                            @endforeach
-                            @else
-                            <tr>
-
-                                <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;">Maintenance Department Email</td>
-                                <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $rja->emails[0]->mail ?? '' }}</td>
-
-                            </tr>
-                            @endif
-                            <tr>
-                                <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;">B2B/Warranty Reference</td>
-                                <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $rja->b2b_reference ?? 'N/A' }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" style="font-size: 20px;font-weight: 600;padding: 0px 20px 0;">
-                    Tech Report - Summary
-                </td>
-            </tr>
-            <tr>
-                <td style="color:#212529; background: #ffffff; padding: 15px 20px;text-align: left;">
-                    <table style="width: 100%;border: 1px solid #ccd4e2;border-spacing: 0;border-radius: 5px;overflow: hidden;">
-                        <tbody>
-                            <tr>
-                                <td colspan="2" style="text-align: left;background-color: #001f47;color:#fff;padding: 15px 20px;font-size: 16px;font-weight: 600;">
-                                    Tech Findings/ Suggested Resolution
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;">Diagnosis findings/ Suggested Resolution (Mandatory, brief description):</td>
-                                <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{!! nl2br(e($rja->diagnosis)) ?? 'N/A' !!}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td style="color:#212529; background: #ffffff; padding: 0px 20px 15px;text-align: left;">
-                    <table style="width: 100%;border: 1px solid #ccd4e2;border-spacing: 0;border-radius: 5px;overflow: hidden;">
-                        <tbody>
-                            <tr>
-                                <td colspan="2" style="text-align: left;background-color: #001f47;color:#fff;padding: 15px 20px;font-size: 16px;font-weight: 600;">
-                                    RJA - Quote Details
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;font-size: 20px;font-weight: 600;">
-                                    <span class="" style="border-bottom: 1px solid #585858;">Labour:</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;border-right: 1px solid #ccd4e2;">Labour Description</th>
-                                <th style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;">Labour Cost</th>
-                            </tr>
-                            @if ($rja->items->where('type', 'labour')->isNotEmpty())
-                            @php
-                            $total_labour_cost = 0;
-                            @endphp
-                            @foreach($rja->items->where('type', 'labour') as $key => $labour)
-                            <tr>
-                                <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;border-right: 1px solid #ccd4e2;">Labour {{$key+1}}:</td>
-                                <td style="width:50%; background: #f6f9ff; border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $labour->cost.'$' ?? 'N/A' }}</td>
-                            </tr>
-                            @php
-                            $total_labour_cost += (float) $labour->cost;
-                            @endphp
-                            @endforeach
-                            @else
-                            <tr>
-                                <td colspan="2" style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">No labour items found.</td>
-                            </tr>
-                            @endif
-                            <tr>
-                                <td colspan="2" style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;font-size: 20px;font-weight: 600;">
-                                    <span class="" style="border-bottom: 1px solid #585858;">Parts:</span>
-                                </td>
-                            </tr>
-                            @if ($rja->items->where('type', 'part')->isNotEmpty())
-                            @php
-                            $total_part_cost = 0;
-                            $i =1;
-                            @endphp
-                            @foreach($rja->items->where('type', 'part') as $part)
-                            <tr>
-                                <td colspan="2" style="color:#212529; background: #f6f9ff;text-align: left;padding:0;">
-                                    <table style="width: 100%;border: 1px solid #ccd4e2;border-spacing: 0;border-radius: 5px;overflow: hidden;">
-                                        <tbody>
-                                            <tr>
-                                                <th style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;border-right: 1px solid #ccd4e2;">Part {{$i}}</th>
-                                                <th style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;border-right: 1px solid #ccd4e2;">Part Number</th>
-                                                <th style="border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">Part Cost</th>
-                                            </tr>
-                                            <tr>
-                                                <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;border-right: 1px solid #ccd4e2;"></td>
-                                                <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;border-right: 1px solid #ccd4e2;">{{ $part->part_number ?? 'N/A' }}</td>
-                                                <td style="border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ $part->cost.'$' ?? 'N/A' }}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-
-                            </tr>
-                            @php
-                            $total_part_cost += (float) $part->cost;
-                            $i++;
-                            @endphp
-                            @endforeach
-                            @else
-                            <tr>
-                                <td colspan="2" style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">No parts items found.</td>
-                            </tr>
-                            @endif
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td style="color:#212529; background: #ffffff; padding: 15px 20px;text-align: left;">
-                    <table style="width: 100%;border: 1px solid #ccd4e2;border-spacing: 0;border-radius: 5px;overflow: hidden;">
-                        <tbody>
-                            <tr>
-                                <td colspan="2" style="text-align: left;background-color: #001f47;color:#fff;padding: 15px 20px;font-size: 16px;font-weight: 600;">
-                                    RJA - Quote Summary
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;">Total Labour (Pre HST):</td>
-                                <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ number_format($total_labour_cost, 2, '.', ',') }}$</td>
-                            </tr>
-                            <tr>
-                                <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;">Total Parts (Pre HST):</td>
-                                <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{number_format($total_part_cost, 2, '.', ',')}}$</td>
-                            </tr>
-                            <tr>
-                                <td style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;width:50%;">Total (Pre HST):</td>
-                                <td style="width:50%;border-bottom: 1px solid #ccd4e2; color:#212529; padding: 15px 20px;">{{ number_format($total_labour_cost+$total_part_cost, 2, '.', ',') }}$</td>
-                            </tr>
-                            <!-- <tr>
-                                <td colspan="2" style="color:#212529; background: #f6f9ff; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;">
-                                    <div class="" style=" display: flex;align-items: center;justify-content: center; gap: 12px;width: 100%;">
-                                        <button type="submit" style="border: 1px solid #198754;background: #198754;border-radius: 4px;line-height: 31px;font-size: 13px;min-height: 20px;color:#fff;">Approve</button>
-                                        <button type="submit" style="border: 1px solid #dc3545;background: #dc3545;border-radius: 4px;line-height: 31px;font-size: 13px;min-height: 20px;color:#fff;">Reject</button>
-                                        <button type="submit" style="border: 1px solid #ef1e24;background: #ef1e24;border-radius: 4px;line-height: 31px;font-size: 13px;min-height: 20px;color:#fff;">Send Email</button>
-                                    </div>
-                                </td>
-                            </tr> -->
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
+        <div style="font-size: 22px; font-weight: bold; text-align: center; color: #fff; background: #001f47; border-radius: 8px; padding: 10px 0; margin: 20px 0; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+            RJA Quote Summary Details
+        </div>
+        <div style="margin: 20px 0; padding: 20px; border: 1px solid #ccd4e2; border-radius: 8px; background: #f9f9f9; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+            <table style="width: 100%; border: 1px solid #ccd4e2; border-spacing: 0; border-radius: 5px; overflow: hidden; margin-bottom: 20px; background: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                <tbody>
+                    <tr>
+                        <td colspan="2" style="text-align: left; background: linear-gradient(90deg, rgba(0, 31, 71, 1) 0%, rgba(0, 55, 121, 1) 100%); color: #fff; padding: 15px; font-size: 16px; font-weight: 600; border-radius: 5px 5px 0 0;">
+                            RJA - Quote Summary
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border-bottom: 1px solid #ccd4e2; font-weight: bold;">Total Labour (Pre HST):</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #ccd4e2;">{{ number_format($total_labour_cost, 2, '.', ',') }}$</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border-bottom: 1px solid #ccd4e2; font-weight: bold;">Total Parts (Pre HST):</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #ccd4e2;">{{number_format($total_part_cost, 2, '.', ',')}}$</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; font-weight: bold;">Total (Pre HST):</td>
+                        <td style="padding: 12px;">{{ number_format($total_labour_cost+$total_part_cost, 2, '.', ',') }}$</td>
+                    </tr>
+                </tbody>
+            </table>
             @if($rja->status == 0)
-            <tr>
-                <td colspan="2" style="color:#212529; padding: 15px 20px;text-align: left; border-bottom: 1px solid #ccd4e2;">
-                    <div class="" style="display:block;width:100%;text-align:center;">
-                        <a href="{{ route('rja.approve.for.mail', $rja->id) }}" style="background: #198754;color:#fff;border:1px solid #198754;border-radius:4px;line-height:31px;font-size:13px;min-height:20px;display: inline-block;padding: 5px 15px;text-decoration: none;font-size: 16px;margin-right:15px;">Approve</a>
-                        <a href="{{ route('rja.reject.for.mail', $rja->id) }}" style="background: #dc3545;color:#fff;;border:1px solid #198754;border-radius:4px;line-height:31px;font-size:13px;min-height:20px;display: inline-block;padding: 5px 15px;text-decoration: none;font-size: 16px;">Reject</a>
-                    </div>
-                </td>
-            </tr>
+            <table align="center" style="margin-top: 20px;">
+                <tr>
+                    <td style="padding-right: 15px;">
+                        <a href="{{ route('rja.approve.for.mail', $rja->id) }}" style="background: #198754; color: #fff; border: 1px solid #198754; border-radius: 4px; line-height: 31px; font-size: 14px; min-height: 20px; display: inline-block; padding: 5px 15px; text-decoration: none;">Approve</a>
+                    </td>
+                    <td>
+                        <a href="{{ route('rja.reject.for.mail', $rja->id) }}" style="background: #dc3545; color: #fff; border: 1px solid #dc3545; border-radius: 4px; line-height: 31px; font-size: 14px; min-height: 20px; display: inline-block; padding: 5px 15px; text-decoration: none;">Reject</a>
+                    </td>
+                </tr>
+            </table>
             @endif
-        </tbody>
-    </table>
+        </div>
+    </div>
 </body>
 
 </html>
