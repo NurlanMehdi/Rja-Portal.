@@ -54,52 +54,29 @@
 
                   <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4 fw_6">Login to Your Account</h5>
-                    <p class="text-center small">Enter your email & password to login</p>
+                    <p class="text-center small">Enter your email to receive OTP</p>
                   </div>
 
-                  <form class="row g-3 login_form form_input_d" method="POST" action="{{ route('login') }}">
+                  <!-- Step 1: Enter Email Form -->
+                  <form class="row g-3 login_form form_input_d" method="POST" action="{{ route('send-otp') }}" id="email-form">
                     @csrf
 
                     <div class="col-12">
                       <div class="input-group has-validation">
                         <input type="email" name="email" class="form-control" id="yourEmail" required placeholder="Email" />
                         @error('email')
-                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
                         @enderror
                       </div>
                     </div>
 
                     <div class="col-12">
-                      <div class="password_box">
-                        <input type="password" name="password" class="form-control" id="yourPassword" required placeholder="Password" />
-                        <span class="eye_icon">
-                          <i class="ri-eye-close-line"></i>
-                          <i class="ri-eye-line d-none"></i>
-                        </span>
-                        @error('password')
-                            <div class="invalid-feedback d-block">{{ $message }}</div>
-                        @enderror
-                      </div>
-                    </div>
-
-                    <div class="col-12">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
-                        <label class="form-check-label" for="rememberMe">Remember me</label>
-                      </div>
-                    </div>
-                    <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Login</button>
+                      <button class="btn btn-primary w-100" type="submit">Send OTP</button>
                     </div>
                   </form>
 
                 </div>
               </div>
-
-              <div class="credits">
-                <!-- Powered by <a href="https://bootstrapmade.com/">Prime Appliance</a> -->
-              </div>
-
             </div>
           </div>
         </div>
