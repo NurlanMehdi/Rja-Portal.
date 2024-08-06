@@ -168,7 +168,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    if ($rja->items->where('type', 'part')->isNotEmpty())
+                                    @if ($rja->items->where('type', 'part')->isNotEmpty())
                                     @php
                                     $total_part_cost = 0;
                                     $i =1;
