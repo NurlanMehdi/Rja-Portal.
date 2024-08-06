@@ -63,12 +63,18 @@ class Rja extends Model
         $ccEmails = [];
 
         if (isset($rja->emails[0])) {
-            $toMail = $rja->emails[0]->mail;
+            foreach ($rja->emails as $email) {
+                $toMail[] = $email->mail;
+            }
+            //$toMail = $rja->emails[0]->mail;
             foreach ($rja->emails->slice(1) as $cc_email) {
                 $ccEmails[] = $cc_email['mail'];
             }
         } elseif ($rja->companies && $rja->companies->emails) {
-            $toMail = $rja->companies->emails[0]->email;
+            foreach ($rja->companies->emails as $email) {
+                $toMail[] = $email->email;
+            }
+            // $toMail = $rja->companies->emails[0]->email;
 
             foreach ($rja->companies->emails->slice(1) as $cc_email) {
                 $ccEmails[] = $cc_email['email'];
@@ -79,7 +85,7 @@ class Rja extends Model
         } else {
             $to_emails = [$toMail, 'rja@primeappliancerepairs.com'];
         }
-
+        //dd($to_emails);
         Mail::to($to_emails)->cc($ccEmails)->send(new \App\Mail\RjaMail($rja));
 
         session()->flash('message', 'Emails sent successfully.');
