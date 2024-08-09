@@ -6,17 +6,22 @@ use Livewire\Component;
 use App\Models\Rja;
 use App\Models\RjaMail;
 use App\Models\Company;
+use App\Models\CompanyMail;
 use App\Models\Items;
 
 class NewRja extends Component
 {
-    protected $listeners = ['refreshComponent' => '$refresh'];
     public $company_id;
     public $email;
     public $b2b_reference;
+    public $total_labour_cost;
+    public $total_parts_cost;
+    public $total;
     public $diagnosis;
+    public $company_emails = [];
     public $labour_items = [];
     public $parts_items = [];
+    public $ec_emails = [];
     public $cc_emails = [];
 
     protected $rules = [
@@ -29,13 +34,33 @@ class NewRja extends Component
 
     public function mount()
     {
+        $this->email = '';
+        $this->company_emails = [];
+        $this->cc_emails = [];
+        $this->ec_emails = [];
+        $this->total_labour_cost = 0.00;
+        $this->total_parts_cost = 0.00;
+        $this->total = 0.00;
         $this->labour_items = [['cost' => '']];
         $this->parts_items = [['number' => '', 'cost' => '']];
     }
-
+    public function getCompanyEmails()
+    {
+        $this->company_emails = [];
+        $company_emailss = CompanyMail::select('email')->where('company_id', $this->company_id)->get();
+        $all_emails = [];
+        foreach ($company_emailss as $key => $company_email) {
+            if ($key > 0) {
+                $all_emails[] = $company_email->email;
+            }
+        }
+        $this->company_emails = $all_emails;
+        $this->email = $company_emailss[0]->email;
+    }
     public function addLabourItem()
     {
         $this->labour_items[] = ['cost' => ''];
+        $this->totalCalculation();
     }
 
     public function addCCEmails()
@@ -43,6 +68,11 @@ class NewRja extends Component
         $this->cc_emails[] = [
             'email' => ''
         ];
+    }
+
+    public function removeCompanyEmail($key)
+    {
+        unset($this->company_emails[$key]);
     }
 
     public function removeCCEmail($key)
@@ -53,18 +83,20 @@ class NewRja extends Component
     public function addPartsItem()
     {
         $this->parts_items[] = ['number' => '', 'cost' => ''];
+        $this->totalCalculation();
     }
 
     public function removeLabourItem($index)
     {
+
         unset($this->labour_items[$index]);
-        $this->labour_items = array_values($this->labour_items);  // Reindex the array
+        $this->totalCalculation();
     }
 
     public function removePartsItem($index)
     {
         unset($this->parts_items[$index]);
-        $this->parts_items = array_values($this->parts_items);  // Reindex the array
+        $this->totalCalculation();
     }
 
     private function cleanNumericFields()
@@ -79,13 +111,26 @@ class NewRja extends Component
             return $item;
         }, $this->parts_items);
     }
+    public function totalCalculation()
+    {
+        $this->total_labour_cost = 0;
+        foreach ($this->labour_items as $labour_items) {
+            $this->total_labour_cost += (float)str_replace(",", "", $labour_items['cost']);
+        }
+        $this->total_parts_cost = 0;
+        foreach ($this->parts_items as $parts_items) {
+            $this->total_parts_cost += (float)str_replace(",", "", $parts_items['cost']);
+        }
 
+        $this->total = $this->total_labour_cost + $this->total_parts_cost;
+        $this->total_labour_cost = number_format($this->total_labour_cost, 2, '.', ',');
+        $this->total_parts_cost = number_format($this->total_parts_cost, 2, '.', ',');
+        $this->total = number_format($this->total, 2, '.', ',');
+    }
     public function submit()
     {
         $this->cleanNumericFields();
-
         $this->validate();
-
 
         $rja = Rja::create([
             'company_id' => $this->company_id,
